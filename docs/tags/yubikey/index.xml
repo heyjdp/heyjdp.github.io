@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>yubikey on heyjdp</title>
+    <link>https://heyjdp.github.io/tags/yubikey/</link>
+    <description>Recent content in yubikey on heyjdp</description>
+    <image>
+      <url>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</url>
+      <link>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 01 Mar 2022 11:00:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/tags/yubikey/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>💻 How To Setup A Yubikey ⛓ 🔐 ✨</title>
+      <link>https://heyjdp.github.io/2022/03/how-to-setup-a-yubikey/</link>
+      <pubDate>Tue, 01 Mar 2022 11:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2022/03/how-to-setup-a-yubikey/</guid>
+      <description>&lt;p&gt;A Yubikey is a physical security device for your computer (and phone if you get the NFC version). In this post we will look at adding GPG and SSH keys to the Yubikey for additional privacy and security.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

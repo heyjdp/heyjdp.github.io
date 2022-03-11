@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>about on heyjdp</title>
+    <link>https://heyjdp.github.io/tags/about/</link>
+    <description>Recent content in about on heyjdp</description>
+    <image>
+      <url>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</url>
+      <link>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 25 Jan 2021 16:06:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/tags/about/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>📝 About Page 👩‍💻 🥙 🇨🇾</title>
+      <link>https://heyjdp.github.io/about/</link>
+      <pubDate>Mon, 25 Jan 2021 16:06:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/about/</guid>
+      <description>&lt;p&gt;How did I get started in technology? Great question, let&amp;rsquo;s explore&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hello on heyjdp</title>
+    <link>https://heyjdp.github.io/tags/hello/</link>
+    <description>Recent content in hello on heyjdp</description>
+    <image>
+      <url>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</url>
+      <link>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 09 Jan 2020 11:00:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/tags/hello/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>👋 Hello, World! ✍ 👋 🗺</title>
+      <link>https://heyjdp.github.io/2020/01/hello-world/</link>
+      <pubDate>Thu, 09 Jan 2020 11:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2020/01/hello-world/</guid>
+      <description>&lt;p&gt;It is quite common to write a &amp;lsquo;Hello, world&amp;rsquo; script when trying a new language, just to check the tech is working correctly, this is my contribution to the fire-hose of internet noise. You&amp;rsquo;re welcome!&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

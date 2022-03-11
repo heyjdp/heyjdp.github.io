@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hardware on heyjdp</title>
+    <link>https://heyjdp.github.io/tags/hardware/</link>
+    <description>Recent content in hardware on heyjdp</description>
+    <image>
+      <url>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</url>
+      <link>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 19 Apr 2020 11:00:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/tags/hardware/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>💻 Raspberry Pi 4 Serial Console 🍓 🥧 👩‍💻</title>
+      <link>https://heyjdp.github.io/2020/04/raspberry-pi-4-serial-console/</link>
+      <pubDate>Sun, 19 Apr 2020 11:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2020/04/raspberry-pi-4-serial-console/</guid>
+      <description>Raspberry Pi has been through a few revisions now, and the data available on the www tends to get stale very fast. This is the right way of connecting to a Raspberry Pi 4 via a serial consoles.
+Which GPIO pins are used for the serial console? As can be seen in the image above and the cartoon here, the TX (PIN8) and RX (PIN10) pins for the serial port are next to the 5V power (PIN2) and GND (PIN6) pins on the top left.</description>
+    </item>
+    
+  </channel>
+</rss>
