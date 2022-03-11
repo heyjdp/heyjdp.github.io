@@ -1,0 +1,116 @@
+baseURL: "https://heyjdp.github.io/"
+languageCode: en-us
+title: heyjdp
+theme: hugo-PaperMod-5.0
+publishDir: "docs"
+paginate: 10
+
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+permalinks:
+  posts: /:year/:month/:title/
+
+#googleAnalytics: UA-123-45
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+params:
+  env: production # to enable google analytics, opengraph, twitter-cards and schema.
+  title: "heyjdp"
+  description: "A blog about technology and food by Jas, aka heyjdp, a computerphile living on the island of Cyprus in the Mediterranean."
+  keywords: ["blog", "portfolio", "technology", "recipes"]
+  author: Jas
+  # author: ["Me", "You"] # multiple authors
+#  images: ["<link or path of image for opengraph, twitter-cards>"]
+  images: ["/post-img/post-placeholder-1200x630.jpg"]
+  DateFormat: "January 2, 2006"
+  defaultTheme: auto # dark, light
+  disableThemeToggle: false
+
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: false
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  comments: false
+  hidemeta: false
+  hideSummary: false
+  showtoc: true
+  tocopen: false
+
+  label:
+    text: "heyjdp"
+    icon: /apple-touch-icon.png
+    iconHeight: 35
+
+  # profile-mode
+  profileMode:
+    enabled: true # needs to be explicitly set
+    title: "Jas's Notes \u2728"
+    subtitle: "Geeky blog 	&#128187; &#128241; &#128105;&#8205;&#128187;"
+    imageUrl: "/heyjdp-avatar.png"
+    imageWidth: 180
+    imageHeight: 180
+    imageTitle: heyjdp
+    buttons:
+      - name: Posts
+        url: posts
+      - name: Tags
+        url: tags
+
+  # home-info mode
+  homeInfoParams:
+    Title: "heyjdp \U0001F44B"
+    Content: Welcome to my blog
+
+  socialIcons:
+    - name: twitter
+      url: "https://twitter.com/heyjdp"
+    - name: stackoverflow
+      url: "https://stackoverflow.com/heyjdp"
+    - name: github
+      url: "https://github.com/heyjdp"
+    - name: email
+      url: "mailto:jas@davepowell.net"
+
+  analytics:
+    google:
+#      SiteVerificationTag: "XYZabc"
+    bing:
+#      SiteVerificationTag: "XYZabc"
+    yandex:
+#      SiteVerificationTag: "XYZabc"
+
+  summaryLength: 120
+
+  cover:
+    hidden: false # hide everywhere but not in structured data
+    hiddenInList: false # hide on list pages and home
+    hiddenInSingle: false # hide on single page
+
+  editPost:
+    URL: "https://github.com/heyjdp/heyjdp.github.io"
+    Text: "Suggest Changes" # edit text
+    appendFilePath: true # to append file path to Edit link
+
+menu:
+  main:
+    - identifier: about
+      name: About
+      url: /about
+      weight: 10
+    - identifier: tags
+      name: Tags
+      url: /tags/
+      weight: 20
+    - identifier: Home
+      name: heyjdp
+      url: https://heyjdp.github.io
+      weight: 30

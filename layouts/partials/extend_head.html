@@ -1,0 +1,15 @@
+
+{{ if .Params.katex}}{{ partial "katex.html" . }}{{ end }}
+
+<script>
+    var els = document.getElementsByClassName("highlight");
+    for (var i = 0; i < els.length; i++) {
+    if (els[i].title.length) {
+        var newNode = document.createElement("div");
+        var textNode = document.createTextNode(els[i].title);
+        newNode.appendChild(textNode);
+        newNode.classList.add("highlight-title");
+        els[i].parentNode.insertBefore(newNode, els[i]);
+    }
+    }
+</script>
