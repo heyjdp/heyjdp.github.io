@@ -12,11 +12,11 @@
     <language>en-us</language>
     <lastBuildDate>Thu, 10 Feb 2022 11:00:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/tags/commandline/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>💻 Linux Command Line Archive 🐧 ⌨️ 👩‍💻</title>
-      <link>https://heyjdp.github.io/2022/02/linux-command-line-archive-%EF%B8%8F/</link>
+      <title>💻 Linux CLI Reminder 🐧 ⌨️ 👩‍💻</title>
+      <link>https://heyjdp.github.io/2022/02/linux-cli-reminder-%EF%B8%8F/</link>
       <pubDate>Thu, 10 Feb 2022 11:00:00 +0200</pubDate>
       
-      <guid>https://heyjdp.github.io/2022/02/linux-command-line-archive-%EF%B8%8F/</guid>
+      <guid>https://heyjdp.github.io/2022/02/linux-cli-reminder-%EF%B8%8F/</guid>
       <description>I find myself Google-ing for command-line fu a lot more than I should, here are some favourites&amp;hellip;
 rsync with ssh Although this should be the default by now, really, who trusts the defaults? Manage it yourself with something like this:
 rsync -avP -e &amp;#34;ssh -i ssh_key_file -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null&amp;#34; /home/jas/local-dir/* remote-user@webhost.com:/home/server/www/yourdomain.com/ Rainbow Shell Prompt Put this in .bashrc or wherever is appropriate for your OS:

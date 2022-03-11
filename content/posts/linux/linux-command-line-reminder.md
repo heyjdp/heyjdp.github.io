@@ -1,5 +1,5 @@
 --- 
-title: "\U0001f4bb Linux Command Line Archive \U0001f427 \u2328\uFE0F \U0001f469\u200D\U0001f4bb" 
+title: "\U0001f4bb Linux CLI Reminder \U0001f427 \u2328\uFE0F \U0001f469\u200D\U0001f4bb" 
 date: 2022-02-10T11:00:00+02:00 
 draft: false 
 tags: ["tech", "linux", "commandline", "hacking"] 
@@ -348,4 +348,4 @@ Hi NAME! Youve successfully authenticated, but GitHub does not provide shell acc
 [^2]: *How to generate a strong password on the Linux command line*, https://ostechnix.com/4-easy-ways-to-generate-a-strong-password-in-linux 
 
 [^3]: *Three Git Configurations that Should Be the Default*, https://spin.atomicobject.com/2020/05/05/git-configurations-default/
-hould Be the Default*, https://spin.atomicobject.com/2020/05/05/git-configurations-default/
+hould Be the Default*, https

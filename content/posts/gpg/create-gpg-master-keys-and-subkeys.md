@@ -26,13 +26,13 @@ This guide is part of my series: The Ultimate Guide to GPG for Email Security. T
 
 The Ultimate Guide to GPG Series can be found here:
 
-- [The Ultimate Guide to GPG for Email Security](/2022/02/the-ultimate-guide-to-gpg-for-email-security/)
+- [The Ultimate Guide to GPG for Email Security](/2021/11/the-ultimate-guide-to-gpg-for-email-security/)
 
 ## Use a RAM Disk
 
 For added security, consider using a RAM Disk to create all the secret key material and export to USB from there. Later you can import only the subkeys and public keys to the local machine.
 
-- [The Ultimate Guide to GPG for Email Security](/2022/02/ramdisk-tmpfs-for-macos/)
+- [Use a RAM disk on MacOS for tmpfs](/2022/01/ramdisk-tmpfs-for-macos/)
 
 ## Master Keys and Subkeys
 

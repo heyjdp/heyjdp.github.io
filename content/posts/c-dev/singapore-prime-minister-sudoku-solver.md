@@ -307,7 +307,7 @@ So, just reading through I can see some obvious stuff, some more interesting thi
 
 ## First run of the code
 
-If you didn't yet [setup VS Code for C code debugging](/2022/01/c-code-development-in-vs-code-for-macos/), go ahead and do that now.
+If you didn't yet [setup VS Code for C code debugging](/2021/04/c-code-development-in-vs-code-for-macos/), go ahead and do that now.
 
 So, the entry point of the code is the `main()` function, as with any other C code. Let's take a look at what it does.
 

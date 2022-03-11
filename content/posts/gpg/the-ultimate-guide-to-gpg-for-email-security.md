@@ -60,8 +60,8 @@ Consider an encrypted email between senior systems administrators that had a tit
 
 This post got really long, so I have broken it into more manageable parts:
 
-1. [Installing and Configuring GPG](/2022/02/installing-and-configuring-gpg/)
-2. [Create new GPG master and subkeys](/2022/02/create-gnupg-master-keys-and-subkeys/)
+1. [Installing and Configuring GPG](/2021/12/installing-and-configuring-gpg/)
+2. [Create new GPG master and subkeys](/2022/01/create-gnupg-master-keys-and-subkeys/)
 3. [Exchanging GPG public keys](/2022/02/exchanging-gpg-public-keys/)
 4. [Send/Receive GnuPG Emails on MacOS](/2022/02/send-and-receive-gpg-email-on-macos/)
 

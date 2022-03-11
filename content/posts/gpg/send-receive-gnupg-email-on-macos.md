@@ -26,7 +26,7 @@ This guide is part of my series: The Ultimate Guide to GPG for Email Security. T
 
 The Ultimate Guide to GPG Series can be found here:
 
-- [The Ultimate Guide to GPG for Email Security](/2022/02/the-ultimate-guide-to-gpg-for-email-security/)
+- [The Ultimate Guide to GPG for Email Security](/2021/11/the-ultimate-guide-to-gpg-for-email-security/)
 
 ## How to Install a Secure Email Client for MacOS
 
