@@ -62,15 +62,6 @@ export PS1=&amp;#34;\[$(tput bold)\]\[$(tput setaf 1)\]\u\[$(tput setaf 208)\]@\
     </item>
     
     <item>
-      <title>🍽 Cyprus Tahini 🥙 🍹 🇨🇾</title>
-      <link>https://heyjdp.github.io/2022/01/cyprus-tahini/</link>
-      <pubDate>Tue, 25 Jan 2022 15:51:00 +0200</pubDate>
-      
-      <guid>https://heyjdp.github.io/2022/01/cyprus-tahini/</guid>
-      <description>&lt;p&gt;Here we dig into the Cyprus tahini dip. Make this the summary.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>💻 Ramdisk (tmpfs) for MacOS 	💾 👩‍💻 🍏</title>
       <link>https://heyjdp.github.io/2022/01/ramdisk-tmpfs-for-macos/</link>
       <pubDate>Tue, 18 Jan 2022 11:00:00 +0200</pubDate>
