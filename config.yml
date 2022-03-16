@@ -1,6 +1,6 @@
 baseURL: "https://heyjdp.github.io/"
 languageCode: en-us
-title: heyjdp
+title: "Jas D Powell"
 theme: hugo-PaperMod-5.0
 publishDir: "docs"
 paginate: 10
@@ -21,9 +21,9 @@ minify:
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: "heyjdp"
-  description: "A blog about technology and food by Jas, aka heyjdp, a computerphile living on the island of Cyprus in the Mediterranean."
-  keywords: ["blog", "portfolio", "technology", "recipes"]
+  title: "Jas D Powell"
+  description: "Mainly technology notes Jas, aka heyjdp, a computerphile living on the island of Cyprus in the Mediterranean."
+  keywords: ["blog", "computing", "security", "technology", "notes"]
   author: Jas
   # author: ["Me", "You"] # multiple authors
 #  images: ["<link or path of image for opengraph, twitter-cards>"]
@@ -46,15 +46,15 @@ params:
   tocopen: false
 
   label:
-    text: "heyjdp"
+    text: "Jas D Powell"
     icon: /apple-touch-icon.png
     iconHeight: 35
 
   # profile-mode
   profileMode:
     enabled: true # needs to be explicitly set
-    title: "Jas's Notes \u2728"
-    subtitle: "Geeky blog 	&#128187; &#128241; &#128105;&#8205;&#128187;"
+    title: "Computing Notes \u2728"
+    subtitle: "Geeky Tech How-Tos &#128187; &#128241; &#128105;&#8205;&#128187;"
     imageUrl: "/heyjdp-avatar.png"
     imageWidth: 180
     imageHeight: 180
@@ -71,21 +71,21 @@ params:
     Content: Welcome to my blog
 
   socialIcons:
-    - name: twitter
-      url: "https://twitter.com/heyjdp"
-    - name: stackoverflow
-      url: "https://stackoverflow.com/heyjdp"
     - name: github
       url: "https://github.com/heyjdp"
+    - name: stackoverflow
+      url: "https://stackoverflow.com/users/18483983/heyjdp"
+    - name: twitter
+      url: "https://twitter.com/heyjdp"
     - name: email
       url: "mailto:jas@davepowell.net"
 
-  analytics:
-    google:
+#  analytics:
+#    google:
 #      SiteVerificationTag: "XYZabc"
-    bing:
+#    bing:
 #      SiteVerificationTag: "XYZabc"
-    yandex:
+#    yandex:
 #      SiteVerificationTag: "XYZabc"
 
   summaryLength: 120
@@ -106,11 +106,15 @@ menu:
       name: About
       url: /about
       weight: 10
+    - identifier: resume
+      name: Resume
+      url: https://registry.jsonresume.org/heyjdp?theme=kendall
+      weight: 20
     - identifier: tags
       name: Tags
       url: /tags/
-      weight: 20
-    - identifier: Home
-      name: heyjdp
-      url: https://heyjdp.github.io
       weight: 30
+    - identifier: home
+      name: Home
+      url: https://heyjdp.github.io
+      weight: 40

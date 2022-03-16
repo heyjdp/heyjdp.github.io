@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>heyjdp</title>
+    <title>Jas D Powell</title>
     <link>https://heyjdp.github.io/</link>
-    <description>Recent content on heyjdp</description>
+    <description>Recent content on Jas D Powell</description>
     <image>
       <url>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</url>
       <link>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Mar 2022 11:00:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 14 Mar 2022 16:00:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>📝 Resume 👩‍💻 🥙 🇨🇾</title>
+      <link>https://heyjdp.github.io/resume/</link>
+      <pubDate>Mon, 14 Mar 2022 16:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/resume/</guid>
+      <description>Dr. Jas D Powell Enabling tech start-ups to scale their seed ideas to mass market products. Serious about building technology teams that innovate and win.
+Experience Andle Engineering, Ltd - Director &amp;amp; Chief Consultant Larnaca, Cyprus, May 2016 - Present Boutique technology consultancy.
+Short contracts (3-6 months) have included remote roles with cybersecurity start-up teams in San Francisco, USA and Milano, Italy. Skills included:
+Team Leadership, Project Management, Cryptography &amp;amp; Networking Protocol Design, Raspberry Pi OS customization (yocto, Debian), OS Hardening, Python, C/C++, Ansible, Linux, AWS, C/C++, Network Architecture Design, API Design</description>
+    </item>
+    
     <item>
       <title>💻 Style9 Indent Rules on Linux/OpenBSD 🐧 🐡 👩‍💻</title>
       <link>https://heyjdp.github.io/2022/03/style9-indent-rules-on-linux/openbsd/</link>

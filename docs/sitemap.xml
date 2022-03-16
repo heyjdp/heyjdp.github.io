@@ -2,10 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://heyjdp.github.io/tags/development/</loc>
-    <lastmod>2022-03-11T11:00:00+02:00</lastmod>
-  </url><url>
     <loc>https://heyjdp.github.io/</loc>
+    <lastmod>2022-03-14T16:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/tags/resume/</loc>
+    <lastmod>2022-03-14T16:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/tags/</loc>
+    <lastmod>2022-03-14T16:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/resume/</loc>
+    <lastmod>2022-03-14T16:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/tags/development/</loc>
     <lastmod>2022-03-11T11:00:00+02:00</lastmod>
   </url><url>
     <loc>https://heyjdp.github.io/tags/linux/</loc>
@@ -18,9 +27,6 @@
     <lastmod>2022-03-11T11:00:00+02:00</lastmod>
   </url><url>
     <loc>https://heyjdp.github.io/posts/</loc>
-    <lastmod>2022-03-11T11:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://heyjdp.github.io/tags/</loc>
     <lastmod>2022-03-11T11:00:00+02:00</lastmod>
   </url><url>
     <loc>https://heyjdp.github.io/tags/tech/</loc>
