@@ -80,6 +80,17 @@ export PS1=&amp;#34;\[$(tput bold)\]\[$(tput setaf 1)\]\u\[$(tput setaf 208)\]@\
     </item>
     
     <item>
+      <title>💻 Strip Image EXIF Data 📸 👩‍💻 🐧</title>
+      <link>https://heyjdp.github.io/2021/12/strip-image-exif-data/</link>
+      <pubDate>Tue, 21 Dec 2021 09:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2021/12/strip-image-exif-data/</guid>
+      <description>Did you know that all of your images contain a bunch of metadata? This is mostly harmless. But actually some of the metadata is not harmless.
+Dianne Feinstein, an American, famously said, post-Snowden, that &amp;ldquo;Our courts have consistently recognized that there is no reasonable expectation of privacy in this type of metadata information and thus no search warrant is required to obtain it&amp;rdquo;. Yikes!
+Also, note that the EFF have thoughts on fingerprinting of digital cameras, printers, CD ROM burners, and MAC addresses in routing devices.</description>
+    </item>
+    
+    <item>
       <title>💻 Installing and Configuring GPG ⛓ 🔐 👩‍💻</title>
       <link>https://heyjdp.github.io/2021/12/installing-and-configuring-gpg/</link>
       <pubDate>Sun, 19 Dec 2021 11:00:00 +0200</pubDate>
@@ -166,6 +177,15 @@ FIN</description>
       <guid>https://heyjdp.github.io/2020/04/raspberry-pi-4-serial-console/</guid>
       <description>Raspberry Pi has been through a few revisions now, and the data available on the www tends to get stale very fast. This is the right way of connecting to a Raspberry Pi 4 via a serial consoles.
 Which GPIO pins are used for the serial console? As can be seen in the image above and the cartoon here, the TX (PIN8) and RX (PIN10) pins for the serial port are next to the 5V power (PIN2) and GND (PIN6) pins on the top left.</description>
+    </item>
+    
+    <item>
+      <title>💻 Linear Feedback Shift Register ⛓ ✨ 👩‍💻</title>
+      <link>https://heyjdp.github.io/2020/02/linear-feedback-shift-register/</link>
+      <pubDate>Mon, 17 Feb 2020 11:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2020/02/linear-feedback-shift-register/</guid>
+      <description>&lt;p&gt;How did I get started in technology? Great question, let&amp;rsquo;s explore&amp;hellip;&lt;/p&gt;</description>
     </item>
     
     <item>

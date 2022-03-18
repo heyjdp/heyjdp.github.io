@@ -81,5 +81,14 @@ Kernel Normal Form Kernel normal form 1, or KNF, is the coding style used in the
 Which GPIO pins are used for the serial console? As can be seen in the image above and the cartoon here, the TX (PIN8) and RX (PIN10) pins for the serial port are next to the 5V power (PIN2) and GND (PIN6) pins on the top left.</description>
     </item>
     
+    <item>
+      <title>💻 Linear Feedback Shift Register ⛓ ✨ 👩‍💻</title>
+      <link>https://heyjdp.github.io/2020/02/linear-feedback-shift-register/</link>
+      <pubDate>Mon, 17 Feb 2020 11:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2020/02/linear-feedback-shift-register/</guid>
+      <description>&lt;p&gt;How did I get started in technology? Great question, let&amp;rsquo;s explore&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    
   </channel>
 </rss>

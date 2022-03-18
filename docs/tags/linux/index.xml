@@ -35,6 +35,17 @@ export PS1=&amp;#34;\[$(tput bold)\]\[$(tput setaf 1)\]\u\[$(tput setaf 208)\]@\
     </item>
     
     <item>
+      <title>💻 Strip Image EXIF Data 📸 👩‍💻 🐧</title>
+      <link>https://heyjdp.github.io/2021/12/strip-image-exif-data/</link>
+      <pubDate>Tue, 21 Dec 2021 09:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2021/12/strip-image-exif-data/</guid>
+      <description>Did you know that all of your images contain a bunch of metadata? This is mostly harmless. But actually some of the metadata is not harmless.
+Dianne Feinstein, an American, famously said, post-Snowden, that &amp;ldquo;Our courts have consistently recognized that there is no reasonable expectation of privacy in this type of metadata information and thus no search warrant is required to obtain it&amp;rdquo;. Yikes!
+Also, note that the EFF have thoughts on fingerprinting of digital cameras, printers, CD ROM burners, and MAC addresses in routing devices.</description>
+    </item>
+    
+    <item>
       <title>💻 Raspberry Pi 4 Serial Console 🍓 🥧 👩‍💻</title>
       <link>https://heyjdp.github.io/2020/04/raspberry-pi-4-serial-console/</link>
       <pubDate>Sun, 19 Apr 2020 11:00:00 +0200</pubDate>

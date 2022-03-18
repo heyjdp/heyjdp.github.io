@@ -23,5 +23,16 @@ rsync -avP -e &amp;#34;ssh -i ssh_key_file -o StrictHostKeyChecking=no -o UserKn
 export PS1=&amp;#34;\[$(tput bold)\]\[$(tput setaf 1)\]\u\[$(tput setaf 208)\]@\[$(tput setaf 3)\h\[$(tput setaf 2)\]:\d \[$(tput setaf 4)\]\@:\[$(tput setaf 55)\]\w\n$PROMPT_COLOR\$ \[$(tput sgr0)\]&amp;#34; YouTube-dl on Linux Obtain it from here: https://github.</description>
     </item>
     
+    <item>
+      <title>💻 Strip Image EXIF Data 📸 👩‍💻 🐧</title>
+      <link>https://heyjdp.github.io/2021/12/strip-image-exif-data/</link>
+      <pubDate>Tue, 21 Dec 2021 09:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2021/12/strip-image-exif-data/</guid>
+      <description>Did you know that all of your images contain a bunch of metadata? This is mostly harmless. But actually some of the metadata is not harmless.
+Dianne Feinstein, an American, famously said, post-Snowden, that &amp;ldquo;Our courts have consistently recognized that there is no reasonable expectation of privacy in this type of metadata information and thus no search warrant is required to obtain it&amp;rdquo;. Yikes!
+Also, note that the EFF have thoughts on fingerprinting of digital cameras, printers, CD ROM burners, and MAC addresses in routing devices.</description>
+    </item>
+    
   </channel>
 </rss>

@@ -53,11 +53,11 @@ params:
   # profile-mode
   profileMode:
     enabled: true # needs to be explicitly set
-    title: "Computing Notes \u2728"
-    subtitle: "Geeky Tech How-Tos &#128187; &#128241; &#128105;&#8205;&#128187;"
+    title: "Tech Notes, Mainly Linux \u2728"
+    subtitle: "Wrangles bytes for chocolate digestives &#128187; &#128241; &#128105;&#8205;&#128187;"
     imageUrl: "/heyjdp-avatar.png"
-    imageWidth: 180
-    imageHeight: 180
+    imageWidth: 240
+    imageHeight: 240
     imageTitle: heyjdp
     buttons:
       - name: Posts
