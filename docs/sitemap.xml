@@ -3,13 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://heyjdp.github.io/</loc>
-    <lastmod>2022-03-14T16:00:00+02:00</lastmod>
+    <lastmod>2022-03-18T14:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/tags/json/</loc>
+    <lastmod>2022-03-18T14:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/tags/office/</loc>
+    <lastmod>2022-03-18T14:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/posts/</loc>
+    <lastmod>2022-03-18T14:00:00+02:00</lastmod>
   </url><url>
     <loc>https://heyjdp.github.io/tags/resume/</loc>
-    <lastmod>2022-03-14T16:00:00+02:00</lastmod>
+    <lastmod>2022-03-18T14:00:00+02:00</lastmod>
   </url><url>
     <loc>https://heyjdp.github.io/tags/</loc>
-    <lastmod>2022-03-14T16:00:00+02:00</lastmod>
+    <lastmod>2022-03-18T14:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/tags/tech/</loc>
+    <lastmod>2022-03-18T14:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/2022/03/resume-in-json-format/</loc>
+    <lastmod>2022-03-18T14:00:00+02:00</lastmod>
   </url><url>
     <loc>https://heyjdp.github.io/resume/</loc>
     <lastmod>2022-03-14T16:00:00+02:00</lastmod>
@@ -24,12 +39,6 @@
     <lastmod>2022-03-11T11:00:00+02:00</lastmod>
   </url><url>
     <loc>https://heyjdp.github.io/tags/plan9/</loc>
-    <lastmod>2022-03-11T11:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://heyjdp.github.io/posts/</loc>
-    <lastmod>2022-03-11T11:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://heyjdp.github.io/tags/tech/</loc>
     <lastmod>2022-03-11T11:00:00+02:00</lastmod>
   </url><url>
     <loc>https://heyjdp.github.io/2022/03/style9-indent-rules-on-linux/openbsd/</loc>
