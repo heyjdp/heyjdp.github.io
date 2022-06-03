@@ -3,7 +3,34 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://heyjdp.github.io/</loc>
-    <lastmod>2022-03-18T14:00:00+02:00</lastmod>
+    <lastmod>2022-03-31T11:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/tags/linux/</loc>
+    <lastmod>2022-03-31T11:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/posts/</loc>
+    <lastmod>2022-03-31T11:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/tags/</loc>
+    <lastmod>2022-03-31T11:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/tags/tech/</loc>
+    <lastmod>2022-03-31T11:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/2022/03/naming-resources/</loc>
+    <lastmod>2022-03-31T11:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/tags/development/</loc>
+    <lastmod>2022-03-30T12:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/tags/hardware/</loc>
+    <lastmod>2022-03-30T12:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/tags/raspberry-pi/</loc>
+    <lastmod>2022-03-30T12:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/2022/03/openbsd-6.9-on-raspberry-pi-4/</loc>
+    <lastmod>2022-03-30T12:00:00+02:00</lastmod>
   </url><url>
     <loc>https://heyjdp.github.io/tags/json/</loc>
     <lastmod>2022-03-18T14:00:00+02:00</lastmod>
@@ -11,16 +38,7 @@
     <loc>https://heyjdp.github.io/tags/office/</loc>
     <lastmod>2022-03-18T14:00:00+02:00</lastmod>
   </url><url>
-    <loc>https://heyjdp.github.io/posts/</loc>
-    <lastmod>2022-03-18T14:00:00+02:00</lastmod>
-  </url><url>
     <loc>https://heyjdp.github.io/tags/resume/</loc>
-    <lastmod>2022-03-18T14:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://heyjdp.github.io/tags/</loc>
-    <lastmod>2022-03-18T14:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://heyjdp.github.io/tags/tech/</loc>
     <lastmod>2022-03-18T14:00:00+02:00</lastmod>
   </url><url>
     <loc>https://heyjdp.github.io/2022/03/resume-in-json-format/</loc>
@@ -28,12 +46,6 @@
   </url><url>
     <loc>https://heyjdp.github.io/resume/</loc>
     <lastmod>2022-03-14T16:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://heyjdp.github.io/tags/development/</loc>
-    <lastmod>2022-03-11T11:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://heyjdp.github.io/tags/linux/</loc>
-    <lastmod>2022-03-11T11:00:00+02:00</lastmod>
   </url><url>
     <loc>https://heyjdp.github.io/tags/openbsd/</loc>
     <lastmod>2022-03-11T11:00:00+02:00</lastmod>
@@ -74,7 +86,7 @@
     <loc>https://heyjdp.github.io/tags/hacking/</loc>
     <lastmod>2022-02-10T11:00:00+02:00</lastmod>
   </url><url>
-    <loc>https://heyjdp.github.io/2022/02/linux-cli-reminder-%EF%B8%8F/</loc>
+    <loc>https://heyjdp.github.io/2022/02/linux-cli-reminder/</loc>
     <lastmod>2022-02-10T11:00:00+02:00</lastmod>
   </url><url>
     <loc>https://heyjdp.github.io/2022/02/exchanging-gpg-public-keys/</loc>
@@ -148,12 +160,6 @@
   </url><url>
     <loc>https://heyjdp.github.io/about/</loc>
     <lastmod>2021-01-25T16:06:00+02:00</lastmod>
-  </url><url>
-    <loc>https://heyjdp.github.io/tags/hardware/</loc>
-    <lastmod>2020-04-19T11:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://heyjdp.github.io/tags/raspberry-pi/</loc>
-    <lastmod>2020-04-19T11:00:00+02:00</lastmod>
   </url><url>
     <loc>https://heyjdp.github.io/2020/04/raspberry-pi-4-serial-console/</loc>
     <lastmod>2020-04-19T11:00:00+02:00</lastmod>

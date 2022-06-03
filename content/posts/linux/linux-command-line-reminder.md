@@ -1,5 +1,5 @@
 --- 
-title: "\U0001f4bb Linux CLI Reminder \U0001f427 \u2328\uFE0F \U0001f469\u200D\U0001f4bb" 
+title: "\U0001f4bb Linux CLI Reminder \U0001f469\u200D\U0001f4bb \U0001f4fa \U0001f427"
 date: 2022-02-10T11:00:00+02:00 
 draft: false 
 tags: ["tech", "linux", "commandline", "hacking"] 
@@ -114,7 +114,7 @@ Brilliant lorem ipsum question and answers on stack overflow [^1].
 
 ## Generate a password on the Linux command line
 
-Basically, do this:
+Basically, do this [^2]:
 
 ```bash
 cat /dev/urandom | tr -dc a-zA-Z0-9 | fold -w 18 | head -n 1
@@ -225,127 +225,10 @@ loremipsum () {
 
 Brilliant lorem ipsum question and answers on stack overflow [^1].
 
-## Generate a password on the Linux command line
-
-Basically, do this [^2]:
-
-```bash
-cat /dev/urandom | tr -dc a-zA-Z0-9 | fold -w 18 | head -n 1
-```
-
-## Configuring Git the right way
-
-We'll be using Git for our version control system so we're going to set it up to match our Github account. If you don't already have a Github account, make sure to register. It will come in handy for the future.
-
-Replace my name and email address in the following steps with the ones you used for your Github account.
-
-```bash
-git config --global color.ui true
-git config --global user.name "NAME"
-git config --global user.email "YOU@EMAIL.com"
-git config --global pull.r## Lorem Ipsum on the Command Line [^1]
-
-```bash
-$ curl http://metaphorpsum.com/paragraphs/20
-```
-
-And then it can be a bash alias:
-
-```bash
-loremipsum () {
-  if [ "${1}" = "" ] || [ "${2}" = "" ]; then
-     echo "Usage: loremipsum [paragraphs, sentences] [integer]"
-  else
-    curl -s http://metaphorpsum.com/"${1}"/"${2}" && printf "\n"
-  fi
-}
-```
-
-Brilliant lorem ipsum question and answers on stack overflow [^1].
-
-## Generate a password on the Linux command line
-
-Basically, do this:
-
-```bash
-cat /dev/urandom | tr -dc a-zA-Z0-9 | fold -w 18 | head -n 1
-```
-
-## Configuring Git the right way
-
-We'll be using Git for our version control system so we're going to set it up to match our Github account. If you don't already have a Github account, make sure to register. It will come in handy for the future.
-
-Replace my name and email address in the following steps with the ones you used for your Github account.
-
-```bash
-git config --global color.ui true
-git config --global user.name "NAME"
-git config --global user.email "YOU@EMAIL.com"
-git config --global pull.rebase true
-git config --global fetch.prune true
-git config --global diff.colorMoved zebra
-ssh-keygen -a 100 -t rsa -b 4096 -C "YOU@EMAIL.com" -f NAME-github-key-rsa4096
-ssh-keygen -a 100 -t ed25519 -C "YOU@EMAIL.com" -f NAME-github-key-ed25519
-```
-
-The three commands rebase, prune and zebra came from this blog post called "Three Git Configurations that Should Be the Default" which is well worth your time.
-
-The next step is to take the newly generated SSH key and add it to your Github account. You want to copy and paste the output of the following command and paste it here.
-
-```bash
-cat NAME-github-key-rsa4096.pub
-cat NAME-github-key-ed25519.pub
-```
-
-Once you've done this, you can check and see if it worked:
-
-```bash
-ssh -i cat NAME-github-key-rsa4096 -T git@github.com
-ssh -i cat NAME-github-key-ed25519 -T git@github.com
-```
-
-You should get a message like this:
-
-```bash
-Hi NAME! You've successfully authenticated, but GitHub does not provide shell access.
-```
-
-[^1]: *Is there something like a Lorem Ipsum generator?*, https://unix.stackexchange.com/questions/97160/is-there-something-like-a-lorem-ipsum-generator
-
-[^2]: *How to generate a strong password on the Linux command line*, https://ostechnix.com/4-easy-ways-to-generate-a-strong-password-in-linux 
-
-[^3]: *Three Git Configurations that S
-
-```bash
-ssh-keygen -a 100 -t rsa -b 4096 -C "YOU@EMAIL.com" -f NAME-github-key-rsa4096
-ssh-keygen -a 100 -t ed25519 -C "YOU@EMAIL.com" -f NAME-github-key-ed25519
-```
-
-The three commands rebase, prune and zebra came from this blog post called "Three Git Configurations that Should Be the Default" [^3] which is well worth your time.
-
-The next step is to take the newly generated SSH key and add it to your Github account. You want to copy the output of the following command and paste it into the settings dialog of the GitHub website.
-
-```bash
-cat NAME-github-key-rsa4096.pub
-cat NAME-github-key-ed25519.pub
-```
-
-Once you've done this, you can check and see if it worked:
-
-```bash
-ssh -i cat NAME-github-key-rsa4096 -T git@github.com
-ssh -i cat NAME-github-key-ed25519 -T git@github.com
-```
-
-You should get a message like this:
-
-```bash
-Hi NAME! Youve successfully authenticated, but GitHub does not provide shell access.
-```
+## References
 
 [^1]: *Is there something like a Lorem Ipsum generator?*, https://unix.stackexchange.com/questions/97160/is-there-something-like-a-lorem-ipsum-generator
 
 [^2]: *How to generate a strong password on the Linux command line*, https://ostechnix.com/4-easy-ways-to-generate-a-strong-password-in-linux 
 
 [^3]: *Three Git Configurations that Should Be the Default*, https://spin.atomicobject.com/2020/05/05/git-configurations-default/
-hould Be the Default*, https

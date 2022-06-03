@@ -46,7 +46,6 @@ fixed-list-mode
 keyid-format 0xlong
 list-options show-uid-validity
 verify-options show-uid-validity
-with-fingerprint
 require-cross-certification
 no-symkey-cache
 throw-keyids
@@ -66,8 +65,4 @@ s2k-count 65011712
 disable-cipher-algo 3DES
 weak-digest SHA1
 force-mdc
-
-enable-ssh-support
-default-cache-ttl-ssh 3600 # Set ssh timeout to 1h
-max-cache-ttl-ssh 3600 # Set ssh timeout to 1h
 ```

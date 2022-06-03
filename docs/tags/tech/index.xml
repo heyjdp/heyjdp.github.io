@@ -10,7 +10,28 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 18 Mar 2022 14:00:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/tags/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 31 Mar 2022 11:00:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/tags/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>💻 Naming Resources 🧮 👩‍💻 ✨</title>
+      <link>https://heyjdp.github.io/2022/03/naming-resources/</link>
+      <pubDate>Thu, 31 Mar 2022 11:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2022/03/naming-resources/</guid>
+      <description>&lt;p&gt;And we are back to naming things, this is my latest network device naming policy&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>💻 OpenBSD 6.9 on Raspberry Pi 4 🍓 🥧 👩‍💻</title>
+      <link>https://heyjdp.github.io/2022/03/openbsd-6.9-on-raspberry-pi-4/</link>
+      <pubDate>Wed, 30 Mar 2022 12:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2022/03/openbsd-6.9-on-raspberry-pi-4/</guid>
+      <description>I wondered if I could use my Raspberry Pi 4 as a gateway device to shape and filter my network traffic. It only has one NIC, but OpenBSD supports many USB-NIC devices out of the box. Let&amp;rsquo;s see how successful this idea is.
+Update firmware on Raspberry Pi 4 Instructions here: https://github.com/AshyIsMe/openbsd-rpi4
+Installing OpenBSD 6.9 on Raspberry Pi 4 Download and checksum install69.img from the OpenBSD 6.9 FTP site.
+Put the install69.</description>
+    </item>
+    
     <item>
       <title>💼 Resume in JSON Format 👩‍💼 📋 📎</title>
       <link>https://heyjdp.github.io/2022/03/resume-in-json-format/</link>
@@ -50,11 +71,11 @@ Kernel Normal Form Kernel normal form 1, or KNF, is the coding style used in the
     </item>
     
     <item>
-      <title>💻 Linux CLI Reminder 🐧 ⌨️ 👩‍💻</title>
-      <link>https://heyjdp.github.io/2022/02/linux-cli-reminder-%EF%B8%8F/</link>
+      <title>💻 Linux CLI Reminder 👩‍💻 📺 🐧</title>
+      <link>https://heyjdp.github.io/2022/02/linux-cli-reminder/</link>
       <pubDate>Thu, 10 Feb 2022 11:00:00 +0200</pubDate>
       
-      <guid>https://heyjdp.github.io/2022/02/linux-cli-reminder-%EF%B8%8F/</guid>
+      <guid>https://heyjdp.github.io/2022/02/linux-cli-reminder/</guid>
       <description>I find myself Google-ing for command-line fu a lot more than I should, here are some favourites&amp;hellip;
 rsync with ssh Although this should be the default by now, really, who trusts the defaults? Manage it yourself with something like this:
 rsync -avP -e &amp;#34;ssh -i ssh_key_file -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null&amp;#34; /home/jas/local-dir/* remote-user@webhost.com:/home/server/www/yourdomain.com/ Rainbow Shell Prompt Put this in .bashrc or wherever is appropriate for your OS:
