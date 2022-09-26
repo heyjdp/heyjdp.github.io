@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tools on Dr Dave Powell</title>
+    <link>https://heyjdp.github.io/tags/tools/</link>
+    <description>Recent content in tools on Dr Dave Powell</description>
+    <image>
+      <url>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</url>
+      <link>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 18 Jan 2022 11:00:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>💻 Ramdisk (tmpfs) for MacOS 	💾 👩‍💻 🍏</title>
+      <link>https://heyjdp.github.io/2022/01/ramdisk-tmpfs-for-macos/</link>
+      <pubDate>Tue, 18 Jan 2022 11:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2022/01/ramdisk-tmpfs-for-macos/</guid>
+      <description>&lt;p&gt;This post contains a cute script to mount and unmount a ram disk device on MacOS, and also a couple of notes about wear leveling on SSD and how this script is different to &lt;code&gt;tmpfs&lt;/code&gt; from Unix/Solaris.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

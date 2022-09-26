@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on Dr Dave Powell</title>
+    <link>https://heyjdp.github.io/tags/python/</link>
+    <description>Recent content in python on Dr Dave Powell</description>
+    <image>
+      <url>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</url>
+      <link>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 02 Jun 2021 11:00:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>💻 The Thing Namer 🐍 👩‍💻 ✨</title>
+      <link>https://heyjdp.github.io/2021/06/the-thing-namer/</link>
+      <pubDate>Wed, 02 Jun 2021 11:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2021/06/the-thing-namer/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;There are two hard problems in computer science: we have one joke, and it&amp;rsquo;s not funny.&lt;/p&gt;
+&lt;p&gt;&amp;ndash; heyjdp&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I have things that need naming. So I propose a short project to arbitrarily name projects, because why not? It&amp;rsquo;s fun!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>💻 Python3 Development on VS Code for MacOS 🐍 👩‍💻 🍏</title>
+      <link>https://heyjdp.github.io/2021/04/python3-development-on-vs-code-for-macos/</link>
+      <pubDate>Sun, 11 Apr 2021 11:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2021/04/python3-development-on-vs-code-for-macos/</guid>
+      <description>&lt;p&gt;A quick how-to guide to installing Python3 tooling for Microsoft VS Code on MacOS.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

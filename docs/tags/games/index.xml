@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>games on Dr Dave Powell</title>
+    <link>https://heyjdp.github.io/tags/games/</link>
+    <description>Recent content in games on Dr Dave Powell</description>
+    <image>
+      <url>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</url>
+      <link>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 10 Jul 2021 11:00:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/tags/games/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>💻 Sudoku Solver (by the Prime Minister of Singapore, Hsien Loong Lee) 🌊 🧩 👩‍💻</title>
+      <link>https://heyjdp.github.io/2021/07/sudoku-solver-by-the-prime-minister-of-singapore-hsien-loong-lee/</link>
+      <pubDate>Sat, 10 Jul 2021 11:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2021/07/sudoku-solver-by-the-prime-minister-of-singapore-hsien-loong-lee/</guid>
+      <description>&lt;p&gt;So, in 2015, the Prime Minister of Singapore, Hsien Loong Lee, posted a C language sudoku solver to leetcode.com and I can see a lot of bitwise manipulation in the code. I think it is worth our time to take the solution to pieces and see how it runs so fast.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

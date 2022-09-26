@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>development on Dr Dave Powell</title>
+    <link>https://heyjdp.github.io/tags/development/</link>
+    <description>Recent content in development on Dr Dave Powell</description>
+    <image>
+      <url>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</url>
+      <link>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 23 Aug 2022 16:00:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/tags/development/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>💻 CRUD Put vs Patch 📝 ❌ 🧰</title>
+      <link>https://heyjdp.github.io/2022/08/crud-put-vs-patch/</link>
+      <pubDate>Tue, 23 Aug 2022 16:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2022/08/crud-put-vs-patch/</guid>
+      <description>&lt;p&gt;Should we use the http header PUT or PATCH when updating a record in a CRUD system?&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>💻 Local Git init and GitHub setup 🐙 🐾 👩‍💻</title>
+      <link>https://heyjdp.github.io/2022/08/local-git-init-and-github-setup/</link>
+      <pubDate>Wed, 10 Aug 2022 11:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2022/08/local-git-init-and-github-setup/</guid>
+      <description>&lt;p&gt;A quick how-to guide to get your local &lt;code&gt;git init&lt;/code&gt; project onto GitHub.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>💻 OpenBSD 6.9 on Raspberry Pi 4 🍓 🥧 👩‍💻</title>
+      <link>https://heyjdp.github.io/2022/03/openbsd-6.9-on-raspberry-pi-4/</link>
+      <pubDate>Wed, 30 Mar 2022 12:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2022/03/openbsd-6.9-on-raspberry-pi-4/</guid>
+      <description>I wondered if I could use my Raspberry Pi 4 as a gateway device to shape and filter my network traffic. It only has one NIC, but OpenBSD supports many USB-NIC devices out of the box. Let&amp;rsquo;s see how successful this idea is.
+Update firmware on Raspberry Pi 4 Instructions here: https://github.com/AshyIsMe/openbsd-rpi4
+Installing OpenBSD 6.9 on Raspberry Pi 4 Download and checksum install69.img from the OpenBSD 6.9 FTP site.
+Put the install69.</description>
+    </item>
+    
+    <item>
+      <title>💻 Style9 Indent Rules on Linux/OpenBSD 🐧 🐡 👩‍💻</title>
+      <link>https://heyjdp.github.io/2022/03/style9-indent-rules-on-linux/openbsd/</link>
+      <pubDate>Fri, 11 Mar 2022 11:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2022/03/style9-indent-rules-on-linux/openbsd/</guid>
+      <description>Get that lovely Plan9 source feel in your C code on Linux or OpenBSD
+Kernel Normal Form Kernel normal form 1, or KNF, is the coding style used in the development of code for the BSD operating systems. According to the OpenBSD man pages 2:
+ This file specifies the preferred style for kernel source files in the OpenBSD source tree. It is also a guide for preferred userspace code style.</description>
+    </item>
+    
+    <item>
+      <title>💻 How To Setup A Yubikey ⛓ 🔐 ✨</title>
+      <link>https://heyjdp.github.io/2022/03/how-to-setup-a-yubikey/</link>
+      <pubDate>Tue, 01 Mar 2022 11:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2022/03/how-to-setup-a-yubikey/</guid>
+      <description>&lt;p&gt;A Yubikey is a physical security device for your computer (and phone if you get the NFC version). In this post we will look at adding GPG and SSH keys to the Yubikey for additional privacy and security.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>💻 Sudoku Solver (by the Prime Minister of Singapore, Hsien Loong Lee) 🌊 🧩 👩‍💻</title>
+      <link>https://heyjdp.github.io/2021/07/sudoku-solver-by-the-prime-minister-of-singapore-hsien-loong-lee/</link>
+      <pubDate>Sat, 10 Jul 2021 11:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2021/07/sudoku-solver-by-the-prime-minister-of-singapore-hsien-loong-lee/</guid>
+      <description>&lt;p&gt;So, in 2015, the Prime Minister of Singapore, Hsien Loong Lee, posted a C language sudoku solver to leetcode.com and I can see a lot of bitwise manipulation in the code. I think it is worth our time to take the solution to pieces and see how it runs so fast.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>💻 The Thing Namer 🐍 👩‍💻 ✨</title>
+      <link>https://heyjdp.github.io/2021/06/the-thing-namer/</link>
+      <pubDate>Wed, 02 Jun 2021 11:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2021/06/the-thing-namer/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;There are two hard problems in computer science: we have one joke, and it&amp;rsquo;s not funny.&lt;/p&gt;
+&lt;p&gt;&amp;ndash; heyjdp&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I have things that need naming. So I propose a short project to arbitrarily name projects, because why not? It&amp;rsquo;s fun!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>💻 C Code Development in VS Code for MacOS 🌊 👩‍💻 🍏</title>
+      <link>https://heyjdp.github.io/2021/04/c-code-development-in-vs-code-for-macos/</link>
+      <pubDate>Thu, 29 Apr 2021 11:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2021/04/c-code-development-in-vs-code-for-macos/</guid>
+      <description>&lt;p&gt;A quick how-to guide to installing C code tooling for Microsoft VS Code on MacOS.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>💻 Python3 Development on VS Code for MacOS 🐍 👩‍💻 🍏</title>
+      <link>https://heyjdp.github.io/2021/04/python3-development-on-vs-code-for-macos/</link>
+      <pubDate>Sun, 11 Apr 2021 11:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2021/04/python3-development-on-vs-code-for-macos/</guid>
+      <description>&lt;p&gt;A quick how-to guide to installing Python3 tooling for Microsoft VS Code on MacOS.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>💻 Raspberry Pi 4 Serial Console 🍓 🥧 👩‍💻</title>
+      <link>https://heyjdp.github.io/2020/04/raspberry-pi-4-serial-console/</link>
+      <pubDate>Sun, 19 Apr 2020 11:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2020/04/raspberry-pi-4-serial-console/</guid>
+      <description>Raspberry Pi has been through a few revisions now, and the data available on the www tends to get stale very fast. This is the right way of connecting to a Raspberry Pi 4 via a serial consoles.
+Which GPIO pins are used for the serial console? As can be seen in the image above and the cartoon here, the TX (PIN8) and RX (PIN10) pins for the serial port are next to the 5V power (PIN2) and GND (PIN6) pins on the top left.</description>
+    </item>
+    
+    <item>
+      <title>💻 Linear Feedback Shift Register ⛓ ✨ 👩‍💻</title>
+      <link>https://heyjdp.github.io/2020/02/linear-feedback-shift-register/</link>
+      <pubDate>Mon, 17 Feb 2020 11:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2020/02/linear-feedback-shift-register/</guid>
+      <description>&lt;p&gt;How did I get started in technology? Great question, let&amp;rsquo;s explore&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

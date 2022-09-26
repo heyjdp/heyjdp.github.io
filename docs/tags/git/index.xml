@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git on Dr Dave Powell</title>
+    <link>https://heyjdp.github.io/tags/git/</link>
+    <description>Recent content in git on Dr Dave Powell</description>
+    <image>
+      <url>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</url>
+      <link>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 10 Aug 2022 11:00:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>💻 Local Git init and GitHub setup 🐙 🐾 👩‍💻</title>
+      <link>https://heyjdp.github.io/2022/08/local-git-init-and-github-setup/</link>
+      <pubDate>Wed, 10 Aug 2022 11:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2022/08/local-git-init-and-github-setup/</guid>
+      <description>&lt;p&gt;A quick how-to guide to get your local &lt;code&gt;git init&lt;/code&gt; project onto GitHub.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

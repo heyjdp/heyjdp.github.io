@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>openbsd on Dr Dave Powell</title>
+    <link>https://heyjdp.github.io/tags/openbsd/</link>
+    <description>Recent content in openbsd on Dr Dave Powell</description>
+    <image>
+      <url>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</url>
+      <link>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 30 Mar 2022 12:00:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/tags/openbsd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>💻 OpenBSD 6.9 on Raspberry Pi 4 🍓 🥧 👩‍💻</title>
+      <link>https://heyjdp.github.io/2022/03/openbsd-6.9-on-raspberry-pi-4/</link>
+      <pubDate>Wed, 30 Mar 2022 12:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2022/03/openbsd-6.9-on-raspberry-pi-4/</guid>
+      <description>I wondered if I could use my Raspberry Pi 4 as a gateway device to shape and filter my network traffic. It only has one NIC, but OpenBSD supports many USB-NIC devices out of the box. Let&amp;rsquo;s see how successful this idea is.
+Update firmware on Raspberry Pi 4 Instructions here: https://github.com/AshyIsMe/openbsd-rpi4
+Installing OpenBSD 6.9 on Raspberry Pi 4 Download and checksum install69.img from the OpenBSD 6.9 FTP site.
+Put the install69.</description>
+    </item>
+    
+    <item>
+      <title>💻 Style9 Indent Rules on Linux/OpenBSD 🐧 🐡 👩‍💻</title>
+      <link>https://heyjdp.github.io/2022/03/style9-indent-rules-on-linux/openbsd/</link>
+      <pubDate>Fri, 11 Mar 2022 11:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2022/03/style9-indent-rules-on-linux/openbsd/</guid>
+      <description>Get that lovely Plan9 source feel in your C code on Linux or OpenBSD
+Kernel Normal Form Kernel normal form 1, or KNF, is the coding style used in the development of code for the BSD operating systems. According to the OpenBSD man pages 2:
+ This file specifies the preferred style for kernel source files in the OpenBSD source tree. It is also a guide for preferred userspace code style.</description>
+    </item>
+    
+  </channel>
+</rss>
