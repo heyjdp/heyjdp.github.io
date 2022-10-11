@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cicd on Dr Dave Powell</title>
+    <link>https://heyjdp.github.io/tags/cicd/</link>
+    <description>Recent content in cicd on Dr Dave Powell</description>
+    <image>
+      <url>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</url>
+      <link>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 11 Sep 2022 10:30:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/tags/cicd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>💻 What is DevSecOps? 🔐 🧰 💻</title>
+      <link>https://heyjdp.github.io/2022/09/what-is-devsecops/</link>
+      <pubDate>Sun, 11 Sep 2022 10:30:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2022/09/what-is-devsecops/</guid>
+      <description>&lt;p&gt;What is DevSecOps, and how is it different to the more traditional DevOps team you are used to working with?&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
