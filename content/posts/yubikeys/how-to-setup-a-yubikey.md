@@ -62,20 +62,20 @@ This is a TL;DR version of the setup guide. So, the plan is that we will make a 
 Do this
 
 ```bash
-$ gpg --quick-gen-key "Dave Powell <dave@davepowell.net>" rsa4096 cert 50y
+$ gpg --quick-gen-key "Jas Powell <jas@davepowell.net>" rsa4096 cert 50y
 We need to generate a lot of random bytes. It is a good idea to perform
 some other action (type on the keyboard, move the mouse, utilize the
 disks) during the prime generation; this gives the random number
 generator a better chance to gain enough entropy.
 gpg: key 0xF43BA3EA4862E172 marked as ultimately trusted
-gpg: revocation certificate stored as '/Users/dave/.gnupg/openpgp-revocs.d/7367E3012B4F6A98D2BD9D4DF43BA3EA4862E172.rev'
+gpg: revocation certificate stored as '/Users/jas/.gnupg/openpgp-revocs.d/7367E3012B4F6A98D2BD9D4DF43BA3EA4862E172.rev'
 public and secret key created and signed.
 
 Note that this key cannot be used for encryption.  You may want to use
 the command "--edit-key" to generate a subkey for this purpose.
 pub   rsa4096/0xF43BA3EA4862E172 2022-03-04 [C] [expires: 2072-02-20]
       Key fingerprint = 7367 E301 2B4F 6A98 D2BD  9D4D F43B A3EA 4862 E172
-uid                              Dave Powell <dave@davepowell.net>
+uid                              Jas Powell <jas@davepowell.net>
 ```
 
 ### Add the Subkeys
@@ -94,11 +94,11 @@ The public keys:
 
 ```bash 
 $ gpg -k
-/Users/dave/.gnupg/pubring.kbx
+/Users/jas/.gnupg/pubring.kbx
 -----------------------------
 pub   rsa4096/0xF43BA3EA4862E172 2022-03-04 [C] [expires: 2072-02-20]
       Key fingerprint = 7367 E301 2B4F 6A98 D2BD  9D4D F43B A3EA 4862 E172
-uid                   [ultimate] Dave Powell <dave@davepowell.net>
+uid                   [ultimate] Jas Powell <jas@davepowell.net>
 sub   rsa4096/0x6B4ECE4444C100D4 2022-03-04 [E] [expires: 2024-03-03]
 sub   rsa4096/0x1F99A7878C6BF622 2022-03-04 [S] [expires: 2024-03-03]
 sub   rsa4096/0x3B2D4EF6A6A88608 2022-03-04 [A] [expires: 2024-03-03]
@@ -108,11 +108,11 @@ And the secret/subkeys keys:
 
 ```bash
 $ gpg -K
-/Users/dave/.gnupg/pubring.kbx
+/Users/jas/.gnupg/pubring.kbx
 -----------------------------
 sec   rsa4096/0xF43BA3EA4862E172 2022-03-04 [C] [expires: 2072-02-20]
       Key fingerprint = 7367 E301 2B4F 6A98 D2BD  9D4D F43B A3EA 4862 E172
-uid                   [ultimate] Dave Powell <dave@davepowell.net>
+uid                   [ultimate] Jas Powell <jas@davepowell.net>
 ssb   rsa4096/0x6B4ECE4444C100D4 2022-03-04 [E] [expires: 2024-03-03]
 ssb   rsa4096/0x1F99A7878C6BF622 2022-03-04 [S] [expires: 2024-03-03]
 ssb   rsa4096/0x3B2D4EF6A6A88608 2022-03-04 [A] [expires: 2024-03-03]
@@ -135,7 +135,7 @@ ssb  rsa4096/0x1F99A7878C6BF622
      created: 2022-03-04  expires: 2024-03-03  usage: S
 ssb  rsa4096/0x3B2D4EF6A6A88608
      created: 2022-03-04  expires: 2024-03-03  usage: A
-[ultimate] (1). Dave Powell <dave@davepowell.net>
+[ultimate] (1). Jas Powell <jas@davepowell.net>
 
 gpg> trust
 pub  rsa4096/0xF43BA3EA4862E172
@@ -147,7 +147,7 @@ ssb  rsa4096/0x1F99A7878C6BF622
      created: 2022-03-04  expires: 2024-03-03  usage: S
 ssb  rsa4096/0x3B2D4EF6A6A88608
      created: 2022-03-04  expires: 2024-03-03  usage: A
-[ultimate] (1). Dave Powell <dave@davepowell.net>
+[ultimate] (1). Jas Powell <jas@davepowell.net>
 
 Please decide how far you trust this user to correctly verify other users' keys
 (by looking at passports, checking fingerprints from different sources, etc.)
@@ -171,7 +171,7 @@ ssb  rsa4096/0x1F99A7878C6BF622
      created: 2022-03-04  expires: 2024-03-03  usage: S
 ssb  rsa4096/0x3B2D4EF6A6A88608
      created: 2022-03-04  expires: 2024-03-03  usage: A
-[ultimate] (1). Dave Powell <dave@davepowell.net>
+[ultimate] (1). Jas Powell <jas@davepowell.net>
 
 gpg> quit
 ```
@@ -189,11 +189,11 @@ $ gpg --export 7367E3012B4F6A98D2BD9D4DF43BA3EA4862E172 > 7367E3012B4F6A98D2BD9D
 
 $ ls -la
 total 72
-drwxr-xr-x   5 dave  staff    160 Mar  4 14:12 .
-drwxr-xr-x+ 69 dave  staff   2208 Mar  4 14:12 ..
--rw-r--r--   1 dave  staff   6896 Mar  4 14:12 7367E3012B4F6A98D2BD9D4DF43BA3EA4862E172.pub
--rw-r--r--   1 dave  staff  13890 Mar  4 14:12 7367E3012B4F6A98D2BD9D4DF43BA3EA4862E172.sec
--rw-r--r--   1 dave  staff  12151 Mar  4 14:12 7367E3012B4F6A98D2BD9D4DF43BA3EA4862E172.sub.sec
+drwxr-xr-x   5 jas  staff    160 Mar  4 14:12 .
+drwxr-xr-x+ 69 jas  staff   2208 Mar  4 14:12 ..
+-rw-r--r--   1 jas  staff   6896 Mar  4 14:12 7367E3012B4F6A98D2BD9D4DF43BA3EA4862E172.pub
+-rw-r--r--   1 jas  staff  13890 Mar  4 14:12 7367E3012B4F6A98D2BD9D4DF43BA3EA4862E172.sec
+-rw-r--r--   1 jas  staff  12151 Mar  4 14:12 7367E3012B4F6A98D2BD9D4DF43BA3EA4862E172.sub.sec
 ```
 
 ### Detach the Master Key
@@ -203,7 +203,7 @@ Do this:
 ```bash
 $ gpg --delete-secret-keys 7367E3012B4F6A98D2BD9D4DF43BA3EA4862E172
 
-sec  rsa4096/0xF43BA3EA4862E172 2022-03-04 Dave Powell <dave@davepowell.net>
+sec  rsa4096/0xF43BA3EA4862E172 2022-03-04 Jas Powell <jas@davepowell.net>
 
 Delete this key from the keyring? (y/N) y
 This is a secret key! - really delete? (y/N) y
@@ -213,7 +213,7 @@ And re-add the subkeys:
 
 ```bash
 $ gpg --import 7367E3012B4F6A98D2BD9D4DF43BA3EA4862E172.sub.sec
-gpg: key 0xF43BA3EA4862E172: "Dave Powell <dave@davepowell.net>" not changed
+gpg: key 0xF43BA3EA4862E172: "Jas Powell <jas@davepowell.net>" not changed
 gpg: To migrate 'secring.gpg', with each smartcard, run: gpg --card-status
 gpg: key 0xF43BA3EA4862E172: secret key imported
 gpg: Total number processed: 1
@@ -226,11 +226,11 @@ Check that the Master key is detached:
 
 ```bash
 $ gpg -K
-/Users/dave/.gnupg/pubring.kbx
+/Users/jas/.gnupg/pubring.kbx
 -----------------------------
 sec#  rsa4096/0xF43BA3EA4862E172 2022-03-04 [C] [expires: 2072-02-20]
       Key fingerprint = 7367 E301 2B4F 6A98 D2BD  9D4D F43B A3EA 4862 E172
-uid                   [ultimate] Dave Powell <dave@davepowell.net>
+uid                   [ultimate] Jas Powell <jas@davepowell.net>
 ssb   rsa4096/0x6B4ECE4444C100D4 2022-03-04 [E] [expires: 2024-03-03]
 ssb   rsa4096/0x1F99A7878C6BF622 2022-03-04 [S] [expires: 2024-03-03]
 ssb   rsa4096/0x3B2D4EF6A6A88608 2022-03-04 [A] [expires: 2024-03-03]
@@ -306,13 +306,13 @@ Admin commands are allowed
 
 gpg/card> name
 Cardholder's surname: Powell
-Cardholder's given name: Dave
+Cardholder's given name: Jas
 
 gpg/card> lang
 Language preferences: en
 
 gpg/card> login
-Login data (account name): dave@davepowell.net
+Login data (account name): jas@davepowell.net
 
 gpg/card> list
 
@@ -322,11 +322,11 @@ Application type .: OpenPGP
 Version ..........: 2.1
 Manufacturer .....: Yubico
 Serial number ....: 06634141
-Name of cardholder: Dave Powell
+Name of cardholder: Jas Powell
 Language prefs ...: en
 Salutation .......:
 URL of public key : [not set]
-Login data .......: dave@davepowell.net
+Login data .......: jas@davepowell.net
 Signature PIN ....: not forced
 Key attributes ...: rsa2048 rsa2048 rsa2048
 Max. PIN lengths .: 127 127 127
@@ -355,7 +355,7 @@ ssb  rsa4096/0x1F99A7878C6BF622
      created: 2022-03-04  expires: 2024-03-03  usage: S
 ssb  rsa4096/0x3B2D4EF6A6A88608
      created: 2022-03-04  expires: 2024-03-03  usage: A
-[ultimate] (1). Dave Powell <dave@davepowell.net>
+[ultimate] (1). Jas Powell <jas@davepowell.net>
 
 gpg> key 2
 
@@ -368,7 +368,7 @@ ssb* rsa4096/0x1F99A7878C6BF622
      created: 2022-03-04  expires: 2024-03-03  usage: S
 ssb  rsa4096/0x3B2D4EF6A6A88608
      created: 2022-03-04  expires: 2024-03-03  usage: A
-[ultimate] (1). Dave Powell <dave@davepowell.net>
+[ultimate] (1). Jas Powell <jas@davepowell.net>
 
 gpg> keytocard
 Please select where to store the key:
@@ -393,7 +393,7 @@ ssb* rsa4096/0x1F99A7878C6BF622
      created: 2022-03-04  expires: 2024-03-03  usage: S
 ssb* rsa4096/0x3B2D4EF6A6A88608
      created: 2022-03-04  expires: 2024-03-03  usage: A
-[ultimate] (1). Dave Powell <dave@davepowell.net>
+[ultimate] (1). Jas Powell <jas@davepowell.net>
 
 gpg> key 2
 
@@ -406,7 +406,7 @@ ssb  rsa4096/0x1F99A7878C6BF622
      created: 2022-03-04  expires: 2024-03-03  usage: S
 ssb* rsa4096/0x3B2D4EF6A6A88608
      created: 2022-03-04  expires: 2024-03-03  usage: A
-[ultimate] (1). Dave Powell <dave@davepowell.net>
+[ultimate] (1). Jas Powell <jas@davepowell.net>
 
 gpg> keytocard
 Please select where to store the key:
@@ -428,7 +428,7 @@ ssb  rsa4096/0x1F99A7878C6BF622
      created: 2022-03-04  expires: 2024-03-03  usage: S
 ssb* rsa4096/0x3B2D4EF6A6A88608
      created: 2022-03-04  expires: 2024-03-03  usage: A
-[ultimate] (1). Dave Powell <dave@davepowell.net>
+[ultimate] (1). Jas Powell <jas@davepowell.net>
 
 gpg> key 3
 
@@ -441,7 +441,7 @@ ssb  rsa4096/0x1F99A7878C6BF622
      created: 2022-03-04  expires: 2024-03-03  usage: S
 ssb  rsa4096/0x3B2D4EF6A6A88608
      created: 2022-03-04  expires: 2024-03-03  usage: A
-[ultimate] (1). Dave Powell <dave@davepowell.net>
+[ultimate] (1). Jas Powell <jas@davepowell.net>
 
 gpg> keytocard
 Please select where to store the key:
@@ -457,7 +457,7 @@ ssb  rsa4096/0x1F99A7878C6BF622
      created: 2022-03-04  expires: 2024-03-03  usage: S
 ssb  rsa4096/0x3B2D4EF6A6A88608
      created: 2022-03-04  expires: 2024-03-03  usage: A
-[ultimate] (1). Dave Powell <dave@davepowell.net>
+[ultimate] (1). Jas Powell <jas@davepowell.net>
 ```
 
 Make sure we `save` progress:
@@ -470,11 +470,11 @@ And check the status of the secret keys again:
 
 ```bash
 $ gpg -K
-/Users/dave/.gnupg/pubring.kbx
+/Users/jas/.gnupg/pubring.kbx
 -----------------------------
 sec#  rsa4096/0xF43BA3EA4862E172 2022-03-04 [C] [expires: 2072-02-20]
       Key fingerprint = 7367 E301 2B4F 6A98 D2BD  9D4D F43B A3EA 4862 E172
-uid                   [ultimate] Dave Powell <dave@davepowell.net>
+uid                   [ultimate] Jas Powell <jas@davepowell.net>
 ssb>  rsa4096/0x6B4ECE4444C100D4 2022-03-04 [E] [expires: 2024-03-03]
 ssb>  rsa4096/0x1F99A7878C6BF622 2022-03-04 [S] [expires: 2024-03-03]
 ssb>  rsa4096/0x3B2D4EF6A6A88608 2022-03-04 [A] [expires: 2024-03-03]
@@ -494,11 +494,11 @@ Application type .: OpenPGP
 Version ..........: 2.1
 Manufacturer .....: Yubico
 Serial number ....: 06634141
-Name of cardholder: Dave Powell
+Name of cardholder: Jas Powell
 Language prefs ...: en
 Salutation .......:
 URL of public key : [not set]
-Login data .......: dave@davepowell.net
+Login data .......: jas@davepowell.net
 Signature PIN ....: not forced
 Key attributes ...: rsa4096 rsa4096 rsa4096
 Max. PIN lengths .: 127 127 127
@@ -510,7 +510,7 @@ Encryption key....: 6C00 12BA 26A1 1826 93DA  AC4A 6B4E CE44 44C1 00D4
       created ....: 2022-03-04 11:42:06
 Authentication key: 33C8 1D78 CAB6 59ED 1589  F47D 3B2D 4EF6 A6A8 8608
       created ....: 2022-03-04 11:42:18
-General key info..: sub  rsa4096/0x1F99A7878C6BF622 2022-03-04 Dave Powell <dave@davepowell.net>
+General key info..: sub  rsa4096/0x1F99A7878C6BF622 2022-03-04 Jas Powell <jas@davepowell.net>
 sec#  rsa4096/0xF43BA3EA4862E172  created: 2022-03-04  expires: 2072-02-20
 ssb>  rsa4096/0x6B4ECE4444C100D4  created: 2022-03-04  expires: 2024-03-03
                                   card-no: 0006 06634141
@@ -543,7 +543,7 @@ Do this:
 ```bash
 $ echo Hello, world! > plain.txt
 
-$ gpg --default-key 7367E3012B4F6A98D2BD9D4DF43BA3EA4862E172 -e -r dave --armor plain.txt
+$ gpg --default-key 7367E3012B4F6A98D2BD9D4DF43BA3EA4862E172 -e -r jas --armor plain.txt
 
 $ ls
 plain.txt

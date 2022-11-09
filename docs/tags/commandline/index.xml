@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>commandline on Dr Dave Powell</title>
+    <title>commandline on Dr Jas Powell</title>
     <link>https://heyjdp.github.io/tags/commandline/</link>
-    <description>Recent content in commandline on Dr Dave Powell</description>
+    <description>Recent content in commandline on Dr Jas Powell</description>
     <image>
       <url>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</url>
       <link>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</link>
@@ -19,7 +19,7 @@
       <guid>https://heyjdp.github.io/2022/02/linux-cli-reminder/</guid>
       <description>I find myself Google-ing for command-line fu a lot more than I should, here are some favourites&amp;hellip;
 rsync with ssh Although this should be the default by now, really, who trusts the defaults? Manage it yourself with something like this:
-rsync -avP -e &amp;#34;ssh -i ssh_key_file -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null&amp;#34; /home/dave/local-dir/* remote-user@webhost.com:/home/server/www/yourdomain.com/ Rainbow Shell Prompt Put this in .bashrc or wherever is appropriate for your OS:
+rsync -avP -e &amp;#34;ssh -i ssh_key_file -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null&amp;#34; /home/jas/local-dir/* remote-user@webhost.com:/home/server/www/yourdomain.com/ Rainbow Shell Prompt Put this in .bashrc or wherever is appropriate for your OS:
 export PS1=&amp;#34;\[$(tput bold)\]\[$(tput setaf 1)\]\u\[$(tput setaf 208)\]@\[$(tput setaf 3)\h\[$(tput setaf 2)\]:\d \[$(tput setaf 4)\]\@:\[$(tput setaf 55)\]\w\n$PROMPT_COLOR\$ \[$(tput sgr0)\]&amp;#34; YouTube-dl on Linux Obtain it from here: https://github.</description>
     </item>
     

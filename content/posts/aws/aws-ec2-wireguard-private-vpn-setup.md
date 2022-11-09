@@ -47,12 +47,12 @@ If you don't have a key-pair already set up, allow AWS to create on for you and 
 
 ```bash
 $ ls -la ./Downloads/aws-ec2-key.pem
--rwxr-xr-x  1 dave  staff  1704 Feb  7 19:44 ./Downloads/aws-ec2-key.pem
+-rwxr-xr-x  1 jas  staff  1704 Feb  7 19:44 ./Downloads/aws-ec2-key.pem
 
 $ chmod 400 ./Downloads/aws-ec2-key.pem
 
 $ ls -la ./Downloads/aws-ec2-key.pem
--r--------  1 dave  staff  1704 Feb  7 19:44 ./Downloads/aws-ec2-key.pem
+-r--------  1 jas  staff  1704 Feb  7 19:44 ./Downloads/aws-ec2-key.pem
 
 $ ssh -i ./Downloads/aws-ec2-key.pem admin@18.195.111.144
 ```
@@ -328,13 +328,13 @@ It is also possible that a host key has just been changed.
 The fingerprint for the ED25519 key sent by the remote host is
 SHA256:dHJRfQo00UdmmLqeS5YScKZ4uKQT3sCcGUYNMY7bCyQ.
 Please contact your system administrator.
-Add correct host key in /Users/dave/.ssh/known_hosts to get rid of this message.
-Offending ECDSA key in /Users/dave/.ssh/known_hosts:11
+Add correct host key in /Users/jas/.ssh/known_hosts to get rid of this message.
+Offending ECDSA key in /Users/jas/.ssh/known_hosts:11
 Host key for 18.195.111.144 has changed and you have requested strict checking.
 Host key verification failed.
 ```
 
-Then, edit the file `/Users/dave/.ssh/known_hosts` and delete line 11 (or any other line that refers to `18.195.111.144`)
+Then, edit the file `/Users/jas/.ssh/known_hosts` and delete line 11 (or any other line that refers to `18.195.111.144`)
 
 ### Changing the client side `ssh` keys
 
@@ -392,10 +392,10 @@ And then we verify:
 
 ```bash
 $ ls -la aws_ec2*
--rw-------  1 dave  staff   399 Feb  8 16:41 aws_ec2_ed25519_key
--rw-r--r--  1 dave  staff    94 Feb  8 16:41 aws_ec2_ed25519_key.pub
--rw-------  1 dave  staff  6497 Feb  8 16:34 aws_ec2_rsa_key
--rw-r--r--  1 dave  staff  1418 Feb  8 16:34 aws_ec2_rsa_key.pub
+-rw-------  1 jas  staff   399 Feb  8 16:41 aws_ec2_ed25519_key
+-rw-r--r--  1 jas  staff    94 Feb  8 16:41 aws_ec2_ed25519_key.pub
+-rw-------  1 jas  staff  6497 Feb  8 16:34 aws_ec2_rsa_key
+-rw-r--r--  1 jas  staff  1418 Feb  8 16:34 aws_ec2_rsa_key.pub
 
 $ cat aws_ec2_rsa_key.pub
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAEAQDnYyZsNjoD7xCGOCo5L1Tn8jMHaKg6lVA1WdJ6oX0UTTDo4qxRiucNFSDsNYj+3+qWuiRGhn2irVSX4jDr1Vwe4q1OEW6QUWsEQmvCVb1O4obsRXgwUdOd7XhmDKp5CNAI92a3rPRSYi9B0o/gbbOuhblyolXJM7ghvPB+tfXBCYbNg8BNiA0LJl+yGHV+HyGZbXu760E8FOyB9Kt4lwAg0lN3Hrn7os4e9WW1JtdJPfYky9fU+0QtZx6o+3yOM5JzJfF1Yx7LMjzJPJWsegHnUoSdZHAuAmdS2Q2OOodIDN6iigMIDJU4vPZLFBpjykQ1vXGl2yKKZRfkNh+8EJy2TCTJXrcCiA6uzeT61yjMmlSPMkH9rTh5x81oygG01L1f5M5LHxSm0+SWsrFnGNn14tOw/TT304whWay1yBs10Y6k581q6oLE2FcXXPpeQN1SYBuR+WdMwodKs9FHat/CxOPw9pjN6/vGoRAU0O0K0vBifNqOUuTwp6IycuwBgS54nKBt9Ww2c4UQKuOGtwCzwNjJXNOSJe2De4VTWhvdorEXl8KdkqoP9LRuTrJ29lFdb8oqs+jjVgSWkdfWSBD9kD4YxnqmwcPeC1DUp4iTdLehf5PQqo70EJkCPlE/o8AbMSkQyBE9pkOkyhyhOFkDWzyj+Ht82I/yZEqWOktmrNjgsIy/Es9MPTT1qGl6FOu1aEfhX/76arGi0+occOdKG1nrjPhPoQ6P8JkawTbDFRVjTjReCtnV4WAt2UmgdOzOxep13slBhxoNfpxhF6SFN9poxF0WieIioc1lYTohzuiBemW9OoeDQHXru845HGtrwPJbNlTLu5A/i2VvPD507ThwWpi1nGp1kVzy5LJJzmEMce+/3Ms4BfVtQpvo/DZ/YUIM4Lt63l+b49rOwZBo8lc1kDFGT5eKB1lEkh9zUYk4n2e7Mn+387YUB5rr6aR0KcGCm6nA0dcT6/WaO6t+dG7Gi9xWlrTSdE1HXPvwkj3aEljzVeF3fQmaWqeKREC28OBVIOQpon2H1pri3asREfQxPndRkufKAI8FDXl1QLuuHjxFAPYNUo5A36fsa+NwkgCUdM45uyxCGMGk9QP5/Jpz3b5T6M4thx1/IytbeWf4csn1bjEt8iaz0Wj4PTv5CeV0YH4GnjzmDIW8DsrE5LpaUgq7QWryk2HSatFgQTEZib5zqhqA+e+qjbenpj4P1bRbLh8G+A4uuBoEvkR0qpaYARrLlRRVmJ9b14RoIJYwS4PyS0eQj9IWtiTf//kCL6Smgpa+uZCjZJeQ4mExmxW5knTi5h9EqD2ylIws0NSCqdhVNnY5mdipQKVu0Zj0qJE2f6YtLwRtg8zcO7GT admin@debian

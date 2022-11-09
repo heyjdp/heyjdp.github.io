@@ -137,10 +137,10 @@ $ source env/bin/activate
 (env) ...
 
 $ which python3
-/Users/dave/code/pygui/env/bin/python3
+/Users/jas/code/pygui/env/bin/python3
 
 $ which python
-/Users/dave/code/pygui/env/bin/python
+/Users/jas/code/pygui/env/bin/python
 
 $ python --version
 Python 3.9.10

@@ -38,7 +38,7 @@ The SunOS kernel and userland also uses a similar indentation style that was der
 From my own Debian 10 install:
 
 ```bash
-$ cat /home/dave/.indent.pro 
+$ cat /home/jas/.indent.pro 
 -bap
 -br
 -ce

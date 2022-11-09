@@ -51,18 +51,18 @@ This way, if anything happens to the subkeys, or the machine, we can fetch the o
 Try this (obvs replace the info with your own info!):
 
 ```bash
-$ gpg --quick-gen-key "Dave Powell <dave@davepowell.net>" ed25519 sign 50y
+$ gpg --quick-gen-key "Jas Powell <jas@davepowell.net>" ed25519 sign 50y
 We need to generate a lot of random bytes. It is a good idea to perform
 some other action (type on the keyboard, move the mouse, utilize the
 disks) during the prime generation; this gives the random number
 generator a better chance to gain enough entropy.
 gpg: key 0x97350083B861B66A marked as ultimately trusted
-gpg: revocation certificate stored as '/Users/dave/.gnupg/openpgp-revocs.d/A1D113510A1E68CAFF6C579897350083B861B66A.rev'
+gpg: revocation certificate stored as '/Users/jas/.gnupg/openpgp-revocs.d/A1D113510A1E68CAFF6C579897350083B861B66A.rev'
 public and secret key created and signed.
 
 pub   ed25519/0x97350083B861B66A 2022-02-24 [SC] [expires: 2072-02-12]
       Key fingerprint = A1D1 1351 0A1E 68CA FF6C  5798 9735 0083 B861 B66A
-uid                              Dave Powell <dave@davepowell.net>
+uid                              Jas Powell <jas@davepowell.net>
 ```
 
 Note the use of 50 years for the expiry date of they key!
@@ -70,12 +70,12 @@ Note the use of 50 years for the expiry date of they key!
 Also, note that the revocation certificate for the key was automatically generated:
 
 ```txt
-$ cat /Users/dave/.gnupg/openpgp-revocs.d/A1D113510A1E68CAFF6C579897350083B861B66A.rev
+$ cat /Users/jas/.gnupg/openpgp-revocs.d/A1D113510A1E68CAFF6C579897350083B861B66A.rev
 This is a revocation certificate for the OpenPGP key:
 
 pub   ed25519/0x97350083B861B66A 2022-02-24 [SC] [expires: 2072-02-12]
       Key fingerprint = A1D1 1351 0A1E 68CA FF6C  5798 9735 0083 B861 B66A
-uid                            Dave Powell <dave@davepowell.net>
+uid                            Jas Powell <jas@davepowell.net>
 
 A revocation certificate is a kind of "kill switch" to publicly
 declare that a key shall not anymore be used.  It is not possible
@@ -107,22 +107,22 @@ Let's find the ID of the key we just made, list the public keys (lowercase `k`):
 
 ```bash
 $ gpg -k
-/Users/dave/.gnupg/pubring.kbx
+/Users/jas/.gnupg/pubring.kbx
 -----------------------------
 pub   ed25519/0x97350083B861B66A 2022-02-24 [SC] [expires: 2072-02-12]
       Key fingerprint = A1D1 1351 0A1E 68CA FF6C  5798 9735 0083 B861 B66A
-uid                   [ultimate] Dave Powell <dave@davepowell.net>
+uid                   [ultimate] Jas Powell <jas@davepowell.net>
 ```
 
 And list the secret/private keys (uppercase `k`):
 
 ```bash
 $ gpg -K
-/Users/dave/.gnupg/pubring.kbx
+/Users/jas/.gnupg/pubring.kbx
 -----------------------------
 sec   ed25519/0x97350083B861B66A 2022-02-24 [SC] [expires: 2072-02-12]
       Key fingerprint = A1D1 1351 0A1E 68CA FF6C  5798 9735 0083 B861 B66A
-uid                   [ultimate] Dave Powell <dave@davepowell.net>
+uid                   [ultimate] Jas Powell <jas@davepowell.net>
 ```
 
 Our key fingerprint is `A1D113510A1E68CAFF6C579897350083B861B66A`, so let's use this to create subkeys:
@@ -137,11 +137,11 @@ Now when we list the public keys we can see the following:
 
 ```bash
 $ gpg --list-public-keys
-/Users/dave/.gnupg/pubring.kbx
+/Users/jas/.gnupg/pubring.kbx
 -----------------------------
 pub   ed25519/0x97350083B861B66A 2022-02-24 [SC] [expires: 2072-02-12]
       Key fingerprint = A1D1 1351 0A1E 68CA FF6C  5798 9735 0083 B861 B66A
-uid                   [ultimate] Dave Powell <dave@davepowell.net>
+uid                   [ultimate] Jas Powell <jas@davepowell.net>
 sub   cv25519/0xCDEC82D1091C8781 2022-02-24 [E] [expires: 2024-02-24]
 sub   ed25519/0x3EABAD70AA17837B 2022-02-24 [A] [expires: 2024-02-24]
 sub   ed25519/0xC94421E14BB1BF25 2022-02-24 [S] [expires: 2024-02-24]
@@ -151,11 +151,11 @@ And we can list the secret keys:
 
 ```bash
 $ gpg --list-secret-keys
-/Users/dave/.gnupg/pubring.kbx
+/Users/jas/.gnupg/pubring.kbx
 -----------------------------
 sec   ed25519/0x97350083B861B66A 2022-02-24 [SC] [expires: 2072-02-12]
       Key fingerprint = A1D1 1351 0A1E 68CA FF6C  5798 9735 0083 B861 B66A
-uid                   [ultimate] Dave Powell <dave@davepowell.net>
+uid                   [ultimate] Jas Powell <jas@davepowell.net>
 ssb   cv25519/0xCDEC82D1091C8781 2022-02-24 [E] [expires: 2024-02-24]
 ssb   ed25519/0x3EABAD70AA17837B 2022-02-24 [A] [expires: 2024-02-24]
 ssb   ed25519/0xC94421E14BB1BF25 2022-02-24 [S] [expires: 2024-02-24]
@@ -190,7 +190,7 @@ $ gpg -a --export-secret-subkeys A1D113510A1E68CAFF6C579897350083B861B66A > $HOM
 Also, take a copy of the revocation certificate into backup storage:
 
 ```bash
-$ cp /Users/dave/.gnupg/openpgp-revocs.d/A1D113510A1E68CAFF6C579897350083B861B66A.rev $HOME/keyexport/
+$ cp /Users/jas/.gnupg/openpgp-revocs.d/A1D113510A1E68CAFF6C579897350083B861B66A.rev $HOME/keyexport/
 ```
 
 Let's check our archive:
@@ -198,12 +198,12 @@ Let's check our archive:
 ```bash
 $ ls -la $HOME/keyexport/
 total 32
-drwxr-xr-x   6 dave  staff   192 Feb 24 08:39 .
-drwxr-xr-x+ 64 dave  staff  2048 Feb 24 08:28 ..
--rw-r--r--   1 dave  staff  1302 Feb 24 08:36 A1D113510A1E68CAFF6C579897350083B861B66A.pub
--rw-------   1 dave  staff  1269 Feb 24 08:39 A1D113510A1E68CAFF6C579897350083B861B66A.rev
--rw-r--r--   1 dave  staff  1503 Feb 24 08:33 A1D113510A1E68CAFF6C579897350083B861B66A.sec
--rw-r--r--   1 dave  staff  1467 Feb 24 08:38 A1D113510A1E68CAFF6C579897350083B861B66A.sub.sec
+drwxr-xr-x   6 jas  staff   192 Feb 24 08:39 .
+drwxr-xr-x+ 64 jas  staff  2048 Feb 24 08:28 ..
+-rw-r--r--   1 jas  staff  1302 Feb 24 08:36 A1D113510A1E68CAFF6C579897350083B861B66A.pub
+-rw-------   1 jas  staff  1269 Feb 24 08:39 A1D113510A1E68CAFF6C579897350083B861B66A.rev
+-rw-r--r--   1 jas  staff  1503 Feb 24 08:33 A1D113510A1E68CAFF6C579897350083B861B66A.sec
+-rw-r--r--   1 jas  staff  1467 Feb 24 08:38 A1D113510A1E68CAFF6C579897350083B861B66A.sub.sec
 ```
 
 Looks good. Now we should archive this file and put it in secure offline storage:
@@ -211,10 +211,10 @@ Looks good. Now we should archive this file and put it in secure offline storage
 ```bash
 $ tar -zcvf $HOME/keyexport.tar.gz $HOME/keyexport/*
 tar: Removing leading '/' from member names
-a Users/dave/keyexport/A1D113510A1E68CAFF6C579897350083B861B66A.pub
-a Users/dave/keyexport/A1D113510A1E68CAFF6C579897350083B861B66A.rev
-a Users/dave/keyexport/A1D113510A1E68CAFF6C579897350083B861B66A.sec
-a Users/dave/keyexport/A1D113510A1E68CAFF6C579897350083B861B66A.sub.sec
+a Users/jas/keyexport/A1D113510A1E68CAFF6C579897350083B861B66A.pub
+a Users/jas/keyexport/A1D113510A1E68CAFF6C579897350083B861B66A.rev
+a Users/jas/keyexport/A1D113510A1E68CAFF6C579897350083B861B66A.sec
+a Users/jas/keyexport/A1D113510A1E68CAFF6C579897350083B861B66A.sub.sec
 ```
 
 Copy the file `$HOME/keyexport.tar.gz` onto a USB drive that you keep in a secure place.
@@ -226,7 +226,7 @@ Now, we need to remove the secret key (and subkeys) from `gpg`:
 ```bash
 $ gpg --delete-secret-key A1D113510A1E68CAFF6C579897350083B861B66A
 
-sec  ed25519/0x97350083B861B66A 2022-02-24 Dave Powell <dave@davepowell.net>
+sec  ed25519/0x97350083B861B66A 2022-02-24 Jas Powell <jas@davepowell.net>
 
 Delete this key from the keyring? (y/N) y
 This is a secret key! - really delete? (y/N) y
@@ -236,7 +236,7 @@ Then re-import the subkeys only:
 
 ```bash
 $ gpg --import $HOME/keyexport/A1D113510A1E68CAFF6C579897350083B861B66A.sub.sec
-gpg: key 0x97350083B861B66A: "Dave Powell <dave@davepowell.net>" not changed
+gpg: key 0x97350083B861B66A: "Jas Powell <jas@davepowell.net>" not changed
 gpg: To migrate 'secring.gpg', with each smartcard, run: gpg --card-status
 gpg: key 0x97350083B861B66A: secret key imported
 gpg: Total number processed: 1
@@ -249,11 +249,11 @@ List the keys:
 
 ```bash
 $ gpg -K
-/Users/dave/.gnupg/pubring.kbx
+/Users/jas/.gnupg/pubring.kbx
 -----------------------------
 sec#  ed25519/0x97350083B861B66A 2022-02-24 [SC] [expires: 2072-02-12]
       Key fingerprint = A1D1 1351 0A1E 68CA FF6C  5798 9735 0083 B861 B66A
-uid                   [ultimate] Dave Powell <dave@davepowell.net>
+uid                   [ultimate] Jas Powell <jas@davepowell.net>
 ssb   cv25519/0xCDEC82D1091C8781 2022-02-24 [E] [expires: 2024-02-24]
 ssb   ed25519/0x3EABAD70AA17837B 2022-02-24 [A] [expires: 2024-02-24]
 ssb   ed25519/0xC94421E14BB1BF25 2022-02-24 [S] [expires: 2024-02-24]

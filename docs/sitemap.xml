@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://heyjdp.github.io/</loc>
+    <lastmod>2022-11-09T10:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/tags/macos/</loc>
+    <lastmod>2022-11-09T10:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/posts/</loc>
+    <lastmod>2022-11-09T10:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/tags/</loc>
+    <lastmod>2022-11-09T10:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/tags/tech/</loc>
+    <lastmod>2022-11-09T10:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/tags/tools/</loc>
+    <lastmod>2022-11-09T10:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/2022/11/macos-installer-hung-with-waiting-for-other-installations-to-complete/</loc>
+    <lastmod>2022-11-09T10:00:00+02:00</lastmod>
+  </url><url>
     <loc>https://heyjdp.github.io/tags/cicd/</loc>
     <lastmod>2022-09-11T10:30:00+02:00</lastmod>
   </url><url>
@@ -12,18 +33,6 @@
     <lastmod>2022-09-11T10:30:00+02:00</lastmod>
   </url><url>
     <loc>https://heyjdp.github.io/tags/devsecops/</loc>
-    <lastmod>2022-09-11T10:30:00+02:00</lastmod>
-  </url><url>
-    <loc>https://heyjdp.github.io/</loc>
-    <lastmod>2022-09-11T10:30:00+02:00</lastmod>
-  </url><url>
-    <loc>https://heyjdp.github.io/posts/</loc>
-    <lastmod>2022-09-11T10:30:00+02:00</lastmod>
-  </url><url>
-    <loc>https://heyjdp.github.io/tags/</loc>
-    <lastmod>2022-09-11T10:30:00+02:00</lastmod>
-  </url><url>
-    <loc>https://heyjdp.github.io/tags/tech/</loc>
     <lastmod>2022-09-11T10:30:00+02:00</lastmod>
   </url><url>
     <loc>https://heyjdp.github.io/2022/09/what-is-devsecops/</loc>
@@ -118,12 +127,6 @@
   </url><url>
     <loc>https://heyjdp.github.io/2022/02/exchanging-gpg-public-keys/</loc>
     <lastmod>2022-02-03T11:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://heyjdp.github.io/tags/macos/</loc>
-    <lastmod>2022-01-18T11:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://heyjdp.github.io/tags/tools/</loc>
-    <lastmod>2022-01-18T11:00:00+02:00</lastmod>
   </url><url>
     <loc>https://heyjdp.github.io/2022/01/ramdisk-tmpfs-for-macos/</loc>
     <lastmod>2022-01-18T11:00:00+02:00</lastmod>

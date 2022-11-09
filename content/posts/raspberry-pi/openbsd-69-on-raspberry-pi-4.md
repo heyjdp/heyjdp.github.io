@@ -86,7 +86,7 @@ There will be some slowness with the `reordering libraries` phase, but be patien
 Change to root user by typing `su` and enter the root password
 
 ```bash
-# echo permit nopass keepenv setenv { PATH } dave as root
+# echo permit nopass keepenv setenv { PATH } jas as root
 ```
 
 Now `exit` the root shell and test permissions:

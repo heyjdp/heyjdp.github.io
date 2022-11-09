@@ -49,7 +49,7 @@ b) If you cannot see both icons showing pink as in the image below then you are 
 
 ## Receiving an encrypted GnuPG Email in Mail.app on MacOS
 
-One of the nice features of the GnuPG Mail plugin for MacOS is that there is no additional complexity when recieving email. As you can see in the screenshot below, the mail was opened for reading automatically, and it is confirmed to be encrypted and signed by the Dave Powell key.
+One of the nice features of the GnuPG Mail plugin for MacOS is that there is no additional complexity when recieving email. As you can see in the screenshot below, the mail was opened for reading automatically, and it is confirmed to be encrypted and signed by the Jas Powell key.
 
 ![Using MacOS Mail.app to receive an encrypted and signed email](/post-img/recieving-gpg-email-on-macos.jpg)
 
@@ -92,7 +92,7 @@ mail for another couple of decades, but all is well here on Earth.
 
 Best regards.
 
-Dave
+Jas
 
 PS - Practice with that power loader, it will come in handy!
 

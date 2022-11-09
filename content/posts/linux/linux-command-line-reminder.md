@@ -28,7 +28,7 @@ I find myself Google-ing for command-line fu a lot more than I should, here are 
 Although this should be the default by now, really, who trusts the defaults? Manage it yourself with something like this:
 
 ```bash
-rsync -avP -e "ssh -i ssh_key_file -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" /home/dave/local-dir/* remote-user@webhost.com:/home/server/www/yourdomain.com/
+rsync -avP -e "ssh -i ssh_key_file -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" /home/jas/local-dir/* remote-user@webhost.com:/home/server/www/yourdomain.com/
 ```
 
 ## Rainbow Shell Prompt

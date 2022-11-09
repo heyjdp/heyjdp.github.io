@@ -93,7 +93,7 @@ For further information, please refer to https://pinout.xyz/
 
 1. Find the serial device on the Linux box [^3]:
     ```bash
-    dave@iceberg:Mon Nov 16 06:08 PM:~
+    jas@iceberg:Mon Nov 16 06:08 PM:~
     $ dmesg | egrep --color 'serial|ttyS|ttyU'
     [46683.319955] usbcore: registered new interface driver usbserial_generic
     [46683.319966] usbserial: USB Serial support registered for generic
@@ -103,7 +103,7 @@ For further information, please refer to https://pinout.xyz/
 
 2. Check device permissions and add the user to the dialout group [^4]:
     ```bash
-    dave@iceberg:Mon Nov 16 07:11 PM:~
+    jas@iceberg:Mon Nov 16 07:11 PM:~
     $ ls -la /dev/ttyUSB0
     $ sudo chmod 666 /dev/ttyUSB0
     $ sudo adduser ${USER} dialout
@@ -111,7 +111,7 @@ For further information, please refer to https://pinout.xyz/
 
 3. Use `minicom` [^5]:
     ```bash
-    dave@iceberg:Mon Nov 16 07:58 PM:~
+    jas@iceberg:Mon Nov 16 07:58 PM:~
     $ sudo minicom -b 115200 -D /dev/ttyUSB0
     ```
     and after you have the Minicom window open, then check the hardware flow control is set to **off** (`CTRL-A` + `Z` >> `O` >> `Serial port setup` >> `F` >> `Hardware Flow Control: No` >> `ESC`) And press enter a few times and you should see the prompt
@@ -124,7 +124,7 @@ For further information, please refer to https://pinout.xyz/
 
 4. If `minicom` is too clunky (yeah, I know), then try `tio` - it is supposed to be self configuring [^6]. It works well actually...
     ```bash
-    dave@iceberg:Mon Nov 16 08:09 PM:~
+    jas@iceberg:Mon Nov 16 08:09 PM:~
     $ sudo tio /dev/ttyUSB0
     [tio 20:09:35] tio v1.32
     [tio 20:09:35] Press ctrl-t q to quit

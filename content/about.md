@@ -35,5 +35,5 @@ Personally, I grew up in the UK, in the working class north. I was fascinated by
 
 ## Contact
 
-- dave@davepowell.net
+- jas@davepowell.net
 - https://heyjdp.github.io

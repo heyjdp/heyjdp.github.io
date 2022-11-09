@@ -31,7 +31,7 @@ On your local machine you started a project and now you decided that you want to
 $ git config -l
 color.ui=true
 user.name=heyjdp
-user.email=dave@davepowell.net
+user.email=jas@davepowell.net
 user.signingkey=7367E3012B4F6A98D2BD9D4DF43BA3EA4862E172
 diff.colormoved=zebra
 init.defaultbranch=main
@@ -45,7 +45,7 @@ Now we can run git init in the root directory of the project:
 
 ```bash
 $ git init
-Initialized empty Git repository in /home/dave/code/terraform-ansible-aws-wireguard/.git/
+Initialized empty Git repository in /home/jas/code/terraform-ansible-aws-wireguard/.git/
 ```
 
 ## Start a project with the same name on GitHub

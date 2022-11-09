@@ -28,12 +28,12 @@ This tool, [jsonresume](https://jsonresume.org/getting-started/) look quite nift
 ```json
 {
   "basics": {
-    "name": "Dr. Dave Powell",
+    "name": "Dr. Jas Powell",
     "label": "Experienced team leader, manager and mentor with a sleeves-up attitude to design and development",
     "image": "https://avatars0.githubusercontent.com/u/100204215?s=460&v=4",
     "summary": "Enabling tech start-ups to scale their seed ideas to mass market products. Serious about building technology teams that innovate and win.  I've worked mostly at startups so I am used to wearing many hats. I have a strong background in hands-on software and firmware engineering, security and cryptography, dev-ops, test and system architecture.",
     "website": "https://heyjdp.github.io",
-    "email": "dave@davepowell.net",
+    "email": "jas@davepowell.net",
     "phone": "+357 96 431 656",
     "location": {
       "city": "Larnaca",
@@ -47,7 +47,7 @@ The exact JSON schema is available at: [https://jsonresume.org/schema/](https://
 
 Here is an example of the output from my resume file: [https://registry.jsonresume.org/heyjdp?theme=kendall](https://registry.jsonresume.org/heyjdp?theme=kendall)
 
-![Example output of the JSON Resume fomatter with theme Kendall](/post-img/dave-powell-resume-from-json-1200x575.jpg)
+![Example output of the JSON Resume fomatter with theme Kendall](/post-img/jas-powell-resume-from-json-1200x575.jpg)
 
 There are many themes available too, you just need to [change the URL to change theme](https://jsonresume.org/themes/), which is nice! Also there is a QR code generator. 
 

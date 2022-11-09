@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Dr Dave Powell</title>
+    <title>Posts on Dr Jas Powell</title>
     <link>https://heyjdp.github.io/posts/</link>
-    <description>Recent content in Posts on Dr Dave Powell</description>
+    <description>Recent content in Posts on Dr Jas Powell</description>
     <image>
       <url>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</url>
       <link>https://heyjdp.github.io/post-img/post-placeholder-1200x630.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 11 Sep 2022 10:30:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 09 Nov 2022 10:00:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>💻 MacOS installer hung with &#39;Waiting for other installations to complete&#39; 👩‍💻 🔮 🍏</title>
+      <link>https://heyjdp.github.io/2022/11/macos-installer-hung-with-waiting-for-other-installations-to-complete/</link>
+      <pubDate>Wed, 09 Nov 2022 10:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2022/11/macos-installer-hung-with-waiting-for-other-installations-to-complete/</guid>
+      <description>&lt;p&gt;For reasons I needed to test a set of &lt;code&gt;osquery&lt;/code&gt; rules lately, so I downloaded the official package from &lt;a href=&#34;https://osquery.io&#34;&gt;https://osquery.io&lt;/a&gt; and set about running the installer. For some reason the installation got stuck at a message &amp;lsquo;Waiting for other installation to complete&amp;rsquo;. The installer hangs for a long time, so I explored my options to unblock the installer.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>💻 What is DevSecOps? 🔐 🧰 💻</title>
       <link>https://heyjdp.github.io/2022/09/what-is-devsecops/</link>
@@ -105,7 +114,7 @@ Kernel Normal Form Kernel normal form 1, or KNF, is the coding style used in the
       <guid>https://heyjdp.github.io/2022/02/linux-cli-reminder/</guid>
       <description>I find myself Google-ing for command-line fu a lot more than I should, here are some favourites&amp;hellip;
 rsync with ssh Although this should be the default by now, really, who trusts the defaults? Manage it yourself with something like this:
-rsync -avP -e &amp;#34;ssh -i ssh_key_file -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null&amp;#34; /home/dave/local-dir/* remote-user@webhost.com:/home/server/www/yourdomain.com/ Rainbow Shell Prompt Put this in .bashrc or wherever is appropriate for your OS:
+rsync -avP -e &amp;#34;ssh -i ssh_key_file -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null&amp;#34; /home/jas/local-dir/* remote-user@webhost.com:/home/server/www/yourdomain.com/ Rainbow Shell Prompt Put this in .bashrc or wherever is appropriate for your OS:
 export PS1=&amp;#34;\[$(tput bold)\]\[$(tput setaf 1)\]\u\[$(tput setaf 208)\]@\[$(tput setaf 3)\h\[$(tput setaf 2)\]:\d \[$(tput setaf 4)\]\@:\[$(tput setaf 55)\]\w\n$PROMPT_COLOR\$ \[$(tput sgr0)\]&amp;#34; YouTube-dl on Linux Obtain it from here: https://github.</description>
     </item>
     

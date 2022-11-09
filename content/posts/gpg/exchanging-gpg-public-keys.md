@@ -33,11 +33,11 @@ One of the easiest ways to get your own public key is via a command line. First 
 
 ```bash
 $ gpg --list-keys
-/Users/dave/.gnupg/pubring.kbx
+/Users/jas/.gnupg/pubring.kbx
 -----------------------------
 pub   ed25519/0x97350083B861B66A 2022-02-24 [SC] [expires: 2072-02-12]
       Key fingerprint = A1D1 1351 0A1E 68CA FF6C  5798 9735 0083 B861 B66A
-uid                   [ultimate] Dave Powell <dave@davepowell.net>
+uid                   [ultimate] Jas Powell <jas@davepowell.net>
 sub   cv25519/0xCDEC82D1091C8781 2022-02-24 [E] [expires: 2024-02-24]
 sub   ed25519/0x3EABAD70AA17837B 2022-02-24 [A] [expires: 2024-02-24]
 sub   ed25519/0xC94421E14BB1BF25 2022-02-24 [S] [expires: 2024-02-24]

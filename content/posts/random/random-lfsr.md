@@ -70,7 +70,7 @@ And here we are...
 
 ## Contact
 
-- dave@davepowell.net
+- jas@davepowell.net
 - https://heyjdp.github.io
 
 ## References
