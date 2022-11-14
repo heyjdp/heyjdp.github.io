@@ -2,16 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://heyjdp.github.io/</loc>
-    <lastmod>2022-11-09T10:00:00+02:00</lastmod>
+    <loc>https://heyjdp.github.io/tags/baking/</loc>
+    <lastmod>2022-11-14T18:30:00+02:00</lastmod>
   </url><url>
-    <loc>https://heyjdp.github.io/tags/macos/</loc>
-    <lastmod>2022-11-09T10:00:00+02:00</lastmod>
+    <loc>https://heyjdp.github.io/tags/bread/</loc>
+    <lastmod>2022-11-14T18:30:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/</loc>
+    <lastmod>2022-11-14T18:30:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/tags/foccacia/</loc>
+    <lastmod>2022-11-14T18:30:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/tags/food/</loc>
+    <lastmod>2022-11-14T18:30:00+02:00</lastmod>
   </url><url>
     <loc>https://heyjdp.github.io/posts/</loc>
-    <lastmod>2022-11-09T10:00:00+02:00</lastmod>
+    <lastmod>2022-11-14T18:30:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/tags/recipe/</loc>
+    <lastmod>2022-11-14T18:30:00+02:00</lastmod>
   </url><url>
     <loc>https://heyjdp.github.io/tags/</loc>
+    <lastmod>2022-11-14T18:30:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/2022/11/foccacia-recipe/</loc>
+    <lastmod>2022-11-14T18:30:00+02:00</lastmod>
+  </url><url>
+    <loc>https://heyjdp.github.io/tags/macos/</loc>
     <lastmod>2022-11-09T10:00:00+02:00</lastmod>
   </url><url>
     <loc>https://heyjdp.github.io/tags/tech/</loc>
