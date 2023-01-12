@@ -54,6 +54,36 @@ And GitHub should reply with:
 Hi jas-business! You've successfully authenticated, but GitHub does not provide shell access.
 ```
 
+## Reset `ssh-agent` issue
+
+So, sometimes when you run:
+
+```bash
+ssh -i jas-business-github-key-ed25519 -T git@github.com
+```
+
+And GitHub should reply with:
+
+```
+Hi jas-business! You've successfully authenticated, but GitHub does not provide shell access.
+```
+
+But instead you see:
+
+```
+Hi jas-PERSONAL! You've successfully authenticated, but GitHub does not provide shell access.
+```
+
+And you're confused because you definitely used the right key and when you run `git config user.name` you see the right user name, it may be because the `ssh-agent` got confused between terminal windows, sigh!
+
+Do this:
+
+```bash
+killall ssh-agent; eval `ssh-agent`
+```
+
+and sanity will be restored!
+
 ## Adding keys to the local `git` config
 
 If you are git clone-ing a existing project that needs your new key[^2], use a line like this one:
@@ -93,7 +123,32 @@ however, after investigating signed/verified git commits I came across the follo
 > 
 > Or you can squash-rebase, where all your small commits are rolled up into a single new commit, which GitHub will sign on your behalf.
 > 
-If verification is important to you, rebasing is generally a bad idea, fast-forward merges and merge commits will better reflect what actually happened and who had authored those changes.
+> If verification is important to you, rebasing is generally a bad idea, fast-forward merges and merge commits will better reflect what actually happened and who had authored those changes.
+
+So, in conclusion, I am now recommending `git merge` and ignore rebase options, historical commits are useful, and if they are signed/verified, then the signatures will be lost if rebase is used. Atlassian has advice here[^5].
+
+So when you are asked about this:
+
+```bash
+hint: Pulling without specifying how to reconcile divergent branches is
+hint: discouraged. You can squelch this message by running one of the following
+hint: commands sometime before your next pull:
+hint: 
+hint:   git config pull.rebase false  # merge (the default strategy)
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint: 
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+```
+
+I recommend:
+
+```bash
+git config --global pull.rebase false
+```
 
 ## Signing (verified) git commits
 
@@ -103,7 +158,12 @@ See this reference[^4]
 
 ## References
 
-[^1] https://stackoverflow.com/questions/62950018/verified-signatures-are-gone-after-i-pressed-rebase-and-merge
-[^2] https://stackoverflow.com/questions/4565700/how-to-specify-the-private-ssh-key-to-use-when-executing-shell-command-on-git
-[^3] https://dev.to/web3coach/how-to-configure-a-local-git-repository-to-use-a-specific-ssh-key-4aml
-[^4] https://calebhearth.com/sign-git-with-ssh
+[^1]: https://stackoverflow.com/questions/62950018/verified-signatures-are-gone-after-i-pressed-rebase-and-merge
+
+[^2]: https://stackoverflow.com/questions/4565700/how-to-specify-the-private-ssh-key-to-use-when-executing-shell-command-on-git
+
+[^3]: https://dev.to/web3coach/how-to-configure-a-local-git-repository-to-use-a-specific-ssh-key-4aml
+
+[^4]: https://calebhearth.com/sign-git-with-ssh
+
+[^5]: https://www.atlassian.com/git/tutorials/merging-vs-rebasing 
