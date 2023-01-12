@@ -10,7 +10,16 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 10 Aug 2022 11:00:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/tags/github/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 11 Jan 2023 16:00:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/tags/github/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>💻 Git and GitHub Setup 2023 🐙 🐾 👩‍💻</title>
+      <link>https://heyjdp.github.io/2023/01/git-and-github-setup-2023/</link>
+      <pubDate>Wed, 11 Jan 2023 16:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2023/01/git-and-github-setup-2023/</guid>
+      <description>&lt;p&gt;My 2023 &lt;code&gt;git&lt;/code&gt; and GitHub setup guide.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>💻 Local Git init and GitHub setup 🐙 🐾 👩‍💻</title>
       <link>https://heyjdp.github.io/2022/08/local-git-init-and-github-setup/</link>
