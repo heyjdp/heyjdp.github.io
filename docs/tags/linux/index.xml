@@ -10,7 +10,18 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 31 Mar 2022 11:00:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 27 Jan 2023 13:00:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>💻 Yocto Linux build for Raspberry Pi 4 🍓 🥧 👩‍💻</title>
+      <link>https://heyjdp.github.io/2023/01/yocto-linux-build-for-raspberry-pi-4/</link>
+      <pubDate>Fri, 27 Jan 2023 13:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2023/01/yocto-linux-build-for-raspberry-pi-4/</guid>
+      <description>Let&amp;rsquo;s build our own Linux operating system for a Raspberry Pi 4
+First we need a big build box, something 16 VPC and 32GB RAM from AWS should do the trick. I like this machine:
+ c4.4xlarge   Set up the development environment sudo apt update &amp;amp;&amp;amp; sudo apt -qy dist-upgrade &amp;amp;&amp;amp; sudo apt -qy install gawk wget git diffstat unzip texinfo gcc-multilib build-essential chrpath socat libsdl1.2-dev xterm sed cvs subversion coreutils texi2html docbook-utils python-pysqlite2 help2man desktop-file-utils libgl1-mesa-dev libglu1-mesa-dev mercurial autoconf automake groff curl lzop asciidoc u-boot-tools cpio sudo rsync linux-headers-$(uname -r) locales Additional requirements:</description>
+    </item>
+    
     <item>
       <title>💻 Naming Resources 🧮 👩‍💻 ✨</title>
       <link>https://heyjdp.github.io/2022/03/naming-resources/</link>
