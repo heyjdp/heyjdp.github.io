@@ -190,6 +190,21 @@ Copy it your local machine, `bzcat` the file and then `dd` the `.wic` to the SD 
 
 Boot up the Pi4 and you should have XFCE4 and also `ssh` access
 
+## Root password
+
+From here: https://stackoverflow.com/questions/32274163/how-to-set-root-password-on-yocto-poky-image
+
+As of Poky 2.1.2; to set the root password the following instructions need to be added to local.conf:
+
+```
+INHERIT += "extrausers"
+EXTRA_USERS_PARAMS = "usermod -P p@ssw0rd root;"
+```
+
+Make sure you put it at the end of `conf/local.conf` - it seems a bit fussy ;)
+
+No need to remove `debug-tweaks`
+
 ## References
 
 [^1]: https://tutorialadda.com/yocto/create-your-own-linux-image-for-the-raspberry-pi-board-using-yocto-project
