@@ -32,7 +32,7 @@ Today I chose [Monopoly property square names](https://en.wikipedia.org/wiki/Lis
 | OldKent | - |
 | Whitechapel | - |
 | KingsCross | BSD Pi Gateway |
-| TheAngel | - |
+| TheAngel | Intel NUC i7 |
 | Euston | - |
 | Pentonville | - |
 | PallMall | - |
