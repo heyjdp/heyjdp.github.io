@@ -1,0 +1,51 @@
+baseURL       = "https://heyjdp.github.io/"
+locale        = "en-gb"
+title         = "heyjdp"
+theme         = "beautifulhugo"
+
+enableGitInfo       = false  # set to true after git init
+pygmentsCodeFences  = true
+pygmentsUseClasses  = true
+
+[Params]
+  subtitle    = "Just some notes"
+  description = "A place to drop links and the odd bit of writing."
+  selfHosted  = true
+  mainSections = ["post"]
+  useHLJS     = false
+  logo        = "img/jas-powell.jpeg"
+
+[Params.author]
+  name    = "Dr Jas Powell"
+  github  = "heyjdp"
+  linkedin = "in/jas-powell"
+  email   = "jas@davepowell.net"
+
+[taxonomies]
+  category = "categories"
+  tag      = "tags"
+
+[[menu.main]]
+  name = "Blog"
+  url  = "/"
+  weight = 1
+
+[[menu.main]]
+  name = "About"
+  url  = "/page/about/"
+  weight = 2
+
+# [[menu.main]]
+#  name = "CV"
+#  url  = "/page/cv/"
+#  weight = 3
+
+[[menu.main]]
+  name = "Categories"
+  url  = "/categories/"
+  weight = 4
+
+[[menu.main]]
+  name = "Tags"
+  url  = "/tags/"
+  weight = 5

@@ -1,0 +1,21 @@
+h1 {
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+/* Site title */
+.intro-header .page-heading h1,
+.intro-header .tags-heading h1,
+.intro-header .categories-heading h1,
+.intro-header .post-heading h1 {
+  font-size: 28px;
+}
+
+/* Site subtitle */
+.intro-header .page-heading .page-subheading,
+.intro-header .post-heading .post-subheading {
+  font-size: 22px;
+}
