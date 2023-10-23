@@ -10,7 +10,16 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 27 Jan 2023 13:00:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 22 Oct 2023 10:00:00 +0200</lastBuildDate><atom:link href="https://heyjdp.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>💻 Dessert Resources 🧮 👩‍💻 ✨</title>
+      <link>https://heyjdp.github.io/2023/10/dessert-resources/</link>
+      <pubDate>Sun, 22 Oct 2023 10:00:00 +0200</pubDate>
+      
+      <guid>https://heyjdp.github.io/2023/10/dessert-resources/</guid>
+      <description>&lt;p&gt;Again we are back to naming things, the new network device naming policy is very sweet&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>💻 Yocto Linux build for Raspberry Pi 4 🍓 🥧 👩‍💻</title>
       <link>https://heyjdp.github.io/2023/01/yocto-linux-build-for-raspberry-pi-4/</link>
