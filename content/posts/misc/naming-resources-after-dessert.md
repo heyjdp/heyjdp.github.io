@@ -30,7 +30,7 @@ Today I chose [Dessert names](https://en.wikipedia.org/wiki/List_of_desserts), b
 | Dessert | Network Asset |
 |:--------|:--------------|
 | Tiramisu | Alix 2D3 OpenBSD Router |
-| Cheesecake | - |
+| Cheesecake | MSI Prestige 14 Evo i7-1195G7 16GB |
 | BirthdayCake | - |
 | IceCream | - |
 | Chocolate | - |
