@@ -32,7 +32,7 @@ Today I chose [Dessert names](https://en.wikipedia.org/wiki/List_of_desserts), b
 | Tiramisu | Alix 2D3 OpenBSD Router |
 | Cheesecake | MSI Prestige 14 Evo i7-1195G7 16GB |
 | BirthdayCake | - |
-| IceCream | - |
+| IceCream | NUC i3 (TV box) |
 | Chocolate | - |
 | ChocoChipCookie | - |
 | Cupcake | - |
