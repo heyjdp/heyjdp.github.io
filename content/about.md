@@ -14,7 +14,7 @@ ShowPostNavLinks: true
 katex: true
 cover:
     image: "/post-img/about-1200x628.jpg" # image path/url
-    alt: "A linear feedback shift register" # alt text
+    alt: "A speech bubble with a letter i for information" # alt text
 #    caption: "" # display caption under cover
     relative: false # when using page bundles set this to true
     hidden: false # only hide on current single page
@@ -25,7 +25,7 @@ This is mainly a collection of notes, about mainly Linux. It is things people ha
 Personally, I grew up in the UK, in the working class north. I was fascinated by all things electrical, mechanical, computational, so I left school in 1993 and eneded up on a full technical apprenticeship (when they still existed). And that started a 30 year long search for all things assembly-based, pseudo-random, encrypted and mathematically difficult. That search has taken me to some interesting places, including:
 
 - a 10-year trip to the University of Sheffield for a sprinkling of degree certificates (including a PhD) in Electronic Engineering and Computing 
-- a 10-year trip to a Mediterranean island to build a family life and a home
+- a 10-year trip to live on a Mediterranean island
 - various roles in executive leadership and team leadership
 - trips to many of the best libraries of the world
 - various roles in network security, cryptography and secure systems design/development
@@ -35,5 +35,5 @@ Personally, I grew up in the UK, in the working class north. I was fascinated by
 
 ## Contact
 
-- jas@davepowell.net
+- jas@heyjdp.net
 - https://heyjdp.github.io
