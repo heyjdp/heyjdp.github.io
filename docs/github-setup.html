@@ -48,17 +48,26 @@
 
  
 
-    <meta name="author" content="Jas Powell" />
-    <meta name="description" content="Notes about Tech and being a Remote Startup CTO" />
+<meta name="author" content="Jas Powell" />
+<meta name="description" content="Notes on GitHub Setup" />
+<meta name="keywords" content="github, ssh">
+
+
   <meta property="og:site_name" content="heyjdp"/>
-  <meta property="og:type" content="blog"/>
-  <meta property="og:title" content="heyjdp"/>
-  <meta property="og:description" content="Notes about Tech and being a Remote Startup CTO"/>
+  <meta property="og:title" content="GitHub Setup"/>
+  <meta property="og:description" content="Notes on GitHub Setup"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:url" content="."/>
+  <meta property="og:url" content="./github-setup.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2025-02-08 10:00:00+02:00"/>
+  <meta property="article:modified_time" content="2025-02-08 10:00:00+02:00"/>
+  <meta property="article:author" content="./author/jas-powell.html">
+  <meta property="article:section" content="Tech-Recipe"/>
+  <meta property="article:tag" content="github"/>
+  <meta property="article:tag" content="ssh"/>
   <meta property="og:image" content="/images/jas-powell-profile.png">
 
-  <title>heyjdp &ndash; Archives</title>
+  <title>heyjdp &ndash; GitHub Setup</title>
 
 
 </head>
@@ -137,23 +146,98 @@
 
 <article class="single">
   <header>
-    <h1 id="archives">Archives</h1>
+      
+    <h1 id="github-setup">GitHub Setup</h1>
+    <p>
+      Posted on February 08, 2025 in <a href="./category/tech-recipe.html">Tech-Recipe</a>
+
+    </p>
   </header>
+
+
   <div>
-    <dl>
+    <blockquote>
+<p>[!NOTE]
+The environment used for this was: Mac Air M2 8gb MacOS Sequoia 15.3</p>
+</blockquote>
+<h2>Notes on GitHub Setup</h2>
+<p>General git config that works for me...</p>
+<div class="highlight"><pre><span></span><code>git config --global init.defaultbranch main
+git config --global color.ui true
+git config --global fetch.prune true
+git config --global diff.colorMoved zebra
+git config --global pull.rebase false
+</code></pre></div>
 
-          <dt>February 08, 2025</dt>
+<h2>Make a new <code>ssh</code> key</h2>
+<p>Make a ssh key for authentication:</p>
+<div class="highlight"><pre><span></span><code>ssh-keygen<span class="w"> </span>-a<span class="w"> </span><span class="m">100</span><span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;jas@business.com&quot;</span><span class="w"> </span>-f<span class="w"> </span>jas-business-github-key-ed25519
+</code></pre></div>
 
-        <dd>
-          <a href="./github-setup.html">GitHub Setup</a>
-        </dd>
-          <dt>February 06, 2025</dt>
+<p>Upload the ssh key to your GitHub acount, and test with:</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-i<span class="w"> </span>jas-business-github-key-ed25519<span class="w"> </span>-T<span class="w"> </span>git@github.com
+</code></pre></div>
 
-        <dd>
-          <a href="./pelican-for-github-pages.html">Pelican for GitHub Pages</a>
-        </dd>
-    </dl>
+<p>And GitHub should reply with:</p>
+<div class="highlight"><pre><span></span><code>Hi jas-business! You&#39;ve successfully authenticated, but GitHub does not provide shell access.
+</code></pre></div>
+
+<h2>Reset <code>ssh-agent</code> issue</h2>
+<p>So, sometimes when you run:</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-i<span class="w"> </span>jas-business-github-key-ed25519<span class="w"> </span>-T<span class="w"> </span>git@github.com
+</code></pre></div>
+
+<p>And GitHub should reply with:</p>
+<div class="highlight"><pre><span></span><code>Hi jas-business! You&#39;ve successfully authenticated, but GitHub does not provide shell access.
+</code></pre></div>
+
+<p>But instead you see:</p>
+<div class="highlight"><pre><span></span><code>Hi jas-PERSONAL! You&#39;ve successfully authenticated, but GitHub does not provide shell access.
+</code></pre></div>
+
+<p>And you're confused because you definitely used the right key and when you run <code>git config user.name</code> you see the right user name, it may be because the <code>ssh-agent</code> got confused between terminal windows, sigh!</p>
+<p>Do this:</p>
+<div class="highlight"><pre><span></span><code>killall<span class="w"> </span>ssh-agent<span class="p">;</span><span class="w"> </span><span class="nb">eval</span><span class="w"> </span><span class="sb">`</span>ssh-agent<span class="sb">`</span>
+</code></pre></div>
+
+<p>and sanity will be restored!</p>
+<h2>Adding keys to the local <code>git</code> config</h2>
+<p>If you are git clone-ing a existing project that needs your new key<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>, use a line like this one:</p>
+<div class="highlight"><pre><span></span><code>ssh-agent<span class="w"> </span><span class="k">$(</span>ssh-add<span class="w"> </span>jas-business-github-key-ed25519<span class="p">;</span><span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:user/project.git<span class="k">)</span>
+</code></pre></div>
+
+<p>And if you work on different projects for business and for personal, in the directory of the project<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>init
+git<span class="w"> </span>config<span class="w"> </span>--local<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;jas&quot;</span>
+git<span class="w"> </span>config<span class="w"> </span>--local<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;jas@business.com&quot;</span>
+git<span class="w"> </span>config<span class="w"> </span>--local<span class="w"> </span>core.sshCommand<span class="w"> </span><span class="s2">&quot;ssh -i jas-business-github-key-ed25519&quot;</span>
+</code></pre></div>
+
+<h2>References</h2>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>https://stackoverflow.com/questions/4565700/how-to-specify-the-private-ssh-key-to-use-when-executing-shell-command-on-git&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>https://dev.to/web3coach/how-to-configure-a-local-git-repository-to-use-a-specific-ssh-key-4aml&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
   </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/github.html">github</a>
+      <a href="./tag/ssh.html">ssh</a>
+    </p>
+  </div>
+
+
+
+
+
+
 </article>
 
 <footer>

@@ -1,5 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>heyjdp</title><link href="/" rel="alternate"></link><link href="feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2025-02-06T10:00:00+02:00</updated><subtitle>Just some notes</subtitle><entry><title>Pelican for GitHub Pages</title><link href="pelican-for-github-pages.html" rel="alternate"></link><published>2025-02-06T10:00:00+02:00</published><updated>2025-02-06T10:00:00+02:00</updated><author><name>Jas Powell</name></author><id>tag:None,2025-02-06:pelican-for-github-pages.html</id><summary type="html">&lt;p&gt;Notes on Pelican setup on Github pages&lt;/p&gt;</summary><content type="html">&lt;blockquote&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>heyjdp</title><link href="/" rel="alternate"></link><link href="feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2025-02-08T10:00:00+02:00</updated><subtitle>Just some notes</subtitle><entry><title>GitHub Setup</title><link href="github-setup.html" rel="alternate"></link><published>2025-02-08T10:00:00+02:00</published><updated>2025-02-08T10:00:00+02:00</updated><author><name>Jas Powell</name></author><id>tag:None,2025-02-08:github-setup.html</id><summary type="html">&lt;p&gt;Notes on GitHub Setup&lt;/p&gt;</summary><content type="html">&lt;blockquote&gt;
+&lt;p&gt;[!NOTE]
+The environment used for this was: Mac Air M2 8gb MacOS Sequoia 15.3&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Notes on GitHub Setup&lt;/h2&gt;
+&lt;p&gt;General git config that works for me...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;git config --global init.defaultbranch main
+git config --global color.ui true
+git config --global fetch.prune true
+git config --global diff.colorMoved zebra
+git config --global pull.rebase false
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Make a new &lt;code&gt;ssh&lt;/code&gt; key&lt;/h2&gt;
+&lt;p&gt;Make a ssh key for authentication:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ssh-keygen&lt;span class="w"&gt; &lt;/span&gt;-a&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;ed25519&lt;span class="w"&gt; &lt;/span&gt;-C&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;jas@business.com&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-f&lt;span class="w"&gt; &lt;/span&gt;jas-business-github-key-ed25519
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Upload the ssh key to your GitHub acount, and test with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ssh&lt;span class="w"&gt; &lt;/span&gt;-i&lt;span class="w"&gt; &lt;/span&gt;jas-business-github-key-ed25519&lt;span class="w"&gt; &lt;/span&gt;-T&lt;span class="w"&gt; &lt;/span&gt;git@github.com
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And GitHub should reply with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Hi jas-business! You&amp;#39;ve successfully authenticated, but GitHub does not provide shell access.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Reset &lt;code&gt;ssh-agent&lt;/code&gt; issue&lt;/h2&gt;
+&lt;p&gt;So, sometimes when you run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ssh&lt;span class="w"&gt; &lt;/span&gt;-i&lt;span class="w"&gt; &lt;/span&gt;jas-business-github-key-ed25519&lt;span class="w"&gt; &lt;/span&gt;-T&lt;span class="w"&gt; &lt;/span&gt;git@github.com
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And GitHub should reply with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Hi jas-business! You&amp;#39;ve successfully authenticated, but GitHub does not provide shell access.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;But instead you see:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Hi jas-PERSONAL! You&amp;#39;ve successfully authenticated, but GitHub does not provide shell access.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And you're confused because you definitely used the right key and when you run &lt;code&gt;git config user.name&lt;/code&gt; you see the right user name, it may be because the &lt;code&gt;ssh-agent&lt;/code&gt; got confused between terminal windows, sigh!&lt;/p&gt;
+&lt;p&gt;Do this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;killall&lt;span class="w"&gt; &lt;/span&gt;ssh-agent&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;eval&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;ssh-agent&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;and sanity will be restored!&lt;/p&gt;
+&lt;h2&gt;Adding keys to the local &lt;code&gt;git&lt;/code&gt; config&lt;/h2&gt;
+&lt;p&gt;If you are git clone-ing a existing project that needs your new key&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;, use a line like this one:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ssh-agent&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;ssh-add&lt;span class="w"&gt; &lt;/span&gt;jas-business-github-key-ed25519&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;clone&lt;span class="w"&gt; &lt;/span&gt;git@github.com:user/project.git&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And if you work on different projects for business and for personal, in the directory of the project&lt;sup id="fnref:2"&gt;&lt;a class="footnote-ref" href="#fn:2"&gt;2&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;git&lt;span class="w"&gt; &lt;/span&gt;init
+git&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;--local&lt;span class="w"&gt; &lt;/span&gt;user.name&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;jas&amp;quot;&lt;/span&gt;
+git&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;--local&lt;span class="w"&gt; &lt;/span&gt;user.email&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;jas@business.com&amp;quot;&lt;/span&gt;
+git&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;--local&lt;span class="w"&gt; &lt;/span&gt;core.sshCommand&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ssh -i jas-business-github-key-ed25519&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;div class="footnote"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;https://stackoverflow.com/questions/4565700/how-to-specify-the-private-ssh-key-to-use-when-executing-shell-command-on-git&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:2"&gt;
+&lt;p&gt;https://dev.to/web3coach/how-to-configure-a-local-git-repository-to-use-a-specific-ssh-key-4aml&amp;#160;&lt;a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</content><category term="Tech-Recipe"></category><category term="github"></category><category term="ssh"></category></entry><entry><title>Pelican for GitHub Pages</title><link href="pelican-for-github-pages.html" rel="alternate"></link><published>2025-02-06T10:00:00+02:00</published><updated>2025-02-06T10:00:00+02:00</updated><author><name>Jas Powell</name></author><id>tag:None,2025-02-06:pelican-for-github-pages.html</id><summary type="html">&lt;p&gt;Notes on Pelican setup on Github pages&lt;/p&gt;</summary><content type="html">&lt;blockquote&gt;
 &lt;p&gt;[!NOTE]
 The environment used for this was: Mac Air M2 8gb MacOS Sequoia 15.3&lt;/p&gt;
 &lt;/blockquote&gt;
