@@ -1,0 +1,625 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="./theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+    <link id="dark-theme-style" rel="stylesheet" type="text/css"
+          media="(prefers-color-scheme: dark)"
+    href="./theme/stylesheet/dark-theme.min.css">
+
+    <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: dark)"
+          href="./theme/pygments/lightbulb.min.css">
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
+          href="./theme/pygments/lightbulb.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+
+
+
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#333333">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#333333">
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- Microsoft EDGE -->
+  <meta name="msapplication-TileColor" content="#333333">
+
+  <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="heyjdp Atom">
+
+
+
+ 
+
+<meta name="author" content="Jas Powell" />
+<meta name="description" content="Notes on Setup of an Alix 2D3 with OpenBSD to act as a Firewall/Gateway" />
+<meta name="keywords" content="alix2d3, openbsd, firewall, gateway">
+
+
+  <meta property="og:site_name" content="heyjdp"/>
+  <meta property="og:title" content="Alix 2D3 OpenBSD Firewall Gateway"/>
+  <meta property="og:description" content="Notes on Setup of an Alix 2D3 with OpenBSD to act as a Firewall/Gateway"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="./alix-2d3-openbsd-firewall-gateway.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2025-02-08 10:00:00+02:00"/>
+  <meta property="article:modified_time" content="2025-02-08 10:00:00+02:00"/>
+  <meta property="article:author" content="./author/jas-powell.html">
+  <meta property="article:section" content="Tech-Recipe"/>
+  <meta property="article:tag" content="alix2d3"/>
+  <meta property="article:tag" content="openbsd"/>
+  <meta property="article:tag" content="firewall"/>
+  <meta property="article:tag" content="gateway"/>
+  <meta property="og:image" content="/images/jas-powell-profile.png">
+
+  <title>heyjdp &ndash; Alix 2D3 OpenBSD Firewall Gateway</title>
+
+
+</head>
+<body >
+
+<aside>
+  <div>
+    <a href="./">
+      <img src="/images/jas-powell-profile.png" alt="Jas Powell" title="Jas Powell">
+    </a>
+
+    <h1>
+      <a href="./">Jas Powell</a>
+    </h1>
+
+    <p>Just some notes</p>
+
+
+    <nav>
+      <ul class="list">
+
+
+            <li>
+              <a target="_self"
+                 href="./pages/about.html#about">
+                About
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="./pages/publications.html#publications">
+                Publications
+              </a>
+            </li>
+
+          <li>
+            <a target="_self" href="/author/jas-powell" >Jas Powell</a>
+          </li>
+          <li>
+            <a target="_self" href="https://www.github.com/heyjdp" >github</a>
+          </li>
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-github"
+           href="https://github.com/heyjdp"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-rss"
+           href="/feeds/all.atom.xml"
+           target="_blank">
+          <i class="fa-solid fa-rss"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="./">Home</a>
+
+  <a href="/archives.html">Archives</a>
+  <a href="/categories.html">Categories</a>
+  <a href="/tags.html">Tags</a>
+
+  <a href="/feeds/all.atom.xml">Atom</a>
+
+</nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="alix-2d3-openbsd-firewall-gateway">Alix 2D3 OpenBSD Firewall Gateway</h1>
+    <p>
+      Posted on February 08, 2025 in <a href="./category/tech-recipe.html">Tech-Recipe</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <blockquote>
+<p>[!NOTE]
+The environment used for this was: Mac Air M2 8gb MacOS Sequoia 15.3</p>
+</blockquote>
+<h2>Notes on Setup of an Alix 2D3 with OpenBSD to act as a Firewall/Gateway</h2>
+<h3>Download and verify:</h3>
+<p>Get a copy of OpenBSD, in this case the <code>amd64</code> install image. From here: <a href="https://cdn.openbsd.org/pub/OpenBSD/7.6/amd64/">https://cdn.openbsd.org/pub/OpenBSD/7.6/amd64/</a></p>
+<p>And make sure to check the <code>sha256sum</code> against the published value<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>:</p>
+<div class="highlight"><pre><span></span><code>sha256sum<span class="w"> </span>./Downloads/install76.img
+973dfa837e4998f6c0f29d0afc9f40d85e29a3d2b25fcea8b3f13b4491fbedc0<span class="w">  </span>./Downloads/install76.img
+</code></pre></div>
+
+<h3>Create install media</h3>
+<p>Insert a USB stick into the Macbook:</p>
+<div class="highlight"><pre><span></span><code>diskutil<span class="w"> </span>list
+/dev/disk4<span class="w"> </span><span class="o">(</span>external,<span class="w"> </span>physical<span class="o">)</span>:
+<span class="w">   </span><span class="c1">#:                       TYPE NAME                    SIZE       IDENTIFIER</span>
+<span class="w">   </span><span class="m">0</span>:<span class="w">     </span>FDisk_partition_scheme<span class="w">                        </span>*62.5<span class="w"> </span>GB<span class="w">    </span>disk4
+<span class="w">   </span><span class="m">1</span>:<span class="w">                       </span>0xEF<span class="w">                         </span><span class="m">491</span>.5<span class="w"> </span>KB<span class="w">   </span>disk4s1
+<span class="w">   </span><span class="m">2</span>:<span class="w">                    </span>OpenBSD<span class="w">                         </span><span class="m">729</span>.3<span class="w"> </span>MB<span class="w">   </span>disk4s4
+<span class="w">                    </span><span class="o">(</span>free<span class="w"> </span>space<span class="o">)</span><span class="w">                         </span><span class="m">61</span>.8<span class="w"> </span>GB<span class="w">    </span>-
+</code></pre></div>
+
+<p>Our external disk is <code>/dev/disk4</code> - so now we can copy the install image, unmount the disk first:</p>
+<div class="highlight"><pre><span></span><code>diskutil<span class="w"> </span>unmountDisk<span class="w"> </span>/dev/disk4
+sudo<span class="w"> </span>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>./Downloads/install76.img<span class="w"> </span><span class="nv">of</span><span class="o">=</span>/dev/disk4<span class="w"> </span><span class="nv">bs</span><span class="o">=</span>1m
+</code></pre></div>
+
+<h3>Boot the Alix 2D3</h3>
+<p>First you need a serial cable, insert it into the serial port of the Alix (powered off) and also into the USB port of the Macbook. You need to identify the serial device:</p>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/dev/cu.*
+/dev/cu.usbserial-11210
+</code></pre></div>
+
+<p>So now we can make a screen connection to the serial port. Note that the default baud rate is 38400, but it can be set in the BIOS to 115200:</p>
+<div class="highlight"><pre><span></span><code>screen<span class="w"> </span>/dev/cu.usbserial-11210<span class="w"> </span><span class="m">115200</span>
+</code></pre></div>
+
+<p>NOTE: to leave a <code>screen</code> session press <code>CTRL+a</code>, <code>k</code> then <code>y</code></p>
+<p>Insert the USB device into the Alix 2D3 and put the power onto the Alix 2D3. You will see a screen like this:</p>
+<div class="highlight"><pre><span></span><code>SeaBIOS<span class="w"> </span><span class="o">(</span>version<span class="w"> </span>?-20160307_153453-michael-desktop64<span class="o">)</span>
+XHCI<span class="w"> </span>init<span class="w"> </span>on<span class="w"> </span>dev<span class="w"> </span><span class="m">00</span>:10.0:<span class="w"> </span>regs<span class="w"> </span>@<span class="w"> </span>0xfeb22000,<span class="w"> </span><span class="m">4</span><span class="w"> </span>ports,<span class="w"> </span><span class="m">32</span><span class="w"> </span>slots,<span class="w"> </span><span class="m">32</span><span class="w"> </span>byte<span class="w"> </span>contexts
+XHCI<span class="w">    </span>extcap<span class="w"> </span>0x1<span class="w"> </span>@<span class="w"> </span>feb22500
+XHCI<span class="w">    </span>protocol<span class="w"> </span>USB<span class="w">  </span><span class="m">3</span>.00,<span class="w"> </span><span class="m">2</span><span class="w"> </span>ports<span class="w"> </span><span class="o">(</span>offset<span class="w"> </span><span class="m">1</span><span class="o">)</span>,<span class="w"> </span>def<span class="w"> </span><span class="m">0</span>
+XHCI<span class="w">    </span>protocol<span class="w"> </span>USB<span class="w">  </span><span class="m">2</span>.00,<span class="w"> </span><span class="m">2</span><span class="w"> </span>ports<span class="w"> </span><span class="o">(</span>offset<span class="w"> </span><span class="m">3</span><span class="o">)</span>,<span class="w"> </span>def<span class="w"> </span><span class="m">10</span>
+XHCI<span class="w">    </span>extcap<span class="w"> </span>0xa<span class="w"> </span>@<span class="w"> </span>feb22540
+Found<span class="w"> </span><span class="m">2</span><span class="w"> </span>serial<span class="w"> </span>ports
+ATA<span class="w"> </span>controller<span class="w"> </span><span class="m">1</span><span class="w"> </span>at<span class="w"> </span><span class="m">4010</span>/4020/0<span class="w"> </span><span class="o">(</span>irq<span class="w"> </span><span class="m">0</span><span class="w"> </span>dev<span class="w"> </span><span class="m">88</span><span class="o">)</span>
+EHCI<span class="w"> </span>init<span class="w"> </span>on<span class="w"> </span>dev<span class="w"> </span><span class="m">00</span>:13.0<span class="w"> </span><span class="o">(</span><span class="nv">regs</span><span class="o">=</span>0xfeb25420<span class="o">)</span>
+ATA<span class="w"> </span>controller<span class="w"> </span><span class="m">2</span><span class="w"> </span>at<span class="w"> </span><span class="m">4018</span>/4024/0<span class="w"> </span><span class="o">(</span>irq<span class="w"> </span><span class="m">0</span><span class="w"> </span>dev<span class="w"> </span><span class="m">88</span><span class="o">)</span>
+Searching<span class="w"> </span>bootorder<span class="w"> </span><span class="k">for</span>:<span class="w"> </span>/pci@i0cf8/*@14,7
+Searching<span class="w"> </span>bootorder<span class="w"> </span><span class="k">for</span>:<span class="w"> </span>/rom@img/memtest
+Searching<span class="w"> </span>bootorder<span class="w"> </span><span class="k">for</span>:<span class="w"> </span>/rom@img/setup
+ata0-0:<span class="w"> </span>KINGSTON<span class="w"> </span>SMS200S330G<span class="w"> </span>ATA-8<span class="w"> </span>Hard-Disk<span class="w"> </span><span class="o">(</span><span class="m">28626</span><span class="w"> </span>MiBytes<span class="o">)</span>
+Searching<span class="w"> </span>bootorder<span class="w"> </span><span class="k">for</span>:<span class="w"> </span>/pci@i0cf8/*@11/drive@0/disk@0
+XHCI<span class="w"> </span>port<span class="w"> </span><span class="c1">#3: 0x00200e03, powered, enabled, pls 0, speed 3 [High]</span>
+Searching<span class="w"> </span>bootorder<span class="w"> </span><span class="k">for</span>:<span class="w"> </span>/pci@i0cf8/usb@10/storage@3/*@0/*@0,0
+Searching<span class="w"> </span>bootorder<span class="w"> </span><span class="k">for</span>:<span class="w"> </span>/pci@i0cf8/usb@10/usb-*@3
+USB<span class="w"> </span>MSC<span class="w"> </span><span class="nv">vendor</span><span class="o">=</span><span class="s1">&#39;SSK&#39;</span><span class="w"> </span><span class="nv">product</span><span class="o">=</span><span class="s1">&#39;USB3.2&#39;</span><span class="w"> </span><span class="nv">rev</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="w"> </span><span class="nv">type</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">removable</span><span class="o">=</span><span class="m">1</span>
+USB<span class="w"> </span>MSC<span class="w"> </span><span class="nv">blksize</span><span class="o">=</span><span class="m">512</span><span class="w"> </span><span class="nv">sectors</span><span class="o">=</span><span class="m">122136576</span>
+Initialized<span class="w"> </span>USB<span class="w"> </span>HUB<span class="w"> </span><span class="o">(</span><span class="m">0</span><span class="w"> </span>ports<span class="w"> </span>used<span class="o">)</span>
+All<span class="w"> </span>threads<span class="w"> </span>complete.
+Scan<span class="w"> </span><span class="k">for</span><span class="w"> </span>option<span class="w"> </span>roms
+PCengines<span class="w"> </span>Press<span class="w"> </span>F10<span class="w"> </span>key<span class="w"> </span>now<span class="w"> </span><span class="k">for</span><span class="w"> </span>boot<span class="w"> </span>menu:
+</code></pre></div>
+
+<p>Note that to press F10 on the Macbook Air you need to press fn+F10...</p>
+<div class="highlight"><pre><span></span><code>Select<span class="w"> </span>boot<span class="w"> </span>device:
+
+<span class="m">1</span>.<span class="w"> </span>USB<span class="w"> </span>MSC<span class="w"> </span>Drive<span class="w"> </span>SSK<span class="w"> </span>USB3.2
+<span class="m">2</span>.<span class="w"> </span>ata0-0:<span class="w"> </span>KINGSTON<span class="w"> </span>SMS200S330G<span class="w"> </span>ATA-8<span class="w"> </span>Hard-Disk<span class="w"> </span><span class="o">(</span><span class="m">28626</span><span class="w"> </span>MiBytes
+<span class="m">3</span>.<span class="w"> </span>Payload<span class="w"> </span><span class="o">[</span>memtest<span class="o">]</span>
+<span class="m">4</span>.<span class="w"> </span>Payload<span class="w"> </span><span class="o">[</span>setup<span class="o">]</span>
+</code></pre></div>
+
+<h3>Install OpenBSD</h3>
+<p>First of all, we need to stop the Alix going into a boot loop over the serial console. Select the USB drive from the boot menu, then do this:</p>
+<div class="highlight"><pre><span></span><code>Booting<span class="w"> </span>from<span class="w"> </span>Hard<span class="w"> </span>Disk...
+Booting<span class="w"> </span>from<span class="w"> </span><span class="m">0000</span>:7c00
+Using<span class="w"> </span>drive<span class="w"> </span><span class="m">0</span>,<span class="w"> </span>partition<span class="w"> </span><span class="m">3</span>.
+Loading......
+probing:<span class="w"> </span>pc0<span class="w"> </span>com0<span class="w"> </span>com1<span class="w"> </span>mem<span class="o">[</span>638K<span class="w"> </span>1918M<span class="w"> </span><span class="nv">a20</span><span class="o">=</span>on<span class="o">]</span>
+disk:<span class="w"> </span>hd0+<span class="w"> </span>hd1+
+&gt;&gt;<span class="w"> </span>OpenBSD/amd64<span class="w"> </span>BOOT<span class="w"> </span><span class="m">3</span>.67
+boot&gt;<span class="w"> </span>stty<span class="w"> </span>com0<span class="w"> </span><span class="m">115200</span>
+boot&gt;<span class="w"> </span><span class="nb">set</span><span class="w"> </span>tty<span class="w"> </span>com0
+switching<span class="w"> </span>console<span class="w"> </span>to<span class="w"> </span>com0
+&gt;&gt;<span class="w"> </span>OpenBSD/amd64<span class="w"> </span>BOOT<span class="w"> </span><span class="m">3</span>.67
+boot&gt;<span class="w"> </span>bsd.rd
+</code></pre></div>
+
+<p>The important lines are:</p>
+<div class="highlight"><pre><span></span><code>boot&gt;<span class="w"> </span>stty<span class="w"> </span>com0<span class="w"> </span><span class="m">115200</span>
+boot&gt;<span class="w"> </span><span class="nb">set</span><span class="w"> </span>tty<span class="w"> </span>com0
+boot&gt;<span class="w"> </span>bsd.rd
+</code></pre></div>
+
+<p>You should get to this point, at which stage you can follow any OpenBSD install guide, but it is very simple:</p>
+<div class="highlight"><pre><span></span><code>Welcome<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>OpenBSD/amd64<span class="w"> </span><span class="m">7</span>.6<span class="w"> </span>installation<span class="w"> </span>program.
+WARNING:<span class="w"> </span>/<span class="w"> </span>was<span class="w"> </span>not<span class="w"> </span>properly<span class="w"> </span>unmounted
+<span class="o">(</span>I<span class="o">)</span>nstall,<span class="w"> </span><span class="o">(</span>U<span class="o">)</span>pgrade,<span class="w"> </span><span class="o">(</span>A<span class="o">)</span>utoinstall<span class="w"> </span>or<span class="w"> </span><span class="o">(</span>S<span class="o">)</span>hell?
+</code></pre></div>
+
+<p>Press <code>I</code> to install and follow onscreen instructions, note that NIC <code>em0</code> is the one closest to the serial port.</p>
+<div class="highlight"><pre><span></span><code>WARNING:<span class="w"> </span>/<span class="w"> </span>was<span class="w"> </span>not<span class="w"> </span>properly<span class="w"> </span>unmounted
+<span class="o">(</span>I<span class="o">)</span>nstall,<span class="w"> </span><span class="o">(</span>U<span class="o">)</span>pgrade,<span class="w"> </span><span class="o">(</span>A<span class="o">)</span>utoinstall<span class="w"> </span>or<span class="w"> </span><span class="o">(</span>S<span class="o">)</span>hell?<span class="w"> </span>I
+At<span class="w"> </span>any<span class="w"> </span>prompt<span class="w"> </span>except<span class="w"> </span>password<span class="w"> </span>prompts<span class="w"> </span>you<span class="w"> </span>can<span class="w"> </span>escape<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>shell<span class="w"> </span>by
+typing<span class="w"> </span><span class="s1">&#39;!&#39;</span>.<span class="w"> </span>Default<span class="w"> </span>answers<span class="w"> </span>are<span class="w"> </span>shown<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[]</span><span class="s1">&#39;s and are selected by</span>
+<span class="s1">pressing RETURN.  You can exit this program at any time by pressing</span>
+<span class="s1">Control-C, but this can leave your system in an inconsistent state.</span>
+
+<span class="s1">Terminal type? [vt220]</span>
+<span class="s1">System hostname? (short form, e.g. &#39;</span>foo<span class="s1">&#39;) cappuccino</span>
+
+<span class="s1">Available network interfaces are: em0 em1 em2 vlan0.</span>
+<span class="s1">Network interface to configure? (name, lladdr, &#39;</span>?<span class="s1">&#39;, or &#39;</span><span class="k">done</span><span class="s1">&#39;) [em0]</span>
+<span class="s1">IPv4 address for em0? (or &#39;</span>autoconf<span class="s1">&#39; or &#39;</span>none<span class="s1">&#39;) [autoconf]</span>
+<span class="s1">IPv6 address for em0? (or &#39;</span>autoconf<span class="s1">&#39; or &#39;</span>none<span class="s1">&#39;) [none]</span>
+<span class="s1">Available network interfaces are: em0 em1 em2 vlan0.</span>
+<span class="s1">Network interface to configure? (name, lladdr, &#39;</span>?<span class="s1">&#39;, or &#39;</span><span class="k">done</span><span class="s1">&#39;) [done]</span>
+<span class="s1">Using DNS domainname my.domain</span>
+<span class="s1">Using DNS nameservers at 213.140.210.232 213.140.211.232</span>
+
+<span class="s1">Password for root account? (will not echo)</span>
+<span class="s1">Password for root account? (again)</span>
+<span class="s1">Start sshd(8) by default? [yes]</span>
+<span class="s1">Change the default console to com0? [yes]</span>
+<span class="s1">Available speeds are: 9600 19200 38400 57600 115200.</span>
+<span class="s1">Which speed should com0 use? (or &#39;</span><span class="k">done</span><span class="s1">&#39;) [115200]</span>
+<span class="s1">Setup a user? (enter a lower-case loginname, or &#39;</span>no<span class="s1">&#39;) [no] jas</span>
+<span class="s1">Full name for user jas? [jas]</span>
+<span class="s1">Password for user jas? (will not echo)</span>
+<span class="s1">Password for user jas? (again)</span>
+<span class="s1">WARNING: root is targeted by password guessing attacks, pubkeys are safer.</span>
+<span class="s1">Allow root ssh login? (yes, no, prohibit-password) [no]</span>
+<span class="s1">What timezone are you in? (&#39;</span>?<span class="s1">&#39; for list) [Asia/Nicosia]</span>
+
+<span class="s1">Available disks are: sd0 sd1.</span>
+<span class="s1">Which disk is the root disk? (&#39;</span>?<span class="s1">&#39; for details) [sd0]</span>
+<span class="s1">Encrypt the root disk with a (p)assphrase or (k)eydisk? [no]</span>
+<span class="s1">Disk: sd0       geometry: 3649/255/63 [58626288 Sectors]</span>
+<span class="s1">Offset: 0       Signature: 0xAA55</span>
+<span class="s1">            Starting         Ending         LBA Info:</span>
+<span class="s1"> #: id      C   H   S -      C   H   S [       start:        size ]</span>
+<span class="s1">-------------------------------------------------------------------------------</span>
+<span class="s1"> 0: 00      0   0   0 -      0   0   0 [           0:           0 ] Unused</span>
+<span class="s1"> 1: 00      0   0   0 -      0   0   0 [           0:           0 ] Unused</span>
+<span class="s1"> 2: 00      0   0   0 -      0   0   0 [           0:           0 ] Unused</span>
+<span class="s1">*3: A6      0   1   2 -   3648 254  63 [          64:    58621121 ] OpenBSD</span>
+<span class="s1">Use (W)hole disk MBR, whole disk (G)PT, (O)penBSD area or (E)dit? [OpenBSD]</span>
+<span class="s1">The auto-allocated layout for sd0 is:</span>
+<span class="s1">#                size           offset  fstype [fsize bsize   cpg]</span>
+<span class="s1">  a:          1004.7M               64  4.2BSD   2048 16384     1 # /</span>
+<span class="s1">  b:          1789.4M          2057632    swap</span>
+<span class="s1">  c:         28626.1M                0  unused</span>
+<span class="s1">  d:          1487.5M          5722240  4.2BSD   2048 16384     1 # /tmp</span>
+<span class="s1">  e:          2302.2M          8768576  4.2BSD   2048 16384     1 # /var</span>
+<span class="s1">  f:          3209.3M         13483392  4.2BSD   2048 16384     1 # /usr</span>
+<span class="s1">  g:           896.8M         20056128  4.2BSD   2048 16384     1 # /usr/X11R6</span>
+<span class="s1">  h:          3588.0M         21892768  4.2BSD   2048 16384     1 # /usr/local</span>
+<span class="s1">  i:          2389.9M         29241056  4.2BSD   2048 16384     1 # /usr/src</span>
+<span class="s1">  j:          5803.7M         34135488  4.2BSD   2048 16384     1 # /usr/obj</span>
+<span class="s1">  k:          6152.2M         46021536  4.2BSD   2048 16384     1 # /home</span>
+<span class="s1">Use (A)uto layout, (E)dit auto layout, or create (C)ustom layout? [a]</span>
+<span class="s1">/dev/rsd0a: 1004.7MB in 2057568 sectors of 512 bytes</span>
+<span class="s1">5 cylinder groups of 202.50MB, 12960 blocks, 25920 inodes each</span>
+<span class="s1">/dev/rsd0k: 6152.2MB in 12599648 sectors of 512 bytes</span>
+<span class="s1">31 cylinder groups of 202.50MB, 12960 blocks, 25920 inodes each</span>
+<span class="s1">/dev/rsd0d: 1487.5MB in 3046336 sectors of 512 bytes</span>
+<span class="s1">8 cylinder groups of 202.50MB, 12960 blocks, 25920 inodes each</span>
+<span class="s1">/dev/rsd0f: 3209.3MB in 6572736 sectors of 512 bytes</span>
+<span class="s1">16 cylinder groups of 202.50MB, 12960 blocks, 25920 inodes each</span>
+<span class="s1">/dev/rsd0g: 896.8MB in 1836640 sectors of 512 bytes</span>
+<span class="s1">5 cylinder groups of 202.50MB, 12960 blocks, 25920 inodes each</span>
+<span class="s1">/dev/rsd0h: 3588.0MB in 7348288 sectors of 512 bytes</span>
+<span class="s1">18 cylinder groups of 202.50MB, 12960 blocks, 25920 inodes each</span>
+<span class="s1">/dev/rsd0j: 5803.7MB in 11886048 sectors of 512 bytes</span>
+<span class="s1">29 cylinder groups of 202.50MB, 12960 blocks, 25920 inodes each</span>
+<span class="s1">/dev/rsd0i: 2389.9MB in 4894432 sectors of 512 bytes</span>
+<span class="s1">12 cylinder groups of 202.50MB, 12960 blocks, 25920 inodes each</span>
+<span class="s1">/dev/rsd0e: 2302.2MB in 4714816 sectors of 512 bytes</span>
+<span class="s1">12 cylinder groups of 202.50MB, 12960 blocks, 25920 inodes each</span>
+<span class="s1">Available disks are: sd1.</span>
+<span class="s1">Which disk do you wish to initialize? (or &#39;</span><span class="k">done</span><span class="s1">&#39;) [done]</span>
+<span class="s1">/dev/sd0a (52d29e0dc555db56.a) on /mnt type ffs (rw, asynchronous, local)</span>
+<span class="s1">/dev/sd0k (52d29e0dc555db56.k) on /mnt/home type ffs (rw, asynchronous, local, nodev, nosuid)</span>
+<span class="s1">/dev/sd0d (52d29e0dc555db56.d) on /mnt/tmp type ffs (rw, asynchronous, local, nodev, nosuid)</span>
+<span class="s1">/dev/sd0f (52d29e0dc555db56.f) on /mnt/usr type ffs (rw, asynchronous, local, nodev)</span>
+<span class="s1">/dev/sd0g (52d29e0dc555db56.g) on /mnt/usr/X11R6 type ffs (rw, asynchronous, local, nodev)</span>
+<span class="s1">/dev/sd0h (52d29e0dc555db56.h) on /mnt/usr/local type ffs (rw, asynchronous, local, nodev)</span>
+<span class="s1">/dev/sd0j (52d29e0dc555db56.j) on /mnt/usr/obj type ffs (rw, asynchronous, local, nodev, nosuid)</span>
+<span class="s1">/dev/sd0i (52d29e0dc555db56.i) on /mnt/usr/src type ffs (rw, asynchronous, local, nodev, nosuid)</span>
+<span class="s1">/dev/sd0e (52d29e0dc555db56.e) on /mnt/var type ffs (rw, asynchronous, local, nodev, nosuid)</span>
+
+<span class="s1">Let&#39;</span>s<span class="w"> </span>install<span class="w"> </span>the<span class="w"> </span>sets!
+Location<span class="w"> </span>of<span class="w"> </span>sets?<span class="w"> </span><span class="o">(</span>disk<span class="w"> </span>http<span class="w"> </span>nfs<span class="w"> </span>or<span class="w"> </span><span class="s1">&#39;done&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>http<span class="o">]</span><span class="w"> </span>disk
+Is<span class="w"> </span>the<span class="w"> </span>disk<span class="w"> </span>partition<span class="w"> </span>already<span class="w"> </span>mounted?<span class="w"> </span><span class="o">[</span>no<span class="o">]</span>
+Available<span class="w"> </span>disks<span class="w"> </span>are:<span class="w"> </span>sd0<span class="w"> </span>sd1.
+Which<span class="w"> </span>disk<span class="w"> </span>contains<span class="w"> </span>the<span class="w"> </span>install<span class="w"> </span>media?<span class="w"> </span><span class="o">(</span>or<span class="w"> </span><span class="s1">&#39;done&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>sd1<span class="o">]</span>
+<span class="w">  </span>a:<span class="w">          </span><span class="m">1424384</span><span class="w">             </span><span class="m">1024</span><span class="w">  </span><span class="m">4</span>.2BSD<span class="w">   </span><span class="m">2048</span><span class="w"> </span><span class="m">16384</span><span class="w"> </span><span class="m">16142</span>
+<span class="w">  </span>i:<span class="w">              </span><span class="m">960</span><span class="w">               </span><span class="m">64</span><span class="w">   </span>MSDOS
+Available<span class="w"> </span>sd1<span class="w"> </span>partitions<span class="w"> </span>are:<span class="w"> </span>a<span class="w"> </span>i.
+Which<span class="w"> </span>sd1<span class="w"> </span>partition<span class="w"> </span>has<span class="w"> </span>the<span class="w"> </span>install<span class="w"> </span>sets?<span class="w"> </span><span class="o">(</span>or<span class="w"> </span><span class="s1">&#39;done&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>a<span class="o">]</span>
+Pathname<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>sets?<span class="w"> </span><span class="o">(</span>or<span class="w"> </span><span class="s1">&#39;done&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">[</span><span class="m">7</span>.6/amd64<span class="o">]</span>
+
+Select<span class="w"> </span>sets<span class="w"> </span>by<span class="w"> </span>entering<span class="w"> </span>a<span class="w"> </span><span class="nb">set</span><span class="w"> </span>name,<span class="w"> </span>a<span class="w"> </span>file<span class="w"> </span>name<span class="w"> </span>pattern<span class="w"> </span>or<span class="w"> </span><span class="s1">&#39;all&#39;</span>.<span class="w"> </span>De-select
+sets<span class="w"> </span>by<span class="w"> </span>prepending<span class="w"> </span>a<span class="w"> </span><span class="s1">&#39;-&#39;</span>,<span class="w"> </span>e.g.:<span class="w"> </span><span class="s1">&#39;-game*&#39;</span>.<span class="w"> </span>Selected<span class="w"> </span>sets<span class="w"> </span>are<span class="w"> </span>labelled<span class="w"> </span><span class="s1">&#39;[X]&#39;</span>.
+<span class="w">    </span><span class="o">[</span>X<span class="o">]</span><span class="w"> </span>bsd<span class="w">           </span><span class="o">[</span>X<span class="o">]</span><span class="w"> </span>base76.tgz<span class="w">    </span><span class="o">[</span>X<span class="o">]</span><span class="w"> </span>game76.tgz<span class="w">    </span><span class="o">[</span>X<span class="o">]</span><span class="w"> </span>xfont76.tgz
+<span class="w">    </span><span class="o">[</span>X<span class="o">]</span><span class="w"> </span>bsd.mp<span class="w">        </span><span class="o">[</span>X<span class="o">]</span><span class="w"> </span>comp76.tgz<span class="w">    </span><span class="o">[</span>X<span class="o">]</span><span class="w"> </span>xbase76.tgz<span class="w">   </span><span class="o">[</span>X<span class="o">]</span><span class="w"> </span>xserv76.tgz
+<span class="w">    </span><span class="o">[</span>X<span class="o">]</span><span class="w"> </span>bsd.rd<span class="w">        </span><span class="o">[</span>X<span class="o">]</span><span class="w"> </span>man76.tgz<span class="w">     </span><span class="o">[</span>X<span class="o">]</span><span class="w"> </span>xshare76.tgz
+Set<span class="w"> </span>name<span class="o">(</span>s<span class="o">)</span>?<span class="w"> </span><span class="o">(</span>or<span class="w"> </span><span class="s1">&#39;abort&#39;</span><span class="w"> </span>or<span class="w"> </span><span class="s1">&#39;done&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">[</span><span class="k">done</span><span class="o">]</span><span class="w"> </span>-x*<span class="w"> </span>-game
+<span class="w">    </span><span class="o">[</span>X<span class="o">]</span><span class="w"> </span>bsd<span class="w">           </span><span class="o">[</span>X<span class="o">]</span><span class="w"> </span>base76.tgz<span class="w">    </span><span class="o">[</span>X<span class="o">]</span><span class="w"> </span>game76.tgz<span class="w">    </span><span class="o">[</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>xfont76.tgz
+<span class="w">    </span><span class="o">[</span>X<span class="o">]</span><span class="w"> </span>bsd.mp<span class="w">        </span><span class="o">[</span>X<span class="o">]</span><span class="w"> </span>comp76.tgz<span class="w">    </span><span class="o">[</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>xbase76.tgz<span class="w">   </span><span class="o">[</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>xserv76.tgz
+<span class="w">    </span><span class="o">[</span>X<span class="o">]</span><span class="w"> </span>bsd.rd<span class="w">        </span><span class="o">[</span>X<span class="o">]</span><span class="w"> </span>man76.tgz<span class="w">     </span><span class="o">[</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>xshare76.tgz
+Set<span class="w"> </span>name<span class="o">(</span>s<span class="o">)</span>?<span class="w"> </span><span class="o">(</span>or<span class="w"> </span><span class="s1">&#39;abort&#39;</span><span class="w"> </span>or<span class="w"> </span><span class="s1">&#39;done&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">[</span><span class="k">done</span><span class="o">]</span>
+Directory<span class="w"> </span>does<span class="w"> </span>not<span class="w"> </span>contain<span class="w"> </span>SHA256.sig.<span class="w"> </span>Continue<span class="w"> </span>without<span class="w"> </span>verification?<span class="w"> </span><span class="o">[</span>no<span class="o">]</span><span class="w"> </span>yes
+Installing<span class="w"> </span>bsd<span class="w">          </span><span class="m">100</span>%<span class="w"> </span><span class="p">|</span>**************************<span class="p">|</span><span class="w"> </span><span class="m">28007</span><span class="w"> </span>KB<span class="w">    </span><span class="m">00</span>:01
+Installing<span class="w"> </span>bsd.mp<span class="w">       </span><span class="m">100</span>%<span class="w"> </span><span class="p">|</span>**************************<span class="p">|</span><span class="w"> </span><span class="m">28139</span><span class="w"> </span>KB<span class="w">    </span><span class="m">00</span>:01
+Installing<span class="w"> </span>bsd.rd<span class="w">       </span><span class="m">100</span>%<span class="w"> </span><span class="p">|</span>**************************<span class="p">|</span><span class="w">  </span><span class="m">4600</span><span class="w"> </span>KB<span class="w">    </span><span class="m">00</span>:00
+Installing<span class="w"> </span>base76.tgz<span class="w">   </span><span class="m">100</span>%<span class="w"> </span><span class="p">|</span>**************************<span class="p">|</span><span class="w">   </span><span class="m">414</span><span class="w"> </span>MB<span class="w">    </span><span class="m">00</span>:54
+Extracting<span class="w"> </span>etc.tgz<span class="w">      </span><span class="m">100</span>%<span class="w"> </span><span class="p">|</span>**************************<span class="p">|</span><span class="w">   </span><span class="m">264</span><span class="w"> </span>KB<span class="w">    </span><span class="m">00</span>:00
+Installing<span class="w"> </span>comp76.tgz<span class="w">   </span><span class="m">100</span>%<span class="w"> </span><span class="p">|</span>**************************<span class="p">|</span><span class="w"> </span><span class="m">81512</span><span class="w"> </span>KB<span class="w">    </span><span class="m">00</span>:18
+Installing<span class="w"> </span>man76.tgz<span class="w">    </span><span class="m">100</span>%<span class="w"> </span><span class="p">|</span>**************************<span class="p">|</span><span class="w">  </span><span class="m">8039</span><span class="w"> </span>KB<span class="w">    </span><span class="m">00</span>:02
+Installing<span class="w"> </span>game76.tgz<span class="w">   </span><span class="m">100</span>%<span class="w"> </span><span class="p">|</span>**************************<span class="p">|</span><span class="w">  </span><span class="m">2746</span><span class="w"> </span>KB<span class="w">    </span><span class="m">00</span>:00
+Installing<span class="w"> </span>BUILDINFO<span class="w">    </span><span class="m">100</span>%<span class="w"> </span><span class="p">|</span>**************************<span class="p">|</span><span class="w">    </span><span class="m">54</span><span class="w">       </span><span class="m">00</span>:00
+Location<span class="w"> </span>of<span class="w"> </span>sets?<span class="w"> </span><span class="o">(</span>disk<span class="w"> </span>http<span class="w"> </span>nfs<span class="w"> </span>or<span class="w"> </span><span class="s1">&#39;done&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">[</span><span class="k">done</span><span class="o">]</span>
+Saving<span class="w"> </span>configuration<span class="w"> </span>files...<span class="w"> </span><span class="k">done</span>.
+Making<span class="w"> </span>all<span class="w"> </span>device<span class="w"> </span>nodes...<span class="w"> </span><span class="k">done</span>.
+Multiprocessor<span class="w"> </span>machine<span class="p">;</span><span class="w"> </span>using<span class="w"> </span>bsd.mp<span class="w"> </span>instead<span class="w"> </span>of<span class="w"> </span>bsd.
+fw_update:<span class="w"> </span>add<span class="w"> </span>amd<span class="p">;</span><span class="w"> </span>update<span class="w"> </span>none
+Relinking<span class="w"> </span>to<span class="w"> </span>create<span class="w"> </span>unique<span class="w"> </span>kernel...<span class="w"> </span><span class="k">done</span>.
+
+CONGRATULATIONS!<span class="w"> </span>Your<span class="w"> </span>OpenBSD<span class="w"> </span>install<span class="w"> </span>has<span class="w"> </span>been<span class="w"> </span>successfully<span class="w"> </span>completed!
+
+When<span class="w"> </span>you<span class="w"> </span>login<span class="w"> </span>to<span class="w"> </span>your<span class="w"> </span>new<span class="w"> </span>system<span class="w"> </span>the<span class="w"> </span>first<span class="w"> </span>time,<span class="w"> </span>please<span class="w"> </span><span class="nb">read</span><span class="w"> </span>your<span class="w"> </span>mail
+using<span class="w"> </span>the<span class="w"> </span><span class="s1">&#39;mail&#39;</span><span class="w"> </span>command.
+
+Exit<span class="w"> </span>to<span class="w"> </span><span class="o">(</span>S<span class="o">)</span>hell,<span class="w"> </span><span class="o">(</span>H<span class="o">)</span>alt<span class="w"> </span>or<span class="w"> </span><span class="o">(</span>R<span class="o">)</span>eboot?<span class="w"> </span><span class="o">[</span>reboot<span class="o">]</span>
+</code></pre></div>
+
+<p>Remove the install media and reboot.</p>
+<h3>Configuration</h3>
+<p>First run, do the following to update (run as root, use <code>su</code>):</p>
+<div class="highlight"><pre><span></span><code>syspatch
+pkg_add<span class="w"> </span>-Uu
+sysmerge<span class="w"> </span>-d
+fw_update
+reboot
+</code></pre></div>
+
+<p>Add <code>nano</code> because who has the time to deal with arrow-keys not being arrow-keys</p>
+<div class="highlight"><pre><span></span><code>pkg_add<span class="w"> </span>nano
+</code></pre></div>
+
+<p>Now, edit the <code>doas</code> users:</p>
+<div class="highlight"><pre><span></span><code>nano<span class="w"> </span>/etc/doas.conf
+</code></pre></div>
+
+<p>And insert the line:</p>
+<div class="highlight"><pre><span></span><code>permit<span class="w"> </span>nopass<span class="w"> </span>:wheel
+</code></pre></div>
+
+<p>Now you should log in as the user account (in the <code>wheel</code> group), and then use <code>doas su</code> to perform root operations.</p>
+<h3>Shutdown un-needed services</h3>
+<p>We don't need <code>smtpd</code> and <code>sndiod</code> on this machine, shut them down:</p>
+<div class="highlight"><pre><span></span><code>cappuccino#<span class="w"> </span>rcctl<span class="w"> </span>ls<span class="w"> </span>on
+check_quotas
+cron
+dhcpleased
+library_aslr
+ntpd
+pf
+pflogd
+resolvd
+slaacd
+smtpd
+sndiod
+sshd
+syslogd
+
+cappuccino#<span class="w"> </span>rcctl<span class="w"> </span>stop<span class="w"> </span>smtpd
+smtpd<span class="o">(</span>ok<span class="o">)</span>
+cappuccino#<span class="w"> </span>rcctl<span class="w"> </span>disable<span class="w"> </span>smtpd
+cappuccino#<span class="w"> </span>rcctl<span class="w"> </span>stop<span class="w"> </span>sndiod
+sndiod<span class="o">(</span>ok<span class="o">)</span>
+cappuccino#<span class="w"> </span>rcctl<span class="w"> </span>disable<span class="w"> </span>sndiod
+</code></pre></div>
+
+<h3>Network setup</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;net.inet.ip.forwarding=1&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/sysctl.conf
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;inet autoconf&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/hostname.em0<span class="w"> </span><span class="c1"># or use a static IP</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;inet 172.20.10.1 255.255.255.0 172.20.10.255&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/hostname.em1
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;inet 172.20.20.1 255.255.255.0 172.20.20.255&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/hostname.em2
+</code></pre></div>
+
+<h3>dhcpd</h3>
+<div class="highlight"><pre><span></span><code>rcctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>dhcpd
+rcctl<span class="w"> </span><span class="nb">set</span><span class="w"> </span>dhcpd<span class="w"> </span>flags<span class="w"> </span>em1<span class="w"> </span>em2
+nano<span class="w"> </span>/etc/dhcpd.conf
+</code></pre></div>
+
+<h3>pf Firewall config</h3>
+<div class="highlight"><pre><span></span><code>nano<span class="w"> </span>/etc/pf.conf
+</code></pre></div>
+
+<p>And insert the following:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">wired</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;em1&quot;</span>
+<span class="nv">wifi</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;em2&quot;</span>
+table<span class="w"> </span>&lt;martians&gt;<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="m">0</span>.0.0.0/8<span class="w"> </span><span class="m">10</span>.0.0.0/8<span class="w"> </span><span class="m">127</span>.0.0.0/8<span class="w"> </span><span class="m">169</span>.254.0.0/16<span class="w">     </span><span class="se">\</span>
+<span class="w">                   </span><span class="m">172</span>.16.0.0/12<span class="w"> </span><span class="m">192</span>.0.0.0/24<span class="w"> </span><span class="m">192</span>.0.2.0/24<span class="w"> </span><span class="m">224</span>.0.0.0/3<span class="w"> </span><span class="se">\</span>
+<span class="w">                   </span><span class="m">192</span>.168.0.0/16<span class="w"> </span><span class="m">198</span>.18.0.0/15<span class="w"> </span><span class="m">198</span>.51.100.0/24<span class="w">        </span><span class="se">\</span>
+<span class="w">                   </span><span class="m">203</span>.0.113.0/24<span class="w"> </span><span class="o">}</span>
+<span class="nb">set</span><span class="w"> </span>block-policy<span class="w"> </span>drop
+<span class="nb">set</span><span class="w"> </span>loginterface<span class="w"> </span>egress
+<span class="nb">set</span><span class="w"> </span>skip<span class="w"> </span>on<span class="w"> </span>lo0
+match<span class="w"> </span><span class="k">in</span><span class="w"> </span>all<span class="w"> </span>scrub<span class="w"> </span><span class="o">(</span>no-df<span class="w"> </span>random-id<span class="w"> </span>max-mss<span class="w"> </span><span class="m">1440</span><span class="o">)</span>
+match<span class="w"> </span>out<span class="w"> </span>on<span class="w"> </span>egress<span class="w"> </span>inet<span class="w"> </span>from<span class="w"> </span>!<span class="o">(</span>egress:network<span class="o">)</span><span class="w"> </span>to<span class="w"> </span>any<span class="w"> </span>nat-to<span class="w"> </span><span class="o">(</span>egress:0<span class="o">)</span>
+
+match<span class="w"> </span><span class="k">in</span><span class="w"> </span>on<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nv">$wired</span><span class="w"> </span><span class="o">}</span><span class="w"> </span>inet<span class="w"> </span>proto<span class="w"> </span><span class="o">{</span><span class="w"> </span>tcp<span class="w"> </span>udp<span class="w"> </span><span class="o">}</span><span class="w"> </span>from<span class="w"> </span>any<span class="w"> </span>to<span class="w"> </span>!172.20.10.1<span class="w"> </span>port<span class="w"> </span><span class="m">53</span><span class="w"> </span>rdr-to<span class="w"> </span><span class="m">172</span>.20.10.1
+match<span class="w"> </span><span class="k">in</span><span class="w"> </span>on<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nv">$wifi</span><span class="w"> </span><span class="o">}</span><span class="w"> </span>inet<span class="w"> </span>proto<span class="w"> </span><span class="o">{</span><span class="w"> </span>tcp<span class="w"> </span>udp<span class="w"> </span><span class="o">}</span><span class="w"> </span>from<span class="w"> </span>any<span class="w"> </span>to<span class="w"> </span>!172.20.20.1<span class="w"> </span>port<span class="w"> </span><span class="m">53</span><span class="w"> </span>rdr-to<span class="w"> </span><span class="m">172</span>.20.20.1
+
+antispoof<span class="w"> </span>quick<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>egress<span class="w"> </span><span class="nv">$wired</span><span class="w"> </span><span class="nv">$wifi</span><span class="w"> </span><span class="o">}</span>
+block<span class="w"> </span><span class="k">in</span><span class="w"> </span>quick<span class="w"> </span>on<span class="w"> </span>egress<span class="w"> </span>from<span class="w"> </span>&lt;martians&gt;<span class="w"> </span>to<span class="w"> </span>any
+
+block<span class="w"> </span><span class="k">in</span><span class="w"> </span>quick<span class="w"> </span>on<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nv">$wired</span><span class="w"> </span><span class="nv">$wifi</span><span class="w"> </span><span class="o">}</span><span class="w"> </span>proto<span class="w"> </span><span class="o">{</span><span class="w"> </span>tcp<span class="w"> </span>udp<span class="w"> </span><span class="o">}</span><span class="w"> </span>from<span class="w"> </span>any<span class="w"> </span>to<span class="w"> </span>any<span class="w"> </span>port<span class="w"> </span><span class="m">853</span>
+block<span class="w"> </span><span class="k">in</span><span class="w"> </span>quick<span class="w"> </span>on<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nv">$wired</span><span class="w"> </span><span class="nv">$wifi</span><span class="w"> </span><span class="o">}</span><span class="w"> </span>proto<span class="w"> </span><span class="o">{</span><span class="w"> </span>tcp<span class="w"> </span>udp<span class="w"> </span><span class="o">}</span><span class="w"> </span>from<span class="w"> </span>any<span class="w"> </span>to<span class="w"> </span>any<span class="w"> </span>port<span class="w"> </span><span class="m">5353</span>
+
+block<span class="w"> </span><span class="k">return</span><span class="w"> </span>out<span class="w"> </span>quick<span class="w"> </span>on<span class="w"> </span>egress<span class="w"> </span>from<span class="w"> </span>any<span class="w"> </span>to<span class="w"> </span>&lt;martians&gt;
+block<span class="w"> </span>all
+pass<span class="w"> </span>out<span class="w"> </span>quick<span class="w"> </span>inet
+pass<span class="w"> </span><span class="k">in</span><span class="w"> </span>on<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nv">$wired</span><span class="w"> </span><span class="nv">$wifi</span><span class="w"> </span><span class="o">}</span><span class="w"> </span>inet
+</code></pre></div>
+
+<h3>unbound for DNS</h3>
+<div class="highlight"><pre><span></span><code>rcctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>unbound
+nano<span class="w"> </span>/var/unbound/etc/unbound.conf
+</code></pre></div>
+
+<p>And insert the following:</p>
+<div class="highlight"><pre><span></span><code>server:
+<span class="w">        </span>interface:<span class="w"> </span><span class="m">172</span>.20.10.1
+<span class="w">        </span>interface:<span class="w"> </span><span class="m">172</span>.20.20.1
+<span class="w">        </span>interface:<span class="w"> </span><span class="m">127</span>.0.0.1
+<span class="w">        </span>access-control:<span class="w"> </span><span class="m">172</span>.20.10.0/24<span class="w"> </span>allow
+<span class="w">        </span>access-control:<span class="w"> </span><span class="m">172</span>.20.20.0/24<span class="w"> </span>allow
+<span class="w">        </span><span class="k">do</span>-not-query-localhost:<span class="w"> </span>no
+<span class="w">        </span>hide-identity:<span class="w"> </span>yes
+<span class="w">        </span>hide-version:<span class="w"> </span>yes
+<span class="w">        </span>prefetch:<span class="w"> </span>yes
+
+forward-zone:
+<span class="w">        </span>name:<span class="w"> </span><span class="s2">&quot;.&quot;</span>
+<span class="w">        </span>forward-addr:<span class="w"> </span><span class="m">1</span>.1.1.1<span class="w">  </span><span class="c1"># IP of the preferred upstream resolver</span>
+</code></pre></div>
+
+<p>And make sure that the localhost interface takes DNS from the local resolver:</p>
+<div class="highlight"><pre><span></span><code>nano<span class="w"> </span>/etc/dhclient.conf
+</code></pre></div>
+
+<p>Add the following:</p>
+<div class="highlight"><pre><span></span><code>ignore<span class="w"> </span>domain-name,<span class="w"> </span>domain-name-servers<span class="p">;</span>
+append<span class="w"> </span>dhcp-lease-time<span class="w"> </span><span class="m">86400</span><span class="p">;</span>
+send<span class="w"> </span>host-name<span class="w"> </span><span class="s2">&quot;cappuccino&quot;</span><span class="p">;</span>
+prepend<span class="w"> </span>domain-name-servers<span class="w"> </span><span class="m">127</span>.0.0.1<span class="p">;</span>
+prepend<span class="w"> </span>domain-name<span class="w"> </span><span class="s2">&quot;office.lan&quot;</span><span class="p">;</span>
+</code></pre></div>
+
+<p>And now adjust the DHCP lease daemon:</p>
+<div class="highlight"><pre><span></span><code>nano<span class="w"> </span>/etc/dhcpleased.conf
+</code></pre></div>
+
+<p>Add this:</p>
+<div class="highlight"><pre><span></span><code>interface<span class="w"> </span>em0<span class="w"> </span><span class="o">{</span>
+<span class="w">        </span>ignore<span class="w"> </span>dns
+<span class="o">}</span>
+</code></pre></div>
+
+<h3>Manually hammer <code>/etc/revolv.conf</code></h3>
+<p>Note, that I didn't have much luck with this method, it seems like still the best thing to do is manually edit <code>/etc/resolv.conf</code> and then change the flags:</p>
+<div class="highlight"><pre><span></span><code>nano<span class="w"> </span>/etc/resolv.conf
+</code></pre></div>
+
+<p>And add this:</p>
+<div class="highlight"><pre><span></span><code>nameserver<span class="w"> </span><span class="m">127</span>.0.0.1
+lookup<span class="w"> </span>file<span class="w"> </span><span class="nb">bind</span>
+</code></pre></div>
+
+<p>And lock the file:</p>
+<div class="highlight"><pre><span></span><code>chflags<span class="w"> </span>uchg<span class="w"> </span>/etc/resolv.conf
+</code></pre></div>
+
+<p>This can be reversed with:</p>
+<div class="highlight"><pre><span></span><code>chflags<span class="w"> </span>nouchg<span class="w"> </span>/etc/resolv.conf
+</code></pre></div>
+
+<h2>References</h2>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://cdn.openbsd.org/pub/OpenBSD/7.6/amd64/SHA256">https://cdn.openbsd.org/pub/OpenBSD/7.6/amd64/SHA256</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/alix2d3.html">alix2d3</a>
+      <a href="./tag/openbsd.html">openbsd</a>
+      <a href="./tag/firewall.html">firewall</a>
+      <a href="./tag/gateway.html">gateway</a>
+    </p>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2025 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script id="dark-theme-script"
+          src="./theme/dark-theme/dark-theme.min.js"
+          data-enable-auto-detect-theme="True"
+          data-default-theme="light"
+          type="text/javascript">
+  </script>
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " heyjdp ",
+  "url" : ".",
+  "image": "/images/jas-powell-profile.png",
+  "description": "Notes about Tech and being a Remote Startup CTO"
+}
+</script><a href="https://github.com/heyjdp" target="_blank" class="github-corner" aria-label="View source on Github">
+    <svg width="80"
+         height="80"
+         viewBox="0 0 250 250"
+         style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+         aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor"
+              style="transform-origin: 130px 106px;"
+              class="octo-arm">
+        </path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor"
+              class="octo-body">
+        </path>
+    </svg>
+</a>
+
+</body>
+</html>

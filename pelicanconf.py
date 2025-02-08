@@ -9,7 +9,7 @@ SITEDESCRIPTION = "Notes about Tech and being a Remote Startup CTO"
 SITELOGO = "/images/jas-powell-profile.png"
 
 BROWSER_COLOR = "#333333"
-PYGMENTS_STYLE = "colorful"
+PYGMENTS_STYLE = "lightbulb"
 # MD_EXTENSIONS = ['codehilite(css_class=highlight)','extra']
 
 SYNTAX_THEME=u'github'

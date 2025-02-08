@@ -1,5 +1,408 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>heyjdp</title><link href="/" rel="alternate"></link><link href="feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2025-02-08T10:00:00+02:00</updated><subtitle>Just some notes</subtitle><entry><title>GitHub Setup</title><link href="github-setup.html" rel="alternate"></link><published>2025-02-08T10:00:00+02:00</published><updated>2025-02-08T10:00:00+02:00</updated><author><name>Jas Powell</name></author><id>tag:None,2025-02-08:github-setup.html</id><summary type="html">&lt;p&gt;Notes on GitHub Setup&lt;/p&gt;</summary><content type="html">&lt;blockquote&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>heyjdp</title><link href="/" rel="alternate"></link><link href="feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2025-02-08T10:00:00+02:00</updated><subtitle>Just some notes</subtitle><entry><title>Alix 2D3 OpenBSD Firewall Gateway</title><link href="alix-2d3-openbsd-firewall-gateway.html" rel="alternate"></link><published>2025-02-08T10:00:00+02:00</published><updated>2025-02-08T10:00:00+02:00</updated><author><name>Jas Powell</name></author><id>tag:None,2025-02-08:alix-2d3-openbsd-firewall-gateway.html</id><summary type="html">&lt;p&gt;Notes on Setup of an Alix 2D3 with OpenBSD to act as a Firewall/Gateway&lt;/p&gt;</summary><content type="html">&lt;blockquote&gt;
+&lt;p&gt;[!NOTE]
+The environment used for this was: Mac Air M2 8gb MacOS Sequoia 15.3&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Notes on Setup of an Alix 2D3 with OpenBSD to act as a Firewall/Gateway&lt;/h2&gt;
+&lt;h3&gt;Download and verify:&lt;/h3&gt;
+&lt;p&gt;Get a copy of OpenBSD, in this case the &lt;code&gt;amd64&lt;/code&gt; install image. From here: &lt;a href="https://cdn.openbsd.org/pub/OpenBSD/7.6/amd64/"&gt;https://cdn.openbsd.org/pub/OpenBSD/7.6/amd64/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;And make sure to check the &lt;code&gt;sha256sum&lt;/code&gt; against the published value&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sha256sum&lt;span class="w"&gt; &lt;/span&gt;./Downloads/install76.img
+973dfa837e4998f6c0f29d0afc9f40d85e29a3d2b25fcea8b3f13b4491fbedc0&lt;span class="w"&gt;  &lt;/span&gt;./Downloads/install76.img
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Create install media&lt;/h3&gt;
+&lt;p&gt;Insert a USB stick into the Macbook:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;diskutil&lt;span class="w"&gt; &lt;/span&gt;list
+/dev/disk4&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;external,&lt;span class="w"&gt; &lt;/span&gt;physical&lt;span class="o"&gt;)&lt;/span&gt;:
+&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="c1"&gt;#:                       TYPE NAME                    SIZE       IDENTIFIER&lt;/span&gt;
+&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;:&lt;span class="w"&gt;     &lt;/span&gt;FDisk_partition_scheme&lt;span class="w"&gt;                        &lt;/span&gt;*62.5&lt;span class="w"&gt; &lt;/span&gt;GB&lt;span class="w"&gt;    &lt;/span&gt;disk4
+&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;:&lt;span class="w"&gt;                       &lt;/span&gt;0xEF&lt;span class="w"&gt;                         &lt;/span&gt;&lt;span class="m"&gt;491&lt;/span&gt;.5&lt;span class="w"&gt; &lt;/span&gt;KB&lt;span class="w"&gt;   &lt;/span&gt;disk4s1
+&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;:&lt;span class="w"&gt;                    &lt;/span&gt;OpenBSD&lt;span class="w"&gt;                         &lt;/span&gt;&lt;span class="m"&gt;729&lt;/span&gt;.3&lt;span class="w"&gt; &lt;/span&gt;MB&lt;span class="w"&gt;   &lt;/span&gt;disk4s4
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;free&lt;span class="w"&gt; &lt;/span&gt;space&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt;                         &lt;/span&gt;&lt;span class="m"&gt;61&lt;/span&gt;.8&lt;span class="w"&gt; &lt;/span&gt;GB&lt;span class="w"&gt;    &lt;/span&gt;-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Our external disk is &lt;code&gt;/dev/disk4&lt;/code&gt; - so now we can copy the install image, unmount the disk first:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;diskutil&lt;span class="w"&gt; &lt;/span&gt;unmountDisk&lt;span class="w"&gt; &lt;/span&gt;/dev/disk4
+sudo&lt;span class="w"&gt; &lt;/span&gt;dd&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;./Downloads/install76.img&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/disk4&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1m
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Boot the Alix 2D3&lt;/h3&gt;
+&lt;p&gt;First you need a serial cable, insert it into the serial port of the Alix (powered off) and also into the USB port of the Macbook. You need to identify the serial device:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ls&lt;span class="w"&gt; &lt;/span&gt;/dev/cu.*
+/dev/cu.usbserial-11210
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;So now we can make a screen connection to the serial port. Note that the default baud rate is 38400, but it can be set in the BIOS to 115200:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;screen&lt;span class="w"&gt; &lt;/span&gt;/dev/cu.usbserial-11210&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;115200&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;NOTE: to leave a &lt;code&gt;screen&lt;/code&gt; session press &lt;code&gt;CTRL+a&lt;/code&gt;, &lt;code&gt;k&lt;/code&gt; then &lt;code&gt;y&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Insert the USB device into the Alix 2D3 and put the power onto the Alix 2D3. You will see a screen like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SeaBIOS&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;version&lt;span class="w"&gt; &lt;/span&gt;?-20160307_153453-michael-desktop64&lt;span class="o"&gt;)&lt;/span&gt;
+XHCI&lt;span class="w"&gt; &lt;/span&gt;init&lt;span class="w"&gt; &lt;/span&gt;on&lt;span class="w"&gt; &lt;/span&gt;dev&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;00&lt;/span&gt;:10.0:&lt;span class="w"&gt; &lt;/span&gt;regs&lt;span class="w"&gt; &lt;/span&gt;@&lt;span class="w"&gt; &lt;/span&gt;0xfeb22000,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;ports,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;32&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;slots,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;32&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;byte&lt;span class="w"&gt; &lt;/span&gt;contexts
+XHCI&lt;span class="w"&gt;    &lt;/span&gt;extcap&lt;span class="w"&gt; &lt;/span&gt;0x1&lt;span class="w"&gt; &lt;/span&gt;@&lt;span class="w"&gt; &lt;/span&gt;feb22500
+XHCI&lt;span class="w"&gt;    &lt;/span&gt;protocol&lt;span class="w"&gt; &lt;/span&gt;USB&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.00,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;ports&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;offset&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;def&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+XHCI&lt;span class="w"&gt;    &lt;/span&gt;protocol&lt;span class="w"&gt; &lt;/span&gt;USB&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;.00,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;ports&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;offset&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;def&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;
+XHCI&lt;span class="w"&gt;    &lt;/span&gt;extcap&lt;span class="w"&gt; &lt;/span&gt;0xa&lt;span class="w"&gt; &lt;/span&gt;@&lt;span class="w"&gt; &lt;/span&gt;feb22540
+Found&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;serial&lt;span class="w"&gt; &lt;/span&gt;ports
+ATA&lt;span class="w"&gt; &lt;/span&gt;controller&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;at&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;4010&lt;/span&gt;/4020/0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;irq&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;dev&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;88&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+EHCI&lt;span class="w"&gt; &lt;/span&gt;init&lt;span class="w"&gt; &lt;/span&gt;on&lt;span class="w"&gt; &lt;/span&gt;dev&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;00&lt;/span&gt;:13.0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;regs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0xfeb25420&lt;span class="o"&gt;)&lt;/span&gt;
+ATA&lt;span class="w"&gt; &lt;/span&gt;controller&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;at&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;4018&lt;/span&gt;/4024/0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;irq&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;dev&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;88&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+Searching&lt;span class="w"&gt; &lt;/span&gt;bootorder&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;/pci@i0cf8/*@14,7
+Searching&lt;span class="w"&gt; &lt;/span&gt;bootorder&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;/rom@img/memtest
+Searching&lt;span class="w"&gt; &lt;/span&gt;bootorder&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;/rom@img/setup
+ata0-0:&lt;span class="w"&gt; &lt;/span&gt;KINGSTON&lt;span class="w"&gt; &lt;/span&gt;SMS200S330G&lt;span class="w"&gt; &lt;/span&gt;ATA-8&lt;span class="w"&gt; &lt;/span&gt;Hard-Disk&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;28626&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;MiBytes&lt;span class="o"&gt;)&lt;/span&gt;
+Searching&lt;span class="w"&gt; &lt;/span&gt;bootorder&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;/pci@i0cf8/*@11/drive@0/disk@0
+XHCI&lt;span class="w"&gt; &lt;/span&gt;port&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;#3: 0x00200e03, powered, enabled, pls 0, speed 3 [High]&lt;/span&gt;
+Searching&lt;span class="w"&gt; &lt;/span&gt;bootorder&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;/pci@i0cf8/usb@10/storage@3/*@0/*@0,0
+Searching&lt;span class="w"&gt; &lt;/span&gt;bootorder&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;/pci@i0cf8/usb@10/usb-*@3
+USB&lt;span class="w"&gt; &lt;/span&gt;MSC&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;vendor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;SSK&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;product&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;USB3.2&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;rev&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;removable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+USB&lt;span class="w"&gt; &lt;/span&gt;MSC&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;blksize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;512&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;sectors&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;122136576&lt;/span&gt;
+Initialized&lt;span class="w"&gt; &lt;/span&gt;USB&lt;span class="w"&gt; &lt;/span&gt;HUB&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;ports&lt;span class="w"&gt; &lt;/span&gt;used&lt;span class="o"&gt;)&lt;/span&gt;
+All&lt;span class="w"&gt; &lt;/span&gt;threads&lt;span class="w"&gt; &lt;/span&gt;complete.
+Scan&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;option&lt;span class="w"&gt; &lt;/span&gt;roms
+PCengines&lt;span class="w"&gt; &lt;/span&gt;Press&lt;span class="w"&gt; &lt;/span&gt;F10&lt;span class="w"&gt; &lt;/span&gt;key&lt;span class="w"&gt; &lt;/span&gt;now&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;boot&lt;span class="w"&gt; &lt;/span&gt;menu:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note that to press F10 on the Macbook Air you need to press fn+F10...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Select&lt;span class="w"&gt; &lt;/span&gt;boot&lt;span class="w"&gt; &lt;/span&gt;device:
+
+&lt;span class="m"&gt;1&lt;/span&gt;.&lt;span class="w"&gt; &lt;/span&gt;USB&lt;span class="w"&gt; &lt;/span&gt;MSC&lt;span class="w"&gt; &lt;/span&gt;Drive&lt;span class="w"&gt; &lt;/span&gt;SSK&lt;span class="w"&gt; &lt;/span&gt;USB3.2
+&lt;span class="m"&gt;2&lt;/span&gt;.&lt;span class="w"&gt; &lt;/span&gt;ata0-0:&lt;span class="w"&gt; &lt;/span&gt;KINGSTON&lt;span class="w"&gt; &lt;/span&gt;SMS200S330G&lt;span class="w"&gt; &lt;/span&gt;ATA-8&lt;span class="w"&gt; &lt;/span&gt;Hard-Disk&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;28626&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;MiBytes
+&lt;span class="m"&gt;3&lt;/span&gt;.&lt;span class="w"&gt; &lt;/span&gt;Payload&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;memtest&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="m"&gt;4&lt;/span&gt;.&lt;span class="w"&gt; &lt;/span&gt;Payload&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;setup&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Install OpenBSD&lt;/h3&gt;
+&lt;p&gt;First of all, we need to stop the Alix going into a boot loop over the serial console. Select the USB drive from the boot menu, then do this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Booting&lt;span class="w"&gt; &lt;/span&gt;from&lt;span class="w"&gt; &lt;/span&gt;Hard&lt;span class="w"&gt; &lt;/span&gt;Disk...
+Booting&lt;span class="w"&gt; &lt;/span&gt;from&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0000&lt;/span&gt;:7c00
+Using&lt;span class="w"&gt; &lt;/span&gt;drive&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;partition&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.
+Loading......
+probing:&lt;span class="w"&gt; &lt;/span&gt;pc0&lt;span class="w"&gt; &lt;/span&gt;com0&lt;span class="w"&gt; &lt;/span&gt;com1&lt;span class="w"&gt; &lt;/span&gt;mem&lt;span class="o"&gt;[&lt;/span&gt;638K&lt;span class="w"&gt; &lt;/span&gt;1918M&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;a20&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;on&lt;span class="o"&gt;]&lt;/span&gt;
+disk:&lt;span class="w"&gt; &lt;/span&gt;hd0+&lt;span class="w"&gt; &lt;/span&gt;hd1+
+&amp;gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;OpenBSD/amd64&lt;span class="w"&gt; &lt;/span&gt;BOOT&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.67
+boot&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;stty&lt;span class="w"&gt; &lt;/span&gt;com0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;115200&lt;/span&gt;
+boot&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;tty&lt;span class="w"&gt; &lt;/span&gt;com0
+switching&lt;span class="w"&gt; &lt;/span&gt;console&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;com0
+&amp;gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;OpenBSD/amd64&lt;span class="w"&gt; &lt;/span&gt;BOOT&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.67
+boot&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;bsd.rd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The important lines are:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;boot&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;stty&lt;span class="w"&gt; &lt;/span&gt;com0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;115200&lt;/span&gt;
+boot&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;tty&lt;span class="w"&gt; &lt;/span&gt;com0
+boot&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;bsd.rd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should get to this point, at which stage you can follow any OpenBSD install guide, but it is very simple:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Welcome&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;OpenBSD/amd64&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;7&lt;/span&gt;.6&lt;span class="w"&gt; &lt;/span&gt;installation&lt;span class="w"&gt; &lt;/span&gt;program.
+WARNING:&lt;span class="w"&gt; &lt;/span&gt;/&lt;span class="w"&gt; &lt;/span&gt;was&lt;span class="w"&gt; &lt;/span&gt;not&lt;span class="w"&gt; &lt;/span&gt;properly&lt;span class="w"&gt; &lt;/span&gt;unmounted
+&lt;span class="o"&gt;(&lt;/span&gt;I&lt;span class="o"&gt;)&lt;/span&gt;nstall,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;U&lt;span class="o"&gt;)&lt;/span&gt;pgrade,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;A&lt;span class="o"&gt;)&lt;/span&gt;utoinstall&lt;span class="w"&gt; &lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;S&lt;span class="o"&gt;)&lt;/span&gt;hell?
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Press &lt;code&gt;I&lt;/code&gt; to install and follow onscreen instructions, note that NIC &lt;code&gt;em0&lt;/code&gt; is the one closest to the serial port.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;WARNING:&lt;span class="w"&gt; &lt;/span&gt;/&lt;span class="w"&gt; &lt;/span&gt;was&lt;span class="w"&gt; &lt;/span&gt;not&lt;span class="w"&gt; &lt;/span&gt;properly&lt;span class="w"&gt; &lt;/span&gt;unmounted
+&lt;span class="o"&gt;(&lt;/span&gt;I&lt;span class="o"&gt;)&lt;/span&gt;nstall,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;U&lt;span class="o"&gt;)&lt;/span&gt;pgrade,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;A&lt;span class="o"&gt;)&lt;/span&gt;utoinstall&lt;span class="w"&gt; &lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;S&lt;span class="o"&gt;)&lt;/span&gt;hell?&lt;span class="w"&gt; &lt;/span&gt;I
+At&lt;span class="w"&gt; &lt;/span&gt;any&lt;span class="w"&gt; &lt;/span&gt;prompt&lt;span class="w"&gt; &lt;/span&gt;except&lt;span class="w"&gt; &lt;/span&gt;password&lt;span class="w"&gt; &lt;/span&gt;prompts&lt;span class="w"&gt; &lt;/span&gt;you&lt;span class="w"&gt; &lt;/span&gt;can&lt;span class="w"&gt; &lt;/span&gt;escape&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;a&lt;span class="w"&gt; &lt;/span&gt;shell&lt;span class="w"&gt; &lt;/span&gt;by
+typing&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;!&amp;#39;&lt;/span&gt;.&lt;span class="w"&gt; &lt;/span&gt;Default&lt;span class="w"&gt; &lt;/span&gt;answers&lt;span class="w"&gt; &lt;/span&gt;are&lt;span class="w"&gt; &lt;/span&gt;shown&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s and are selected by&lt;/span&gt;
+&lt;span class="s1"&gt;pressing RETURN.  You can exit this program at any time by pressing&lt;/span&gt;
+&lt;span class="s1"&gt;Control-C, but this can leave your system in an inconsistent state.&lt;/span&gt;
+
+&lt;span class="s1"&gt;Terminal type? [vt220]&lt;/span&gt;
+&lt;span class="s1"&gt;System hostname? (short form, e.g. &amp;#39;&lt;/span&gt;foo&lt;span class="s1"&gt;&amp;#39;) cappuccino&lt;/span&gt;
+
+&lt;span class="s1"&gt;Available network interfaces are: em0 em1 em2 vlan0.&lt;/span&gt;
+&lt;span class="s1"&gt;Network interface to configure? (name, lladdr, &amp;#39;&lt;/span&gt;?&lt;span class="s1"&gt;&amp;#39;, or &amp;#39;&lt;/span&gt;&lt;span class="k"&gt;done&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;) [em0]&lt;/span&gt;
+&lt;span class="s1"&gt;IPv4 address for em0? (or &amp;#39;&lt;/span&gt;autoconf&lt;span class="s1"&gt;&amp;#39; or &amp;#39;&lt;/span&gt;none&lt;span class="s1"&gt;&amp;#39;) [autoconf]&lt;/span&gt;
+&lt;span class="s1"&gt;IPv6 address for em0? (or &amp;#39;&lt;/span&gt;autoconf&lt;span class="s1"&gt;&amp;#39; or &amp;#39;&lt;/span&gt;none&lt;span class="s1"&gt;&amp;#39;) [none]&lt;/span&gt;
+&lt;span class="s1"&gt;Available network interfaces are: em0 em1 em2 vlan0.&lt;/span&gt;
+&lt;span class="s1"&gt;Network interface to configure? (name, lladdr, &amp;#39;&lt;/span&gt;?&lt;span class="s1"&gt;&amp;#39;, or &amp;#39;&lt;/span&gt;&lt;span class="k"&gt;done&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;) [done]&lt;/span&gt;
+&lt;span class="s1"&gt;Using DNS domainname my.domain&lt;/span&gt;
+&lt;span class="s1"&gt;Using DNS nameservers at 213.140.210.232 213.140.211.232&lt;/span&gt;
+
+&lt;span class="s1"&gt;Password for root account? (will not echo)&lt;/span&gt;
+&lt;span class="s1"&gt;Password for root account? (again)&lt;/span&gt;
+&lt;span class="s1"&gt;Start sshd(8) by default? [yes]&lt;/span&gt;
+&lt;span class="s1"&gt;Change the default console to com0? [yes]&lt;/span&gt;
+&lt;span class="s1"&gt;Available speeds are: 9600 19200 38400 57600 115200.&lt;/span&gt;
+&lt;span class="s1"&gt;Which speed should com0 use? (or &amp;#39;&lt;/span&gt;&lt;span class="k"&gt;done&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;) [115200]&lt;/span&gt;
+&lt;span class="s1"&gt;Setup a user? (enter a lower-case loginname, or &amp;#39;&lt;/span&gt;no&lt;span class="s1"&gt;&amp;#39;) [no] jas&lt;/span&gt;
+&lt;span class="s1"&gt;Full name for user jas? [jas]&lt;/span&gt;
+&lt;span class="s1"&gt;Password for user jas? (will not echo)&lt;/span&gt;
+&lt;span class="s1"&gt;Password for user jas? (again)&lt;/span&gt;
+&lt;span class="s1"&gt;WARNING: root is targeted by password guessing attacks, pubkeys are safer.&lt;/span&gt;
+&lt;span class="s1"&gt;Allow root ssh login? (yes, no, prohibit-password) [no]&lt;/span&gt;
+&lt;span class="s1"&gt;What timezone are you in? (&amp;#39;&lt;/span&gt;?&lt;span class="s1"&gt;&amp;#39; for list) [Asia/Nicosia]&lt;/span&gt;
+
+&lt;span class="s1"&gt;Available disks are: sd0 sd1.&lt;/span&gt;
+&lt;span class="s1"&gt;Which disk is the root disk? (&amp;#39;&lt;/span&gt;?&lt;span class="s1"&gt;&amp;#39; for details) [sd0]&lt;/span&gt;
+&lt;span class="s1"&gt;Encrypt the root disk with a (p)assphrase or (k)eydisk? [no]&lt;/span&gt;
+&lt;span class="s1"&gt;Disk: sd0       geometry: 3649/255/63 [58626288 Sectors]&lt;/span&gt;
+&lt;span class="s1"&gt;Offset: 0       Signature: 0xAA55&lt;/span&gt;
+&lt;span class="s1"&gt;            Starting         Ending         LBA Info:&lt;/span&gt;
+&lt;span class="s1"&gt; #: id      C   H   S -      C   H   S [       start:        size ]&lt;/span&gt;
+&lt;span class="s1"&gt;-------------------------------------------------------------------------------&lt;/span&gt;
+&lt;span class="s1"&gt; 0: 00      0   0   0 -      0   0   0 [           0:           0 ] Unused&lt;/span&gt;
+&lt;span class="s1"&gt; 1: 00      0   0   0 -      0   0   0 [           0:           0 ] Unused&lt;/span&gt;
+&lt;span class="s1"&gt; 2: 00      0   0   0 -      0   0   0 [           0:           0 ] Unused&lt;/span&gt;
+&lt;span class="s1"&gt;*3: A6      0   1   2 -   3648 254  63 [          64:    58621121 ] OpenBSD&lt;/span&gt;
+&lt;span class="s1"&gt;Use (W)hole disk MBR, whole disk (G)PT, (O)penBSD area or (E)dit? [OpenBSD]&lt;/span&gt;
+&lt;span class="s1"&gt;The auto-allocated layout for sd0 is:&lt;/span&gt;
+&lt;span class="s1"&gt;#                size           offset  fstype [fsize bsize   cpg]&lt;/span&gt;
+&lt;span class="s1"&gt;  a:          1004.7M               64  4.2BSD   2048 16384     1 # /&lt;/span&gt;
+&lt;span class="s1"&gt;  b:          1789.4M          2057632    swap&lt;/span&gt;
+&lt;span class="s1"&gt;  c:         28626.1M                0  unused&lt;/span&gt;
+&lt;span class="s1"&gt;  d:          1487.5M          5722240  4.2BSD   2048 16384     1 # /tmp&lt;/span&gt;
+&lt;span class="s1"&gt;  e:          2302.2M          8768576  4.2BSD   2048 16384     1 # /var&lt;/span&gt;
+&lt;span class="s1"&gt;  f:          3209.3M         13483392  4.2BSD   2048 16384     1 # /usr&lt;/span&gt;
+&lt;span class="s1"&gt;  g:           896.8M         20056128  4.2BSD   2048 16384     1 # /usr/X11R6&lt;/span&gt;
+&lt;span class="s1"&gt;  h:          3588.0M         21892768  4.2BSD   2048 16384     1 # /usr/local&lt;/span&gt;
+&lt;span class="s1"&gt;  i:          2389.9M         29241056  4.2BSD   2048 16384     1 # /usr/src&lt;/span&gt;
+&lt;span class="s1"&gt;  j:          5803.7M         34135488  4.2BSD   2048 16384     1 # /usr/obj&lt;/span&gt;
+&lt;span class="s1"&gt;  k:          6152.2M         46021536  4.2BSD   2048 16384     1 # /home&lt;/span&gt;
+&lt;span class="s1"&gt;Use (A)uto layout, (E)dit auto layout, or create (C)ustom layout? [a]&lt;/span&gt;
+&lt;span class="s1"&gt;/dev/rsd0a: 1004.7MB in 2057568 sectors of 512 bytes&lt;/span&gt;
+&lt;span class="s1"&gt;5 cylinder groups of 202.50MB, 12960 blocks, 25920 inodes each&lt;/span&gt;
+&lt;span class="s1"&gt;/dev/rsd0k: 6152.2MB in 12599648 sectors of 512 bytes&lt;/span&gt;
+&lt;span class="s1"&gt;31 cylinder groups of 202.50MB, 12960 blocks, 25920 inodes each&lt;/span&gt;
+&lt;span class="s1"&gt;/dev/rsd0d: 1487.5MB in 3046336 sectors of 512 bytes&lt;/span&gt;
+&lt;span class="s1"&gt;8 cylinder groups of 202.50MB, 12960 blocks, 25920 inodes each&lt;/span&gt;
+&lt;span class="s1"&gt;/dev/rsd0f: 3209.3MB in 6572736 sectors of 512 bytes&lt;/span&gt;
+&lt;span class="s1"&gt;16 cylinder groups of 202.50MB, 12960 blocks, 25920 inodes each&lt;/span&gt;
+&lt;span class="s1"&gt;/dev/rsd0g: 896.8MB in 1836640 sectors of 512 bytes&lt;/span&gt;
+&lt;span class="s1"&gt;5 cylinder groups of 202.50MB, 12960 blocks, 25920 inodes each&lt;/span&gt;
+&lt;span class="s1"&gt;/dev/rsd0h: 3588.0MB in 7348288 sectors of 512 bytes&lt;/span&gt;
+&lt;span class="s1"&gt;18 cylinder groups of 202.50MB, 12960 blocks, 25920 inodes each&lt;/span&gt;
+&lt;span class="s1"&gt;/dev/rsd0j: 5803.7MB in 11886048 sectors of 512 bytes&lt;/span&gt;
+&lt;span class="s1"&gt;29 cylinder groups of 202.50MB, 12960 blocks, 25920 inodes each&lt;/span&gt;
+&lt;span class="s1"&gt;/dev/rsd0i: 2389.9MB in 4894432 sectors of 512 bytes&lt;/span&gt;
+&lt;span class="s1"&gt;12 cylinder groups of 202.50MB, 12960 blocks, 25920 inodes each&lt;/span&gt;
+&lt;span class="s1"&gt;/dev/rsd0e: 2302.2MB in 4714816 sectors of 512 bytes&lt;/span&gt;
+&lt;span class="s1"&gt;12 cylinder groups of 202.50MB, 12960 blocks, 25920 inodes each&lt;/span&gt;
+&lt;span class="s1"&gt;Available disks are: sd1.&lt;/span&gt;
+&lt;span class="s1"&gt;Which disk do you wish to initialize? (or &amp;#39;&lt;/span&gt;&lt;span class="k"&gt;done&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;) [done]&lt;/span&gt;
+&lt;span class="s1"&gt;/dev/sd0a (52d29e0dc555db56.a) on /mnt type ffs (rw, asynchronous, local)&lt;/span&gt;
+&lt;span class="s1"&gt;/dev/sd0k (52d29e0dc555db56.k) on /mnt/home type ffs (rw, asynchronous, local, nodev, nosuid)&lt;/span&gt;
+&lt;span class="s1"&gt;/dev/sd0d (52d29e0dc555db56.d) on /mnt/tmp type ffs (rw, asynchronous, local, nodev, nosuid)&lt;/span&gt;
+&lt;span class="s1"&gt;/dev/sd0f (52d29e0dc555db56.f) on /mnt/usr type ffs (rw, asynchronous, local, nodev)&lt;/span&gt;
+&lt;span class="s1"&gt;/dev/sd0g (52d29e0dc555db56.g) on /mnt/usr/X11R6 type ffs (rw, asynchronous, local, nodev)&lt;/span&gt;
+&lt;span class="s1"&gt;/dev/sd0h (52d29e0dc555db56.h) on /mnt/usr/local type ffs (rw, asynchronous, local, nodev)&lt;/span&gt;
+&lt;span class="s1"&gt;/dev/sd0j (52d29e0dc555db56.j) on /mnt/usr/obj type ffs (rw, asynchronous, local, nodev, nosuid)&lt;/span&gt;
+&lt;span class="s1"&gt;/dev/sd0i (52d29e0dc555db56.i) on /mnt/usr/src type ffs (rw, asynchronous, local, nodev, nosuid)&lt;/span&gt;
+&lt;span class="s1"&gt;/dev/sd0e (52d29e0dc555db56.e) on /mnt/var type ffs (rw, asynchronous, local, nodev, nosuid)&lt;/span&gt;
+
+&lt;span class="s1"&gt;Let&amp;#39;&lt;/span&gt;s&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;sets!
+Location&lt;span class="w"&gt; &lt;/span&gt;of&lt;span class="w"&gt; &lt;/span&gt;sets?&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;disk&lt;span class="w"&gt; &lt;/span&gt;http&lt;span class="w"&gt; &lt;/span&gt;nfs&lt;span class="w"&gt; &lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;done&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;http&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;disk
+Is&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;disk&lt;span class="w"&gt; &lt;/span&gt;partition&lt;span class="w"&gt; &lt;/span&gt;already&lt;span class="w"&gt; &lt;/span&gt;mounted?&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;no&lt;span class="o"&gt;]&lt;/span&gt;
+Available&lt;span class="w"&gt; &lt;/span&gt;disks&lt;span class="w"&gt; &lt;/span&gt;are:&lt;span class="w"&gt; &lt;/span&gt;sd0&lt;span class="w"&gt; &lt;/span&gt;sd1.
+Which&lt;span class="w"&gt; &lt;/span&gt;disk&lt;span class="w"&gt; &lt;/span&gt;contains&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;media?&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;done&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;sd1&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;a:&lt;span class="w"&gt;          &lt;/span&gt;&lt;span class="m"&gt;1424384&lt;/span&gt;&lt;span class="w"&gt;             &lt;/span&gt;&lt;span class="m"&gt;1024&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;.2BSD&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;2048&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;16384&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;16142&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;i:&lt;span class="w"&gt;              &lt;/span&gt;&lt;span class="m"&gt;960&lt;/span&gt;&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="m"&gt;64&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;MSDOS
+Available&lt;span class="w"&gt; &lt;/span&gt;sd1&lt;span class="w"&gt; &lt;/span&gt;partitions&lt;span class="w"&gt; &lt;/span&gt;are:&lt;span class="w"&gt; &lt;/span&gt;a&lt;span class="w"&gt; &lt;/span&gt;i.
+Which&lt;span class="w"&gt; &lt;/span&gt;sd1&lt;span class="w"&gt; &lt;/span&gt;partition&lt;span class="w"&gt; &lt;/span&gt;has&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;sets?&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;done&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;a&lt;span class="o"&gt;]&lt;/span&gt;
+Pathname&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;sets?&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;done&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;7&lt;/span&gt;.6/amd64&lt;span class="o"&gt;]&lt;/span&gt;
+
+Select&lt;span class="w"&gt; &lt;/span&gt;sets&lt;span class="w"&gt; &lt;/span&gt;by&lt;span class="w"&gt; &lt;/span&gt;entering&lt;span class="w"&gt; &lt;/span&gt;a&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;name,&lt;span class="w"&gt; &lt;/span&gt;a&lt;span class="w"&gt; &lt;/span&gt;file&lt;span class="w"&gt; &lt;/span&gt;name&lt;span class="w"&gt; &lt;/span&gt;pattern&lt;span class="w"&gt; &lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;all&amp;#39;&lt;/span&gt;.&lt;span class="w"&gt; &lt;/span&gt;De-select
+sets&lt;span class="w"&gt; &lt;/span&gt;by&lt;span class="w"&gt; &lt;/span&gt;prepending&lt;span class="w"&gt; &lt;/span&gt;a&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;-&amp;#39;&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;e.g.:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;-game*&amp;#39;&lt;/span&gt;.&lt;span class="w"&gt; &lt;/span&gt;Selected&lt;span class="w"&gt; &lt;/span&gt;sets&lt;span class="w"&gt; &lt;/span&gt;are&lt;span class="w"&gt; &lt;/span&gt;labelled&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;[X]&amp;#39;&lt;/span&gt;.
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;X&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;bsd&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;X&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;base76.tgz&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;X&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;game76.tgz&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;X&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;xfont76.tgz
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;X&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;bsd.mp&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;X&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;comp76.tgz&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;X&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;xbase76.tgz&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;X&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;xserv76.tgz
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;X&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;bsd.rd&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;X&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;man76.tgz&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;X&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;xshare76.tgz
+Set&lt;span class="w"&gt; &lt;/span&gt;name&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt;?&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;abort&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;done&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="k"&gt;done&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-x*&lt;span class="w"&gt; &lt;/span&gt;-game
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;X&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;bsd&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;X&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;base76.tgz&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;X&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;game76.tgz&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;xfont76.tgz
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;X&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;bsd.mp&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;X&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;comp76.tgz&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;xbase76.tgz&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;xserv76.tgz
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;X&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;bsd.rd&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;X&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;man76.tgz&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;xshare76.tgz
+Set&lt;span class="w"&gt; &lt;/span&gt;name&lt;span class="o"&gt;(&lt;/span&gt;s&lt;span class="o"&gt;)&lt;/span&gt;?&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;abort&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;done&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="k"&gt;done&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+Directory&lt;span class="w"&gt; &lt;/span&gt;does&lt;span class="w"&gt; &lt;/span&gt;not&lt;span class="w"&gt; &lt;/span&gt;contain&lt;span class="w"&gt; &lt;/span&gt;SHA256.sig.&lt;span class="w"&gt; &lt;/span&gt;Continue&lt;span class="w"&gt; &lt;/span&gt;without&lt;span class="w"&gt; &lt;/span&gt;verification?&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;no&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;yes
+Installing&lt;span class="w"&gt; &lt;/span&gt;bsd&lt;span class="w"&gt;          &lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;**************************&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;28007&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;KB&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;00&lt;/span&gt;:01
+Installing&lt;span class="w"&gt; &lt;/span&gt;bsd.mp&lt;span class="w"&gt;       &lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;**************************&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;28139&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;KB&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;00&lt;/span&gt;:01
+Installing&lt;span class="w"&gt; &lt;/span&gt;bsd.rd&lt;span class="w"&gt;       &lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;**************************&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;4600&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;KB&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;00&lt;/span&gt;:00
+Installing&lt;span class="w"&gt; &lt;/span&gt;base76.tgz&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;**************************&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;414&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;MB&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;00&lt;/span&gt;:54
+Extracting&lt;span class="w"&gt; &lt;/span&gt;etc.tgz&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;**************************&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;264&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;KB&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;00&lt;/span&gt;:00
+Installing&lt;span class="w"&gt; &lt;/span&gt;comp76.tgz&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;**************************&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;81512&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;KB&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;00&lt;/span&gt;:18
+Installing&lt;span class="w"&gt; &lt;/span&gt;man76.tgz&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;**************************&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;8039&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;KB&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;00&lt;/span&gt;:02
+Installing&lt;span class="w"&gt; &lt;/span&gt;game76.tgz&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;**************************&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;2746&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;KB&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;00&lt;/span&gt;:00
+Installing&lt;span class="w"&gt; &lt;/span&gt;BUILDINFO&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;**************************&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;54&lt;/span&gt;&lt;span class="w"&gt;       &lt;/span&gt;&lt;span class="m"&gt;00&lt;/span&gt;:00
+Location&lt;span class="w"&gt; &lt;/span&gt;of&lt;span class="w"&gt; &lt;/span&gt;sets?&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;disk&lt;span class="w"&gt; &lt;/span&gt;http&lt;span class="w"&gt; &lt;/span&gt;nfs&lt;span class="w"&gt; &lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;done&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="k"&gt;done&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+Saving&lt;span class="w"&gt; &lt;/span&gt;configuration&lt;span class="w"&gt; &lt;/span&gt;files...&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;done&lt;/span&gt;.
+Making&lt;span class="w"&gt; &lt;/span&gt;all&lt;span class="w"&gt; &lt;/span&gt;device&lt;span class="w"&gt; &lt;/span&gt;nodes...&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;done&lt;/span&gt;.
+Multiprocessor&lt;span class="w"&gt; &lt;/span&gt;machine&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;using&lt;span class="w"&gt; &lt;/span&gt;bsd.mp&lt;span class="w"&gt; &lt;/span&gt;instead&lt;span class="w"&gt; &lt;/span&gt;of&lt;span class="w"&gt; &lt;/span&gt;bsd.
+fw_update:&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;amd&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;update&lt;span class="w"&gt; &lt;/span&gt;none
+Relinking&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;create&lt;span class="w"&gt; &lt;/span&gt;unique&lt;span class="w"&gt; &lt;/span&gt;kernel...&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;done&lt;/span&gt;.
+
+CONGRATULATIONS!&lt;span class="w"&gt; &lt;/span&gt;Your&lt;span class="w"&gt; &lt;/span&gt;OpenBSD&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;has&lt;span class="w"&gt; &lt;/span&gt;been&lt;span class="w"&gt; &lt;/span&gt;successfully&lt;span class="w"&gt; &lt;/span&gt;completed!
+
+When&lt;span class="w"&gt; &lt;/span&gt;you&lt;span class="w"&gt; &lt;/span&gt;login&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;your&lt;span class="w"&gt; &lt;/span&gt;new&lt;span class="w"&gt; &lt;/span&gt;system&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;first&lt;span class="w"&gt; &lt;/span&gt;time,&lt;span class="w"&gt; &lt;/span&gt;please&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;read&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;your&lt;span class="w"&gt; &lt;/span&gt;mail
+using&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;mail&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;command.
+
+Exit&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;S&lt;span class="o"&gt;)&lt;/span&gt;hell,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;H&lt;span class="o"&gt;)&lt;/span&gt;alt&lt;span class="w"&gt; &lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;R&lt;span class="o"&gt;)&lt;/span&gt;eboot?&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;reboot&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Remove the install media and reboot.&lt;/p&gt;
+&lt;h3&gt;Configuration&lt;/h3&gt;
+&lt;p&gt;First run, do the following to update (run as root, use &lt;code&gt;su&lt;/code&gt;):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;syspatch
+pkg_add&lt;span class="w"&gt; &lt;/span&gt;-Uu
+sysmerge&lt;span class="w"&gt; &lt;/span&gt;-d
+fw_update
+reboot
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Add &lt;code&gt;nano&lt;/code&gt; because who has the time to deal with arrow-keys not being arrow-keys&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pkg_add&lt;span class="w"&gt; &lt;/span&gt;nano
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, edit the &lt;code&gt;doas&lt;/code&gt; users:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;nano&lt;span class="w"&gt; &lt;/span&gt;/etc/doas.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And insert the line:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;permit&lt;span class="w"&gt; &lt;/span&gt;nopass&lt;span class="w"&gt; &lt;/span&gt;:wheel
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now you should log in as the user account (in the &lt;code&gt;wheel&lt;/code&gt; group), and then use &lt;code&gt;doas su&lt;/code&gt; to perform root operations.&lt;/p&gt;
+&lt;h3&gt;Shutdown un-needed services&lt;/h3&gt;
+&lt;p&gt;We don't need &lt;code&gt;smtpd&lt;/code&gt; and &lt;code&gt;sndiod&lt;/code&gt; on this machine, shut them down:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;cappuccino#&lt;span class="w"&gt; &lt;/span&gt;rcctl&lt;span class="w"&gt; &lt;/span&gt;ls&lt;span class="w"&gt; &lt;/span&gt;on
+check_quotas
+cron
+dhcpleased
+library_aslr
+ntpd
+pf
+pflogd
+resolvd
+slaacd
+smtpd
+sndiod
+sshd
+syslogd
+
+cappuccino#&lt;span class="w"&gt; &lt;/span&gt;rcctl&lt;span class="w"&gt; &lt;/span&gt;stop&lt;span class="w"&gt; &lt;/span&gt;smtpd
+smtpd&lt;span class="o"&gt;(&lt;/span&gt;ok&lt;span class="o"&gt;)&lt;/span&gt;
+cappuccino#&lt;span class="w"&gt; &lt;/span&gt;rcctl&lt;span class="w"&gt; &lt;/span&gt;disable&lt;span class="w"&gt; &lt;/span&gt;smtpd
+cappuccino#&lt;span class="w"&gt; &lt;/span&gt;rcctl&lt;span class="w"&gt; &lt;/span&gt;stop&lt;span class="w"&gt; &lt;/span&gt;sndiod
+sndiod&lt;span class="o"&gt;(&lt;/span&gt;ok&lt;span class="o"&gt;)&lt;/span&gt;
+cappuccino#&lt;span class="w"&gt; &lt;/span&gt;rcctl&lt;span class="w"&gt; &lt;/span&gt;disable&lt;span class="w"&gt; &lt;/span&gt;sndiod
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Network setup&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;net.inet.ip.forwarding=1&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;/etc/sysctl.conf
+&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;inet autoconf&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;/etc/hostname.em0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;# or use a static IP&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;inet 172.20.10.1 255.255.255.0 172.20.10.255&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;/etc/hostname.em1
+&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;inet 172.20.20.1 255.255.255.0 172.20.20.255&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;/etc/hostname.em2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;dhcpd&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;rcctl&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;enable&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;dhcpd
+rcctl&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;dhcpd&lt;span class="w"&gt; &lt;/span&gt;flags&lt;span class="w"&gt; &lt;/span&gt;em1&lt;span class="w"&gt; &lt;/span&gt;em2
+nano&lt;span class="w"&gt; &lt;/span&gt;/etc/dhcpd.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;pf Firewall config&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;nano&lt;span class="w"&gt; &lt;/span&gt;/etc/pf.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And insert the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;wired&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;em1&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;wifi&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;em2&amp;quot;&lt;/span&gt;
+table&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;martians&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.0.0.0/8&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;.0.0.0/8&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;127&lt;/span&gt;.0.0.0/8&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;169&lt;/span&gt;.254.0.0/16&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;                   &lt;/span&gt;&lt;span class="m"&gt;172&lt;/span&gt;.16.0.0/12&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;192&lt;/span&gt;.0.0.0/24&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;192&lt;/span&gt;.0.2.0/24&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;224&lt;/span&gt;.0.0.0/3&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;                   &lt;/span&gt;&lt;span class="m"&gt;192&lt;/span&gt;.168.0.0/16&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;198&lt;/span&gt;.18.0.0/15&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;198&lt;/span&gt;.51.100.0/24&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;                   &lt;/span&gt;&lt;span class="m"&gt;203&lt;/span&gt;.0.113.0/24&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;block-policy&lt;span class="w"&gt; &lt;/span&gt;drop
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;loginterface&lt;span class="w"&gt; &lt;/span&gt;egress
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;skip&lt;span class="w"&gt; &lt;/span&gt;on&lt;span class="w"&gt; &lt;/span&gt;lo0
+match&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;all&lt;span class="w"&gt; &lt;/span&gt;scrub&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;no-df&lt;span class="w"&gt; &lt;/span&gt;random-id&lt;span class="w"&gt; &lt;/span&gt;max-mss&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1440&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+match&lt;span class="w"&gt; &lt;/span&gt;out&lt;span class="w"&gt; &lt;/span&gt;on&lt;span class="w"&gt; &lt;/span&gt;egress&lt;span class="w"&gt; &lt;/span&gt;inet&lt;span class="w"&gt; &lt;/span&gt;from&lt;span class="w"&gt; &lt;/span&gt;!&lt;span class="o"&gt;(&lt;/span&gt;egress:network&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;any&lt;span class="w"&gt; &lt;/span&gt;nat-to&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;egress:0&lt;span class="o"&gt;)&lt;/span&gt;
+
+match&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;on&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$wired&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;inet&lt;span class="w"&gt; &lt;/span&gt;proto&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;tcp&lt;span class="w"&gt; &lt;/span&gt;udp&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;from&lt;span class="w"&gt; &lt;/span&gt;any&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;!172.20.10.1&lt;span class="w"&gt; &lt;/span&gt;port&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;53&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;rdr-to&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;172&lt;/span&gt;.20.10.1
+match&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;on&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$wifi&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;inet&lt;span class="w"&gt; &lt;/span&gt;proto&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;tcp&lt;span class="w"&gt; &lt;/span&gt;udp&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;from&lt;span class="w"&gt; &lt;/span&gt;any&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;!172.20.20.1&lt;span class="w"&gt; &lt;/span&gt;port&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;53&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;rdr-to&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;172&lt;/span&gt;.20.20.1
+
+antispoof&lt;span class="w"&gt; &lt;/span&gt;quick&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;egress&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$wired&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$wifi&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;
+block&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;quick&lt;span class="w"&gt; &lt;/span&gt;on&lt;span class="w"&gt; &lt;/span&gt;egress&lt;span class="w"&gt; &lt;/span&gt;from&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;martians&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;any
+
+block&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;quick&lt;span class="w"&gt; &lt;/span&gt;on&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$wired&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$wifi&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;proto&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;tcp&lt;span class="w"&gt; &lt;/span&gt;udp&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;from&lt;span class="w"&gt; &lt;/span&gt;any&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;any&lt;span class="w"&gt; &lt;/span&gt;port&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;853&lt;/span&gt;
+block&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;quick&lt;span class="w"&gt; &lt;/span&gt;on&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$wired&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$wifi&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;proto&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;tcp&lt;span class="w"&gt; &lt;/span&gt;udp&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;from&lt;span class="w"&gt; &lt;/span&gt;any&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;any&lt;span class="w"&gt; &lt;/span&gt;port&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;5353&lt;/span&gt;
+
+block&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;out&lt;span class="w"&gt; &lt;/span&gt;quick&lt;span class="w"&gt; &lt;/span&gt;on&lt;span class="w"&gt; &lt;/span&gt;egress&lt;span class="w"&gt; &lt;/span&gt;from&lt;span class="w"&gt; &lt;/span&gt;any&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;martians&amp;gt;
+block&lt;span class="w"&gt; &lt;/span&gt;all
+pass&lt;span class="w"&gt; &lt;/span&gt;out&lt;span class="w"&gt; &lt;/span&gt;quick&lt;span class="w"&gt; &lt;/span&gt;inet
+pass&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;on&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$wired&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$wifi&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;inet
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;unbound for DNS&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;rcctl&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;enable&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;unbound
+nano&lt;span class="w"&gt; &lt;/span&gt;/var/unbound/etc/unbound.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And insert the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;server:
+&lt;span class="w"&gt;        &lt;/span&gt;interface:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;172&lt;/span&gt;.20.10.1
+&lt;span class="w"&gt;        &lt;/span&gt;interface:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;172&lt;/span&gt;.20.20.1
+&lt;span class="w"&gt;        &lt;/span&gt;interface:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;127&lt;/span&gt;.0.0.1
+&lt;span class="w"&gt;        &lt;/span&gt;access-control:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;172&lt;/span&gt;.20.10.0/24&lt;span class="w"&gt; &lt;/span&gt;allow
+&lt;span class="w"&gt;        &lt;/span&gt;access-control:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;172&lt;/span&gt;.20.20.0/24&lt;span class="w"&gt; &lt;/span&gt;allow
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;do&lt;/span&gt;-not-query-localhost:&lt;span class="w"&gt; &lt;/span&gt;no
+&lt;span class="w"&gt;        &lt;/span&gt;hide-identity:&lt;span class="w"&gt; &lt;/span&gt;yes
+&lt;span class="w"&gt;        &lt;/span&gt;hide-version:&lt;span class="w"&gt; &lt;/span&gt;yes
+&lt;span class="w"&gt;        &lt;/span&gt;prefetch:&lt;span class="w"&gt; &lt;/span&gt;yes
+
+forward-zone:
+&lt;span class="w"&gt;        &lt;/span&gt;name:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.&amp;quot;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;forward-addr:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.1.1.1&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="c1"&gt;# IP of the preferred upstream resolver&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And make sure that the localhost interface takes DNS from the local resolver:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;nano&lt;span class="w"&gt; &lt;/span&gt;/etc/dhclient.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Add the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ignore&lt;span class="w"&gt; &lt;/span&gt;domain-name,&lt;span class="w"&gt; &lt;/span&gt;domain-name-servers&lt;span class="p"&gt;;&lt;/span&gt;
+append&lt;span class="w"&gt; &lt;/span&gt;dhcp-lease-time&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;86400&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+send&lt;span class="w"&gt; &lt;/span&gt;host-name&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;cappuccino&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+prepend&lt;span class="w"&gt; &lt;/span&gt;domain-name-servers&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;127&lt;/span&gt;.0.0.1&lt;span class="p"&gt;;&lt;/span&gt;
+prepend&lt;span class="w"&gt; &lt;/span&gt;domain-name&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;office.lan&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And now adjust the DHCP lease daemon:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;nano&lt;span class="w"&gt; &lt;/span&gt;/etc/dhcpleased.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Add this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;interface&lt;span class="w"&gt; &lt;/span&gt;em0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;ignore&lt;span class="w"&gt; &lt;/span&gt;dns
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Manually hammer &lt;code&gt;/etc/revolv.conf&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Note, that I didn't have much luck with this method, it seems like still the best thing to do is manually edit &lt;code&gt;/etc/resolv.conf&lt;/code&gt; and then change the flags:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;nano&lt;span class="w"&gt; &lt;/span&gt;/etc/resolv.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And add this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;nameserver&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;127&lt;/span&gt;.0.0.1
+lookup&lt;span class="w"&gt; &lt;/span&gt;file&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;bind&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And lock the file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;chflags&lt;span class="w"&gt; &lt;/span&gt;uchg&lt;span class="w"&gt; &lt;/span&gt;/etc/resolv.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This can be reversed with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;chflags&lt;span class="w"&gt; &lt;/span&gt;nouchg&lt;span class="w"&gt; &lt;/span&gt;/etc/resolv.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;div class="footnote"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;&lt;a href="https://cdn.openbsd.org/pub/OpenBSD/7.6/amd64/SHA256"&gt;https://cdn.openbsd.org/pub/OpenBSD/7.6/amd64/SHA256&lt;/a&gt;&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</content><category term="Tech-Recipe"></category><category term="alix2d3"></category><category term="openbsd"></category><category term="firewall"></category><category term="gateway"></category></entry><entry><title>GitHub Setup</title><link href="github-setup.html" rel="alternate"></link><published>2025-02-08T10:00:00+02:00</published><updated>2025-02-08T10:00:00+02:00</updated><author><name>Jas Powell</name></author><id>tag:None,2025-02-08:github-setup.html</id><summary type="html">&lt;p&gt;Notes on GitHub Setup&lt;/p&gt;</summary><content type="html">&lt;blockquote&gt;
 &lt;p&gt;[!NOTE]
 The environment used for this was: Mac Air M2 8gb MacOS Sequoia 15.3&lt;/p&gt;
 &lt;/blockquote&gt;
