@@ -9,4 +9,4 @@ Summary: About Page
 Status: published 
 [//]: # (comment on status: published, draft, hidden, skip)
 
-Just an about page
+Mostly just some notes as an aide-mémoire
