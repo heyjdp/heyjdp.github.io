@@ -1,5 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>heyjdp</title><link href="/" rel="alternate"></link><link href="feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2025-02-28T10:00:00+02:00</updated><subtitle>Just some notes</subtitle><entry><title>MacOS Tips</title><link href="macos-tips.html" rel="alternate"></link><published>2025-02-28T10:00:00+02:00</published><updated>2025-02-28T10:00:00+02:00</updated><author><name>Jas Powell</name></author><id>tag:None,2025-02-28:macos-tips.html</id><summary type="html">&lt;p&gt;Tips for MacOS Fast Keys&lt;/p&gt;</summary><content type="html">&lt;blockquote&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>heyjdp</title><link href="/" rel="alternate"></link><link href="feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2025-03-04T10:00:00+02:00</updated><subtitle>Just some notes</subtitle><entry><title>GPG Keys for Yubikey and SSH Guide</title><link href="gpg-keys-yubikey-ssh-guide.html" rel="alternate"></link><published>2025-03-04T10:00:00+02:00</published><updated>2025-03-04T10:00:00+02:00</updated><author><name>Jas Powell</name></author><id>tag:None,2025-03-04:gpg-keys-yubikey-ssh-guide.html</id><summary type="html">&lt;p&gt;We don't use GPG any longer. But if you have to...&lt;/p&gt;</summary><content type="html">&lt;blockquote&gt;
+&lt;p&gt;[!NOTE]
+The environment used for this was: Linux i7 16Gb Debian 12.9&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Stop GPG using GUI to prompt for passphrase&lt;/h2&gt;
+&lt;p&gt;Do this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;pinentry-tty
+sudo&lt;span class="w"&gt; &lt;/span&gt;update-alternatives&lt;span class="w"&gt; &lt;/span&gt;--set&lt;span class="w"&gt; &lt;/span&gt;pinentry&lt;span class="w"&gt; &lt;/span&gt;/usr/bin/pinentry-tty
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;GPG Defaults&lt;/h2&gt;
+&lt;p&gt;Use this file in &lt;code&gt;~/.gnupg/gpg.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# https://github.com/drduh/config/blob/master/gpg.conf&lt;/span&gt;
+&lt;span class="c1"&gt;# https://www.gnupg.org/documentation/manuals/gnupg/GPG-Options.html&lt;/span&gt;
+&lt;span class="c1"&gt;# &amp;#39;gpg --version&amp;#39; to get capabilities&lt;/span&gt;
+&lt;span class="c1"&gt;# Use AES256, 192, or 128 as cipher&lt;/span&gt;
+personal-cipher-preferences&lt;span class="w"&gt; &lt;/span&gt;AES256&lt;span class="w"&gt; &lt;/span&gt;AES192&lt;span class="w"&gt; &lt;/span&gt;AES
+&lt;span class="c1"&gt;# Use SHA512, 384, or 256 as digest&lt;/span&gt;
+personal-digest-preferences&lt;span class="w"&gt; &lt;/span&gt;SHA512&lt;span class="w"&gt; &lt;/span&gt;SHA384&lt;span class="w"&gt; &lt;/span&gt;SHA256
+&lt;span class="c1"&gt;# Use ZLIB, BZIP2, ZIP, or no compression&lt;/span&gt;
+personal-compress-preferences&lt;span class="w"&gt; &lt;/span&gt;ZLIB&lt;span class="w"&gt; &lt;/span&gt;BZIP2&lt;span class="w"&gt; &lt;/span&gt;ZIP&lt;span class="w"&gt; &lt;/span&gt;Uncompressed
+&lt;span class="c1"&gt;# Default preferences for new keys&lt;/span&gt;
+default-preference-list&lt;span class="w"&gt; &lt;/span&gt;SHA512&lt;span class="w"&gt; &lt;/span&gt;SHA384&lt;span class="w"&gt; &lt;/span&gt;SHA256&lt;span class="w"&gt; &lt;/span&gt;AES256&lt;span class="w"&gt; &lt;/span&gt;AES192&lt;span class="w"&gt; &lt;/span&gt;AES&lt;span class="w"&gt; &lt;/span&gt;ZLIB&lt;span class="w"&gt; &lt;/span&gt;BZIP2&lt;span class="w"&gt; &lt;/span&gt;ZIP&lt;span class="w"&gt; &lt;/span&gt;Uncompressed
+&lt;span class="c1"&gt;# SHA512 as digest to sign keys&lt;/span&gt;
+cert-digest-algo&lt;span class="w"&gt; &lt;/span&gt;SHA512
+&lt;span class="c1"&gt;# SHA512 as digest for symmetric ops&lt;/span&gt;
+s2k-digest-algo&lt;span class="w"&gt; &lt;/span&gt;SHA512
+&lt;span class="c1"&gt;# AES256 as cipher for symmetric ops&lt;/span&gt;
+s2k-cipher-algo&lt;span class="w"&gt; &lt;/span&gt;AES256
+&lt;span class="c1"&gt;# UTF-8 support for compatibility&lt;/span&gt;
+charset&lt;span class="w"&gt; &lt;/span&gt;utf-8
+&lt;span class="c1"&gt;# No comments in messages&lt;/span&gt;
+no-comments
+&lt;span class="c1"&gt;# No version in output&lt;/span&gt;
+no-emit-version
+&lt;span class="c1"&gt;# Disable banner&lt;/span&gt;
+no-greeting
+&lt;span class="c1"&gt;# Long key id format&lt;/span&gt;
+keyid-format&lt;span class="w"&gt; &lt;/span&gt;0xlong
+&lt;span class="c1"&gt;# Display UID validity&lt;/span&gt;
+list-options&lt;span class="w"&gt; &lt;/span&gt;show-uid-validity
+verify-options&lt;span class="w"&gt; &lt;/span&gt;show-uid-validity
+&lt;span class="c1"&gt;# Display all keys and their fingerprints&lt;/span&gt;
+with-fingerprint
+&lt;span class="c1"&gt;# Display key origins and updates&lt;/span&gt;
+&lt;span class="c1"&gt;#with-key-origin&lt;/span&gt;
+&lt;span class="c1"&gt;# Cross-certify subkeys are present and valid&lt;/span&gt;
+require-cross-certification
+&lt;span class="c1"&gt;# Enforce memory locking to avoid accidentally swapping GPG memory to disk&lt;/span&gt;
+require-secmem
+&lt;span class="c1"&gt;# Disable caching of passphrase for symmetrical ops&lt;/span&gt;
+no-symkey-cache
+&lt;span class="c1"&gt;# Output ASCII instead of binary&lt;/span&gt;
+armor
+&lt;span class="c1"&gt;# Enable smartcard&lt;/span&gt;
+use-agent
+&lt;span class="c1"&gt;# Disable recipient key ID in messages (breaks Mailvelope)&lt;/span&gt;
+throw-keyids
+&lt;span class="c1"&gt;# Default key ID to use (helpful with throw-keyids)&lt;/span&gt;
+&lt;span class="c1"&gt;#default-key 0xFF00000000000001&lt;/span&gt;
+&lt;span class="c1"&gt;#trusted-key 0xFF00000000000001&lt;/span&gt;
+&lt;span class="c1"&gt;# Group recipient keys (preferred ID last)&lt;/span&gt;
+&lt;span class="c1"&gt;#group keygroup = 0xFF00000000000003 0xFF00000000000002 0xFF00000000000001&lt;/span&gt;
+&lt;span class="c1"&gt;# Keyserver URL&lt;/span&gt;
+&lt;span class="c1"&gt;#keyserver hkps://keys.openpgp.org&lt;/span&gt;
+&lt;span class="c1"&gt;#keyserver hkps://keys.mailvelope.com&lt;/span&gt;
+&lt;span class="c1"&gt;#keyserver hkps://keyserver.ubuntu.com:443&lt;/span&gt;
+&lt;span class="c1"&gt;#keyserver hkps://pgpkeys.eu&lt;/span&gt;
+&lt;span class="c1"&gt;#keyserver hkps://pgp.circl.lu&lt;/span&gt;
+&lt;span class="c1"&gt;#keyserver hkp://zkaan2xfbuxia2wpf7ofnkbz6r5zdbbvxbunvp5g2iebopbfc4iqmbad.onion&lt;/span&gt;
+&lt;span class="c1"&gt;# Keyserver proxy&lt;/span&gt;
+&lt;span class="c1"&gt;#keyserver-options http-proxy=http://127.0.0.1:8118&lt;/span&gt;
+&lt;span class="c1"&gt;#keyserver-options http-proxy=socks5-hostname://127.0.0.1:9050&lt;/span&gt;
+&lt;span class="c1"&gt;# Enable key retrieval using WKD and DANE&lt;/span&gt;
+&lt;span class="c1"&gt;#auto-key-locate wkd,dane,local&lt;/span&gt;
+&lt;span class="c1"&gt;#auto-key-retrieve&lt;/span&gt;
+&lt;span class="c1"&gt;# Trust delegation mechanism&lt;/span&gt;
+&lt;span class="c1"&gt;#trust-model tofu+pgp&lt;/span&gt;
+&lt;span class="c1"&gt;# Show expired subkeys&lt;/span&gt;
+&lt;span class="c1"&gt;#list-options show-unusable-subkeys&lt;/span&gt;
+&lt;span class="c1"&gt;# Verbose output&lt;/span&gt;
+&lt;span class="c1"&gt;#verbose&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Generate Master Key&lt;/h2&gt;
+&lt;p&gt;Do this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;gpg&lt;span class="w"&gt; &lt;/span&gt;--quick-generate-key&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Your Name &amp;lt;your.email@example.com&amp;gt; (optional comment)&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;ed25519&lt;span class="w"&gt; &lt;/span&gt;cert&lt;span class="w"&gt; &lt;/span&gt;never
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You will see an output like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;gpg:&lt;span class="w"&gt; &lt;/span&gt;directory&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/home/jas/.gnupg/openpgp-revocs.d&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;created
+gpg:&lt;span class="w"&gt; &lt;/span&gt;revocation&lt;span class="w"&gt; &lt;/span&gt;certificate&lt;span class="w"&gt; &lt;/span&gt;stored&lt;span class="w"&gt; &lt;/span&gt;as&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/home/jas/.gnupg/openpgp-revocs.d/03A99DA4A0BA3F8EDBCD7ECF9A2A84EDC48BBCFC.rev&amp;#39;&lt;/span&gt;
+public&lt;span class="w"&gt; &lt;/span&gt;and&lt;span class="w"&gt; &lt;/span&gt;secret&lt;span class="w"&gt; &lt;/span&gt;key&lt;span class="w"&gt; &lt;/span&gt;created&lt;span class="w"&gt; &lt;/span&gt;and&lt;span class="w"&gt; &lt;/span&gt;signed.
+
+pub&lt;span class="w"&gt;   &lt;/span&gt;ed25519/0x9A2A84EDC48BBCFC&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2025&lt;/span&gt;-03-04&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;C&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;Key&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;fingerprint&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;03A9&lt;span class="w"&gt; &lt;/span&gt;9DA4&lt;span class="w"&gt; &lt;/span&gt;A0BA&lt;span class="w"&gt; &lt;/span&gt;3F8E&lt;span class="w"&gt; &lt;/span&gt;DBCD&lt;span class="w"&gt;  &lt;/span&gt;7ECF&lt;span class="w"&gt; &lt;/span&gt;9A2A&lt;span class="w"&gt; &lt;/span&gt;84ED&lt;span class="w"&gt; &lt;/span&gt;C48B&lt;span class="w"&gt; &lt;/span&gt;BCFC
+uid&lt;span class="w"&gt;                              &lt;/span&gt;Jas&lt;span class="w"&gt; &lt;/span&gt;Powell&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;jas@example.com&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Giong forward, we are interested in this number, the key fingerprint: &lt;code&gt;03A99DA4A0BA3F8EDBCD7ECF9A2A84EDC48BBCFC&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;Add Subkeys&lt;/h2&gt;
+&lt;p&gt;Now add subkeys for signing, encryption, and authentication. These will have expiration times to allow for key rotation. For example, using a one year expiration time:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;gpg&lt;span class="w"&gt; &lt;/span&gt;--quick-add-key&lt;span class="w"&gt; &lt;/span&gt;03A99DA4A0BA3F8EDBCD7ECF9A2A84EDC48BBCFC&lt;span class="w"&gt; &lt;/span&gt;ed25519&lt;span class="w"&gt; &lt;/span&gt;sign&lt;span class="w"&gt; &lt;/span&gt;1y
+gpg&lt;span class="w"&gt; &lt;/span&gt;--quick-add-key&lt;span class="w"&gt; &lt;/span&gt;03A99DA4A0BA3F8EDBCD7ECF9A2A84EDC48BBCFC&lt;span class="w"&gt; &lt;/span&gt;cv25519&lt;span class="w"&gt; &lt;/span&gt;encr&lt;span class="w"&gt; &lt;/span&gt;1y
+gpg&lt;span class="w"&gt; &lt;/span&gt;--quick-add-key&lt;span class="w"&gt; &lt;/span&gt;03A99DA4A0BA3F8EDBCD7ECF9A2A84EDC48BBCFC&lt;span class="w"&gt; &lt;/span&gt;ed25519&lt;span class="w"&gt; &lt;/span&gt;auth&lt;span class="w"&gt; &lt;/span&gt;1y
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Verify the Keys&lt;/h2&gt;
+&lt;p&gt;Now check you have the keys with command: &lt;code&gt;gpg -K&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;gpg&lt;span class="w"&gt; &lt;/span&gt;-K
+/home/jas/.gnupg/pubring.kbx
+----------------------------
+sec&lt;span class="w"&gt;   &lt;/span&gt;ed25519/0x9A2A84EDC48BBCFC&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2025&lt;/span&gt;-03-04&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;C&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;Key&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;fingerprint&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;03A9&lt;span class="w"&gt; &lt;/span&gt;9DA4&lt;span class="w"&gt; &lt;/span&gt;A0BA&lt;span class="w"&gt; &lt;/span&gt;3F8E&lt;span class="w"&gt; &lt;/span&gt;DBCD&lt;span class="w"&gt;  &lt;/span&gt;7ECF&lt;span class="w"&gt; &lt;/span&gt;9A2A&lt;span class="w"&gt; &lt;/span&gt;84ED&lt;span class="w"&gt; &lt;/span&gt;C48B&lt;span class="w"&gt; &lt;/span&gt;BCFC
+uid&lt;span class="w"&gt;                   &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;ultimate&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Jas&lt;span class="w"&gt; &lt;/span&gt;Powell&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;jas@example.com&amp;gt;
+ssb&lt;span class="w"&gt;   &lt;/span&gt;ed25519/0xB6DFDCDABFB9E3CF&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2025&lt;/span&gt;-03-04&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;S&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;expires:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2026&lt;/span&gt;-03-04&lt;span class="o"&gt;]&lt;/span&gt;
+ssb&lt;span class="w"&gt;   &lt;/span&gt;cv25519/0x6A481E53769ECDF3&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2025&lt;/span&gt;-03-04&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;E&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;expires:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2026&lt;/span&gt;-03-04&lt;span class="o"&gt;]&lt;/span&gt;
+ssb&lt;span class="w"&gt;   &lt;/span&gt;ed25519/0x86EB33B0EF885886&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2025&lt;/span&gt;-03-04&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;A&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;expires:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2026&lt;/span&gt;-03-04&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Export Master Keys&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;gpg&lt;span class="w"&gt; &lt;/span&gt;--export-secret-keys&lt;span class="w"&gt; &lt;/span&gt;03A99DA4A0BA3F8EDBCD7ECF9A2A84EDC48BBCFC&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;jas@example.com.private.gpgkey
+gpg&lt;span class="w"&gt; &lt;/span&gt;--export&lt;span class="w"&gt; &lt;/span&gt;03A99DA4A0BA3F8EDBCD7ECF9A2A84EDC48BBCFC&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;jas@example.com.public.gpgkey
+cp&lt;span class="w"&gt; &lt;/span&gt;/home/jas/.gnupg/openpgp-revocs.d/03A99DA4A0BA3F8EDBCD7ECF9A2A84EDC48BBCFC.rev&lt;span class="w"&gt; &lt;/span&gt;jas@example.com.revocs.gpgkey
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Don't lose these three files, these are the master keys for the laptop. Keep them in a sock drawer, in case you need to cut new subkeys after expiry.&lt;/p&gt;
+&lt;h2&gt;Detatch Master Signing Key from the Master&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;gpg&lt;span class="w"&gt; &lt;/span&gt;--export-secret-subkeys&lt;span class="w"&gt; &lt;/span&gt;jas@example.com&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;jas@example.com.private.gpgsubkeys
+gpg&lt;span class="w"&gt; &lt;/span&gt;--delete-secret-key&lt;span class="w"&gt; &lt;/span&gt;jas@example.com
+gpg&lt;span class="w"&gt; &lt;/span&gt;--import&lt;span class="w"&gt; &lt;/span&gt;jas@example.com.private.gpgsubkeys
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Next time you need to re-install your laptop, use the command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;gpg&lt;span class="w"&gt; &lt;/span&gt;--import&lt;span class="w"&gt; &lt;/span&gt;jas@example.com.private.gpgsubkeys
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Key Check&lt;/h2&gt;
+&lt;p&gt;And now we have a detatched signing key, we can check with: &lt;code&gt;gpg -K&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;gpg&lt;span class="w"&gt; &lt;/span&gt;-K
+/home/jas/.gnupg/pubring.kbx
+----------------------------
+sec#&lt;span class="w"&gt;  &lt;/span&gt;ed25519/0x9A2A84EDC48BBCFC&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2025&lt;/span&gt;-03-04&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;C&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;Key&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;fingerprint&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;03A9&lt;span class="w"&gt; &lt;/span&gt;9DA4&lt;span class="w"&gt; &lt;/span&gt;A0BA&lt;span class="w"&gt; &lt;/span&gt;3F8E&lt;span class="w"&gt; &lt;/span&gt;DBCD&lt;span class="w"&gt;  &lt;/span&gt;7ECF&lt;span class="w"&gt; &lt;/span&gt;9A2A&lt;span class="w"&gt; &lt;/span&gt;84ED&lt;span class="w"&gt; &lt;/span&gt;C48B&lt;span class="w"&gt; &lt;/span&gt;BCFC
+uid&lt;span class="w"&gt;                   &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;ultimate&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Jas&lt;span class="w"&gt; &lt;/span&gt;Powell&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;jas@example.com&amp;gt;
+ssb&lt;span class="w"&gt;   &lt;/span&gt;ed25519/0xB6DFDCDABFB9E3CF&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2025&lt;/span&gt;-03-04&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;S&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;expires:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2026&lt;/span&gt;-03-04&lt;span class="o"&gt;]&lt;/span&gt;
+ssb&lt;span class="w"&gt;   &lt;/span&gt;cv25519/0x6A481E53769ECDF3&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2025&lt;/span&gt;-03-04&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;E&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;expires:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2026&lt;/span&gt;-03-04&lt;span class="o"&gt;]&lt;/span&gt;
+ssb&lt;span class="w"&gt;   &lt;/span&gt;ed25519/0x86EB33B0EF885886&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2025&lt;/span&gt;-03-04&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;A&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;expires:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2026&lt;/span&gt;-03-04&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Notice the &lt;code&gt;sec#&lt;/code&gt; &amp;lt;- this indicates that the signing key is detached, and using the subkey.&lt;/p&gt;
+&lt;p&gt;The associated public keys are listed:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;gpg&lt;span class="w"&gt; &lt;/span&gt;-k
+/home/jas/.gnupg/pubring.kbx
+----------------------------
+pub&lt;span class="w"&gt;   &lt;/span&gt;ed25519/0x9A2A84EDC48BBCFC&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2025&lt;/span&gt;-03-04&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;C&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;Key&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;fingerprint&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;03A9&lt;span class="w"&gt; &lt;/span&gt;9DA4&lt;span class="w"&gt; &lt;/span&gt;A0BA&lt;span class="w"&gt; &lt;/span&gt;3F8E&lt;span class="w"&gt; &lt;/span&gt;DBCD&lt;span class="w"&gt;  &lt;/span&gt;7ECF&lt;span class="w"&gt; &lt;/span&gt;9A2A&lt;span class="w"&gt; &lt;/span&gt;84ED&lt;span class="w"&gt; &lt;/span&gt;C48B&lt;span class="w"&gt; &lt;/span&gt;BCFC
+uid&lt;span class="w"&gt;                   &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;ultimate&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Jas&lt;span class="w"&gt; &lt;/span&gt;Powell&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;jas@example.com&amp;gt;
+sub&lt;span class="w"&gt;   &lt;/span&gt;ed25519/0xB6DFDCDABFB9E3CF&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2025&lt;/span&gt;-03-04&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;S&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;expires:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2026&lt;/span&gt;-03-04&lt;span class="o"&gt;]&lt;/span&gt;
+sub&lt;span class="w"&gt;   &lt;/span&gt;cv25519/0x6A481E53769ECDF3&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2025&lt;/span&gt;-03-04&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;E&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;expires:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2026&lt;/span&gt;-03-04&lt;span class="o"&gt;]&lt;/span&gt;
+sub&lt;span class="w"&gt;   &lt;/span&gt;ed25519/0x86EB33B0EF885886&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2025&lt;/span&gt;-03-04&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;A&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;expires:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2026&lt;/span&gt;-03-04&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Caution&lt;/h2&gt;
+&lt;p&gt;A word of advice though, all of this is security theatre. Even though we set up our algorithms, I can still see this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;gpg&lt;span class="w"&gt; &lt;/span&gt;--edit-key&lt;span class="w"&gt; &lt;/span&gt;03A99DA4A0BA3F8EDBCD7ECF9A2A84EDC48BBCFC
+Secret&lt;span class="w"&gt; &lt;/span&gt;subkeys&lt;span class="w"&gt; &lt;/span&gt;are&lt;span class="w"&gt; &lt;/span&gt;available.
+
+pub&lt;span class="w"&gt;  &lt;/span&gt;ed25519/0x9A2A84EDC48BBCFC
+&lt;span class="w"&gt;     &lt;/span&gt;created:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2025&lt;/span&gt;-03-04&lt;span class="w"&gt;  &lt;/span&gt;expires:&lt;span class="w"&gt; &lt;/span&gt;never&lt;span class="w"&gt;       &lt;/span&gt;usage:&lt;span class="w"&gt; &lt;/span&gt;C
+&lt;span class="w"&gt;     &lt;/span&gt;trust:&lt;span class="w"&gt; &lt;/span&gt;ultimate&lt;span class="w"&gt;      &lt;/span&gt;validity:&lt;span class="w"&gt; &lt;/span&gt;ultimate
+ssb&lt;span class="w"&gt;  &lt;/span&gt;ed25519/0xB6DFDCDABFB9E3CF
+&lt;span class="w"&gt;     &lt;/span&gt;created:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2025&lt;/span&gt;-03-04&lt;span class="w"&gt;  &lt;/span&gt;expires:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2026&lt;/span&gt;-03-04&lt;span class="w"&gt;  &lt;/span&gt;usage:&lt;span class="w"&gt; &lt;/span&gt;S
+ssb&lt;span class="w"&gt;  &lt;/span&gt;cv25519/0x6A481E53769ECDF3
+&lt;span class="w"&gt;     &lt;/span&gt;created:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2025&lt;/span&gt;-03-04&lt;span class="w"&gt;  &lt;/span&gt;expires:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2026&lt;/span&gt;-03-04&lt;span class="w"&gt;  &lt;/span&gt;usage:&lt;span class="w"&gt; &lt;/span&gt;E
+ssb&lt;span class="w"&gt;  &lt;/span&gt;ed25519/0x86EB33B0EF885886
+&lt;span class="w"&gt;     &lt;/span&gt;created:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2025&lt;/span&gt;-03-04&lt;span class="w"&gt;  &lt;/span&gt;expires:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2026&lt;/span&gt;-03-04&lt;span class="w"&gt;  &lt;/span&gt;usage:&lt;span class="w"&gt; &lt;/span&gt;A
+&lt;span class="o"&gt;[&lt;/span&gt;ultimate&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;.&lt;span class="w"&gt; &lt;/span&gt;Jas&lt;span class="w"&gt; &lt;/span&gt;Powell&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;jas@example.com&amp;gt;
+
+gpg&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;showpref
+&lt;span class="o"&gt;[&lt;/span&gt;ultimate&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;.&lt;span class="w"&gt; &lt;/span&gt;Jas&lt;span class="w"&gt; &lt;/span&gt;Powell&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;jas@example.com&amp;gt;
+&lt;span class="w"&gt;     &lt;/span&gt;Cipher:&lt;span class="w"&gt; &lt;/span&gt;AES256,&lt;span class="w"&gt; &lt;/span&gt;AES192,&lt;span class="w"&gt; &lt;/span&gt;AES,&lt;span class="w"&gt; &lt;/span&gt;3DES
+&lt;span class="w"&gt;     &lt;/span&gt;AEAD:
+&lt;span class="w"&gt;     &lt;/span&gt;Digest:&lt;span class="w"&gt; &lt;/span&gt;SHA512,&lt;span class="w"&gt; &lt;/span&gt;SHA384,&lt;span class="w"&gt; &lt;/span&gt;SHA256,&lt;span class="w"&gt; &lt;/span&gt;SHA1
+&lt;span class="w"&gt;     &lt;/span&gt;Compression:&lt;span class="w"&gt; &lt;/span&gt;ZLIB,&lt;span class="w"&gt; &lt;/span&gt;BZIP2,&lt;span class="w"&gt; &lt;/span&gt;ZIP,&lt;span class="w"&gt; &lt;/span&gt;Uncompressed
+&lt;span class="w"&gt;     &lt;/span&gt;Features:&lt;span class="w"&gt; &lt;/span&gt;MDC,&lt;span class="w"&gt; &lt;/span&gt;AEAD,&lt;span class="w"&gt; &lt;/span&gt;Keyserver&lt;span class="w"&gt; &lt;/span&gt;no-modify
+
+gpg&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;quit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I have no idea what SHA1 and 3DES are doing on that list. In 2025. GPG is broken. &lt;/p&gt;</content><category term="Tech-Recipe"></category><category term="linux"></category><category term="macos"></category><category term="encryption"></category><category term="gpg"></category></entry><entry><title>MacOS Tips</title><link href="macos-tips.html" rel="alternate"></link><published>2025-02-28T10:00:00+02:00</published><updated>2025-02-28T10:00:00+02:00</updated><author><name>Jas Powell</name></author><id>tag:None,2025-02-28:macos-tips.html</id><summary type="html">&lt;p&gt;Tips for MacOS Fast Keys&lt;/p&gt;</summary><content type="html">&lt;blockquote&gt;
 &lt;p&gt;[!NOTE]
 The environment used for this was: Mac Air M2 8gb MacOS Sequoia 15.3&lt;/p&gt;
 &lt;/blockquote&gt;
