@@ -1,5 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>heyjdp</title><link href="/" rel="alternate"></link><link href="feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2025-03-04T10:00:00+02:00</updated><subtitle>Just some notes</subtitle><entry><title>GPG Keys for Yubikey and SSH Guide</title><link href="gpg-keys-yubikey-ssh-guide.html" rel="alternate"></link><published>2025-03-04T10:00:00+02:00</published><updated>2025-03-04T10:00:00+02:00</updated><author><name>Jas Powell</name></author><id>tag:None,2025-03-04:gpg-keys-yubikey-ssh-guide.html</id><summary type="html">&lt;p&gt;We don't use GPG any longer. But if you have to...&lt;/p&gt;</summary><content type="html">&lt;blockquote&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>heyjdp</title><link href="/" rel="alternate"></link><link href="feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2025-03-14T10:00:00+02:00</updated><subtitle>Just some notes</subtitle><entry><title>Passing Secrets with AGE Encryption</title><link href="passing-secrets-with-age-encryption.html" rel="alternate"></link><published>2025-03-14T10:00:00+02:00</published><updated>2025-03-14T10:00:00+02:00</updated><author><name>Jas Powell</name></author><id>tag:None,2025-03-14:passing-secrets-with-age-encryption.html</id><summary type="html">&lt;p&gt;We don't use GPG any longer. But if you have to...&lt;/p&gt;</summary><content type="html">&lt;blockquote&gt;
+&lt;p&gt;[!NOTE]
+The environment used for this was: Linux i7 16Gb Debian 12.9&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Download a binary&lt;/h2&gt;
+&lt;p&gt;A summary of the README here: https://github.com/FiloSottile/age&lt;/p&gt;
+&lt;p&gt;Download a binary, or install a version, guide on the README.&lt;/p&gt;
+&lt;p&gt;I used this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;-JLO&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;https://dl.filippo.io/age/v1.2.0?for=darwin/arm64&amp;quot;&lt;/span&gt;
+$&lt;span class="w"&gt; &lt;/span&gt;tar&lt;span class="w"&gt; &lt;/span&gt;-zxvf&lt;span class="w"&gt; &lt;/span&gt;age-v1.2.0-darwin-arm64.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Use github keys for encryption&lt;/h2&gt;
+&lt;p&gt;We will use github keys for encryption as follows:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Hello cruel world&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;helloworld.txt
+$&lt;span class="w"&gt; &lt;/span&gt;cat&lt;span class="w"&gt; &lt;/span&gt;helloworld.txt
+Hello&lt;span class="w"&gt; &lt;/span&gt;cruel&lt;span class="w"&gt; &lt;/span&gt;world
+
+$&lt;span class="w"&gt; &lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;https://github.com/&amp;lt;username&amp;gt;.keys&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;./age&lt;span class="w"&gt; &lt;/span&gt;-a&lt;span class="w"&gt; &lt;/span&gt;-R&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;-o&lt;span class="w"&gt; &lt;/span&gt;helloworld.txt.age&lt;span class="w"&gt; &lt;/span&gt;helloworld.txt
+cat&lt;span class="w"&gt; &lt;/span&gt;helloworld.txt.age
+-----BEGIN&lt;span class="w"&gt; &lt;/span&gt;AGE&lt;span class="w"&gt; &lt;/span&gt;ENCRYPTED&lt;span class="w"&gt; &lt;/span&gt;FILE-----
+YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHNzaC1lZDI1NTE5IFRFWVQ1dyBQcGgy
+MVF4dUdKZmhIc01qOEtwUXVFVmxqRnRXM3NhZXdUQWFZVnFUVUVNCmovejR3ZjlE
+bk1tVkRITm9JQjVjVkcyUlVsclljV1BadSs1QkFlVDI3SlEKLS0tIEo3bUR3bU1F
+MVVtcHVCRUtybjdmTjRWTmYrdWhTTlBuQXBvckY5MktrRGcKfqFRLsLgVJrV7Hp3
+Inmb+6FpSrLOTmdWQUHw2MYC0bvVdlRLGfl4KVDhYF346uo3FC8&lt;span class="o"&gt;=&lt;/span&gt;
+-----END&lt;span class="w"&gt; &lt;/span&gt;AGE&lt;span class="w"&gt; &lt;/span&gt;ENCRYPTED&lt;span class="w"&gt; &lt;/span&gt;FILE-----
+
+$&lt;span class="w"&gt; &lt;/span&gt;./age&lt;span class="w"&gt; &lt;/span&gt;-d&lt;span class="w"&gt; &lt;/span&gt;-i&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;secret-key&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;helloworld.txt.age
+Hello&lt;span class="w"&gt; &lt;/span&gt;cruel&lt;span class="w"&gt; &lt;/span&gt;world
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Get all keys:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;-O&lt;span class="w"&gt; &lt;/span&gt;https://github.com/&amp;lt;username-1&amp;gt;.keys
+$&lt;span class="w"&gt; &lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;-O&lt;span class="w"&gt; &lt;/span&gt;https://github.com/&amp;lt;username-2&amp;gt;.keys
+$&lt;span class="w"&gt; &lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;-O&lt;span class="w"&gt; &lt;/span&gt;https://github.com/&amp;lt;username-3&amp;gt;.keys
+$&lt;span class="w"&gt; &lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;-O&lt;span class="w"&gt; &lt;/span&gt;https://github.com/&amp;lt;username-4&amp;gt;.keys
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Encrypt a text file to multiple recipients:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;./age&lt;span class="w"&gt; &lt;/span&gt;-a&lt;span class="w"&gt; &lt;/span&gt;-R&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;username-1&amp;gt;.keys&lt;span class="w"&gt; &lt;/span&gt;-R&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;username-2&amp;gt;.keys&lt;span class="w"&gt; &lt;/span&gt;-R&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;username-3&amp;gt;.keys&lt;span class="w"&gt; &lt;/span&gt;-R&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;username-4&amp;gt;.keys&lt;span class="w"&gt; &lt;/span&gt;-o&lt;span class="w"&gt; &lt;/span&gt;the-secrets.txt.age&lt;span class="w"&gt; &lt;/span&gt;the-secrets.txt
+
+$&lt;span class="w"&gt; &lt;/span&gt;cat&lt;span class="w"&gt; &lt;/span&gt;the-secrets.txt.age
+-----BEGIN&lt;span class="w"&gt; &lt;/span&gt;AGE&lt;span class="w"&gt; &lt;/span&gt;ENCRYPTED&lt;span class="w"&gt; &lt;/span&gt;FILE-----
+YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHNzaC1yc2EgRUlURnRRCkllVE1XTm94
+S1N6VHFCdEZxR25HWEc2SWNheHcwb2dFMzg1VWgwTll1UkxIT2JsQ2pjUmNPejVS
+&amp;lt;&lt;span class="w"&gt; &lt;/span&gt;...&lt;span class="w"&gt; &lt;/span&gt;snip&lt;span class="w"&gt; &lt;/span&gt;...&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;
+yC3pDvCtOOHOAPQ2stlutEoIkvApZfYn+hiSXJLshkSBrdQt1VlZnu+SPsBd+669
+Nh21esjpLCVZJRmJU263ySmPm+X5Uowsw440iS8/cT6M7RjDFuduJ0QluLS40q56
+j/yWkIxXLaFUs/llwbTKuNxNy/XK5HDf6xiEwgFM
+-----END&lt;span class="w"&gt; &lt;/span&gt;AGE&lt;span class="w"&gt; &lt;/span&gt;ENCRYPTED&lt;span class="w"&gt; &lt;/span&gt;FILE-----
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Decrypt using your private key:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;./age&lt;span class="w"&gt; &lt;/span&gt;-d&lt;span class="w"&gt; &lt;/span&gt;-i&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;secret-key&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;the-secrets.txt.age
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Tech-Recipe"></category><category term="linux"></category><category term="macos"></category><category term="encryption"></category><category term="age"></category></entry><entry><title>GPG Keys for Yubikey and SSH Guide</title><link href="gpg-keys-yubikey-ssh-guide.html" rel="alternate"></link><published>2025-03-04T10:00:00+02:00</published><updated>2025-03-04T10:00:00+02:00</updated><author><name>Jas Powell</name></author><id>tag:None,2025-03-04:gpg-keys-yubikey-ssh-guide.html</id><summary type="html">&lt;p&gt;We don't use GPG any longer. But if you have to...&lt;/p&gt;</summary><content type="html">&lt;blockquote&gt;
 &lt;p&gt;[!NOTE]
 The environment used for this was: Linux i7 16Gb Debian 12.9&lt;/p&gt;
 &lt;/blockquote&gt;
